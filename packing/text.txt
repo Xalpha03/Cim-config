@@ -1,0 +1,32 @@
+def get(self, request, *args, **kwargs):
+        if request.GET.get('pdf') == 'true':
+            return self.get_pdf(request)
+        return super().get(request, *args, **kwargs)
+    
+    def render_to_pdf(self):
+
+        """Génère le PDF à partir du template et du contexte avec WeasyPrint"""
+        template = get_template(self.template_name)
+        html_string = template.render(self.get_context_data())
+        
+
+        # Générer directement le PDF et récupérer les bytes
+        pdf_bytes = HTML(string=html_string, base_url=self.request.build_absolute_uri('/')).write_pdf()
+
+        return pdf_bytes
+
+
+    def get_pdf(self, request):
+        """Génère un PDF avec WeasyPrint"""
+        from django.template.loader import render_to_string
+
+        context = self.get_context_data()
+        html_string = render_to_string('packing/packing-panne-user-pdf.html', context)
+        html = HTML(string=html_string)
+        pdf_file = html.write_pdf()  # respectera le @page CSS
+        response = HttpResponse(content_type='application/pdf')
+        response['Content-Disposition'] = f'inline; filename="packingr_{self.request.user}.pdf"'
+        HTML(string=html_string, base_url=request.build_absolute_uri()).write_pdf(response)
+        response= HttpResponse(pdf_file, content_type='application/pdf')
+        context['pdf'] = True  # <-- indique au template que c'est pour le PDF
+        return response

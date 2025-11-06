@@ -1,0 +1,52 @@
+<div class="col-md-4">
+  <div class="card border-0 shadow-lg rounded-4 overflow-hidden h-100 hover-shadow">
+    <div class="card-header bg-{{ couleur }} text-white text-center fs-5 fw-bold">
+      🕒 {% if user.is_authenticated and user.profil.poste == 'packing' %}
+        <a href="{% url 'packing:ajout-packing' %}" class="text-white text-decoration-none">{{ horaire }}</a>
+      {% else %}
+        {{ horaire }}
+      {% endif %}
+    </div>
+
+    <div class="card-body table-responsive p-0">
+      <table class="table table-bordered table-sm mb-0 align-middle text-center">
+        <tbody class="fs-6">
+          {% for obj in object_list %}
+            {% if obj.post.post == poste %}
+              <tr><td colspan="2" class="fw-bold text-start">🚛 Livraison</td><td>{{ obj.livraison|default:"—" }}</td><td class="fst-italic text-muted">Ton</td></tr>
+              <tr><td colspan="2" class="fw-bold text-start">🧱 Casses</td><td>{{ obj.casse|default:"—" }}</td><td class="fst-italic text-muted">Sacs</td></tr>
+              <tr><td colspan="2" class="fw-bold text-start">📦 Ensachés</td><td>{{ obj.ens|default:"—" }}</td><td class="fst-italic text-muted">Sacs</td></tr>
+              <tr><td colspan="2" class="fw-bold text-start">📉 Taux de casse</td><td>{{ obj.tx_cas|default:"—" }}</td><td class="fst-italic text-muted">%</td></tr>
+              <tr><td colspan="2" class="fw-bold text-start">🧺 Vrac</td><td>{{ obj.vrack|default:"—" }}</td><td class="fst-italic text-muted">Ton</td></tr>
+              <tr><td colspan="2" class="fw-bold text-start">⚙️ Rendement</td><td>{{ obj.rend|default:"—" }}</td><td class="fst-italic text-muted">T/Hr</td></tr>
+            {% endif %}
+          {% endfor %}
+        </tbody>
+      </table>
+
+      <div class="d-flex justify-content-between align-items-center p-3 bg-light rounded-bottom-4">
+        <div class="fw-bold text-{{ couleur }}">
+          {% for iteam in object_list %}
+            {% if iteam.post.post == poste %}
+              ⏱️ TM : {{ iteam.temp_march_formate }}
+            {% endif %}
+          {% endfor %}
+        </div>
+        <div class="fw-bold text-{{ couleur }}">
+          {% for iteam in object_list %}
+            {% if iteam.post.post == poste %}
+              {{ iteam.user }}
+            {% endif %}
+          {% endfor %}
+        </div>
+        {% for post in object_list %}
+          {% if post.post.post == poste %}
+            {% if user.is_authenticated and user.profil.poste == 'packing' %}
+              <a class="btn btn-outline-{{ couleur }} btn-sm rounded-pill shadow-sm"href="{% url 'packing:ajout-packing-panne' post.slug %}"> ➕ Ajouter panne</a>
+            {% endif %}
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>

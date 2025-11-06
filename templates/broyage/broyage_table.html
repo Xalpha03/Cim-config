@@ -1,0 +1,94 @@
+<div class="card shadow-lg border-0 rounded-4 mt-5 overflow-hidden">
+  <!-- En-tête stylisée -->
+  <div class="card-header text-white text-center fw-bold fs-5 py-3" style="background: linear-gradient(90deg, #212529 0%, #0d6efd 60%, #6610f2 100%); letter-spacing: 1px; text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.25);">
+    ⚙️ Tableau des Pannes – <span class="fw-light">Suivi quotidien</span>
+  </div>
+
+  <!-- Tableau principal -->
+  <div class="card-body p-0 table-responsive">
+    <table class="table table-hover table-bordered table-sm align-middle text-center mb-0">
+      <!-- En-tête du tableau -->
+      <thead class="table-primary text-uppercase small">
+        <tr>
+          <th rowspan="2" class="fs-6 align-middle">#</th>
+          <th rowspan="2" class="fs-6 align-middle">📍 Poste</th>
+          <th colspan="3" class="fs-6 align-middle">🏭 Broyage</th>
+          <th colspan="2" class="fs-6 align-middle">⏱️ Durée</th>
+        </tr>
+        <tr class="table-light">
+          <th class="fs-6">🚚 production</th>
+          <th class="fs-6">📈 Rendement</th>
+          <th class="fs-6">📉 conso spécifique</th>
+          <th class="fs-6">⛔ Arrêt</th>
+          <th class="fs-6">✅ Marche</th>
+        </tr>
+      </thead>
+
+      <!-- Corps du tableau -->
+      <tbody>
+        {% if object_broy %}
+          {% for iteam in object_broy %}
+            <tr class="align-middle {% if iteam.prod|default:0 > 270 %}table-success{% elif iteam.prod|default:0 > 200 %}table-warning{% else %}table-danger{% endif %}">
+              <td class="fw-bold">{{ forloop.counter }}</td>
+              <td class="fw-bold text-primary">{{ iteam.title }}</td>
+              <td>{{ iteam.prod|default:'—' }}</td>
+              <td>{{ iteam.rend|default:'—' }}</td>
+              <td>{{ iteam.conso|default:'—' }} %</td>
+              <td>{{ iteam.temp_arret_formate|default:'—' }}</td>
+              <td>{{ iteam.temp_march_formate|default:'—' }}</td>
+            </tr>
+          {% endfor %}
+        {% else %}
+          <tr>
+            <td colspan="8" class="text-center text-muted py-4 fst-italic">🌟 Aucune panne enregistrée pour cette date.</td>
+          </tr>
+        {% endif %}
+      </tbody>
+
+      <tfoot class="text-white fw-bold" style="background: linear-gradient(90deg, #198754, #20c997); letter-spacing: 0.5px;">
+        <tr>
+          <td colspan="2" class="text-end pe-3 border-0 fs-6">🔢 Total :</td>
+          <td class="text-center pe-3 border-0 fs-6">{{ total_prod|default:'—' }}</td>
+          <td class="text-center pe-3 border-0 fs-6">{{ total_rend|default:'—' }}</td>
+          <td class="text-center pe-3 border-0 fs-6">{{ total_conso|default:'—' }}</td>
+          <td class="text-center pe-3 border-0 fs-6">{{ total_temp_arret|default:'—' }}</td>
+          <td class="text-center pe-3 border-0 fs-6">{{ total_temp_march|default:'—' }}</td>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+</div>
+
+<!-- Styles additionnels -->
+<style>
+  /* Effet au survol des lignes */
+  .table-hover tbody tr:hover {
+    background-color: #f3f6fa !important;
+    transform: scale(1.01);
+    transition: all 0.25s ease-in-out;
+  }
+  
+  /* Badges compacts et lisibles */
+  .badge {
+    font-size: 0.8rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+  }
+  
+  /* Lignes plus confortables */
+  table td,
+  table th {
+    vertical-align: middle !important;
+    padding: 0.6rem !important;
+  }
+  
+  /* Effet de survol subtil de la carte */
+  .card {
+    border-radius: 1rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+  }
+</style>

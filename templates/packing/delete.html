@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-8 mt-5">
+        <div class="card shadow-sm border-danger">
+          <div class="card-header bg-danger text-white text-center">
+            <h4 class="mb-0">🗑️ Suppression de la panne</h4>
+          </div>
+          <div class="card-body text-center">
+            <p class="fst-italic text-muted">Êtes-vous sûr de vouloir supprimer la panne suivante ?</p>
+            <div class="alert alert-warning">
+              {% if pannes %}
+                <strong>{{ pannes.slug }}</strong>
+              {% else %}
+                <strong>{{ object.slug }}</strong>
+              {% endif %}
+            </div>
+            <form method="post">
+              {% csrf_token %}
+              <button type="submit" class="btn btn-danger me-2">Oui, supprimer définitivement</button>
+
+              {% if object_pack %}
+                <a href="{% url 'user-packing-detail' user.username %}" class="btn btn-secondary">Annuler</a>
+              {% else %}
+                <a href="{% url 'user-packing-panne-detail' user.username %}" class="btn btn-secondary">Annuler</a>
+              {% endif %}
+            </form>
+          </div>
+          <div class="card-footer text-center text-muted small">Action irréversible — soyez sûr de votre choix.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

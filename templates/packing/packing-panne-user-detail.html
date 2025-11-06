@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  <title>Detail Panne de {{ user_detail.username }}</title>
+{% endblock title %}
+  
+{% block content %}
+  <div class="container mt-4">
+    <div class="text-end mb-3">
+      
+      {% if not pdf %}
+        <a href="{% url 'packing:user_packing_panne_pdf' user.username %}" target="_blank" class="btn btn-danger no-print">📄 Télécharger le PDF</a>
+      {% endif %}
+        
+    </div>
+
+    <!-- Tableau des pannes -->
+    {% include 'pannes_table.html' %}
+  </div>
+
+  <style>
+    @media print {
+      .no-print {
+        display: none !important;
+      }
+    }
+  </style>
+{% endblock %}
