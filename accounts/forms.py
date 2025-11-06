@@ -26,7 +26,7 @@ class UserProfilForm(forms.ModelForm):
 
     class Meta:
         model = Profil
-        fields = ['poste', 'site', 'role']
+        fields = ['poste', 'site',]
         widgets = {
            
             'poste': forms.Select(
@@ -39,11 +39,7 @@ class UserProfilForm(forms.ModelForm):
                     'class': 'form-select',
                 }
             ),
-            'role': forms.Select(
-                attrs={
-                    'class': 'form-select',
-                }
-            ),
+            
         }
     
     def clean_site(self):

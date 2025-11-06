@@ -17,7 +17,7 @@ class  Site(models.Model):
 class Profil(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     poste = models.CharField(max_length=100, choices=POSTES)
-    role = models.CharField(max_length=50, choices=[('admin', 'Admin'), ('opérateur', 'Opérateur')])
+    role = models.CharField(max_length=50, choices=[('admin', 'Admin'), ('opérateur', 'Opérateur')], default='opérateur')
     site = models.ForeignKey(Site, on_delete=models.CASCADE,)
     avatar = models.ImageField(upload_to='avatars/', blank=True, null=True)
     bio = models.TextField(blank=True)

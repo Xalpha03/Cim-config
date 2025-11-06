@@ -65,10 +65,10 @@
           {{ form.site|add_class:'form-select form-select-lg rounded-3 shadow-sm' }}
         </div>
 
-        <div class="mb-3">
+        {% comment %} <div class="mb-3">
           <label class="form-label fw-semibold text-secondary">{{ form.role.label }}</label>
           {{ form.role|add_class:'form-select form-select-lg rounded-3 shadow-sm' }}
-        </div>
+        </div> {% endcomment %}
 
         <button type="submit" class="btn btn-primary btn-lg w-100 rounded-3 shadow-sm">🚀 Créer le compte</button>
       </form>
