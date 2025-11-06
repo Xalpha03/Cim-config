@@ -35,7 +35,7 @@ class Packing(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     site = models.ForeignKey(Site, on_delete=models.CASCADE)
-    title = models.CharField(max_length=20)
+    title = models.CharField(max_length=50)
     livraison = models.IntegerField(blank=True, null=True, default=0)
     casse = models.IntegerField(blank=True, null=True, default=0)
     vrack = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True, default=0.0)
@@ -94,10 +94,10 @@ DEPARTEMENT_CHOICES = [
 
 class Pannes(models.Model):
     site = models.ForeignKey(Site, on_delete=models.CASCADE)
-    departement = models.CharField(max_length=10, choices=DEPARTEMENT_CHOICES, default="MEC")
+    departement = models.CharField(max_length=50, choices=DEPARTEMENT_CHOICES, default="MEC")
     broyage = models.ForeignKey(Broyage, on_delete=models.CASCADE, blank=True, null=True)
     packing = models.ForeignKey(Packing, on_delete=models.CASCADE, blank=True, null=True)
-    section = models.CharField(max_length=15, blank=True, null=True)
+    section = models.CharField(max_length=50, blank=True, null=True)
     start_panne =models.TimeField()
     end_panne = models.TimeField()
     duree = models.DurationField()

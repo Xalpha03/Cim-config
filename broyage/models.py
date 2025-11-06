@@ -56,7 +56,7 @@ class Broyage(models.Model):
     post = models.ForeignKey('packing.Post', on_delete=models.CASCADE)
     site = models.ForeignKey(Site, on_delete=models.CASCADE)
     totaliseur = models.ForeignKey(Totaliseur, on_delete=models.CASCADE, blank=True)
-    title = models.CharField(max_length=20)
+    title = models.CharField(max_length=50)
     compt_fin = models.DecimalField(max_digits=20, decimal_places=2)
     clinker_fin = models.DecimalField(max_digits=20, decimal_places=2)
     gypse_fin = models.DecimalField(max_digits=20, decimal_places=2)
