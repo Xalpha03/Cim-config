@@ -15,7 +15,11 @@ import os
 from io import BytesIO
 from django.views.generic import TemplateView
 from django.template.loader import get_template
-
+from django.http import HttpResponse
+from weasyprint import HTML
+from datetime import datetime, date, timedelta
+from django.db.models import Q, Sum
+from django.shortcuts import get_object_or_404
 
 # Create your views here.
 
@@ -476,6 +480,7 @@ class userPackingDetail(ListView):
         total_cas = int()
         total_vrack = Decimal()
         total_temp_arret = timedelta()
+        total_temp_arret_formate = str()
         
         
         for obj in object_pack:
@@ -548,12 +553,6 @@ class userPackingDetail(ListView):
         })
         return context
     
-from django.http import HttpResponse
-from weasyprint import HTML
-from datetime import datetime, date, timedelta
-from django.db.models import Q, Sum
-from django.shortcuts import get_object_or_404
-
 class userPackingPanneDetail(ListView):
     model = Pannes
     template_name = 'packing/packing-panne-user-detail.html'
@@ -610,7 +609,6 @@ class userPackingPanneDetail(ListView):
             'user_detail': user,
         })
         return context
-
 
     
 class updatePacking(UpdateView):
@@ -732,7 +730,7 @@ class adminPackingView(ListView):
         total_liv = int()
         total_cas = int()
         total_vrack = Decimal()
-        total_temp_march_converter = Decimal()
+        total_temp_arret_formate = str()
         total_temp_arret = timedelta()
         
         for obj in object_pack:

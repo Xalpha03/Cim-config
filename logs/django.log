@@ -296,3 +296,774 @@ DEBUG 2025-11-06 18:35:30,728 utils (0.293) SELECT "auth_permission"."content_ty
 DEBUG 2025-11-06 18:35:31,039 utils (0.307) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE "django_content_type"."app_label" = 'packing'; args=('packing',); alias=default
 DEBUG 2025-11-06 18:35:31,334 utils (0.291) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE "django_content_type"."app_label" = 'widget_tweaks'; args=('widget_tweaks',); alias=default
 DEBUG 2025-11-06 18:35:31,661 utils (0.321) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE "django_content_type"."app_label" = 'widget_tweaks'; args=('widget_tweaks',); alias=default
+DEBUG 2025-11-06 18:46:07,961 utils (0.000) 
+            SELECT name, type FROM sqlite_master
+            WHERE type in ('table', 'view') AND NOT name='sqlite_sequence'
+            ORDER BY name; args=None; alias=default
+DEBUG 2025-11-06 18:46:07,964 utils (0.000) SELECT "django_migrations"."id", "django_migrations"."app", "django_migrations"."name", "django_migrations"."applied" FROM "django_migrations"; args=(); alias=default
+DEBUG 2025-11-06 18:46:48,070 utils (0.000) 
+            SELECT name, type FROM sqlite_master
+            WHERE type in ('table', 'view') AND NOT name='sqlite_sequence'
+            ORDER BY name; args=None; alias=default
+DEBUG 2025-11-06 18:46:48,074 utils (0.000) SELECT "django_migrations"."id", "django_migrations"."app", "django_migrations"."name", "django_migrations"."applied" FROM "django_migrations"; args=(); alias=default
+DEBUG 2025-11-06 18:47:02,327 utils (0.000) 
+            SELECT name, type FROM sqlite_master
+            WHERE type in ('table', 'view') AND NOT name='sqlite_sequence'
+            ORDER BY name; args=None; alias=default
+DEBUG 2025-11-06 18:47:02,332 utils (0.000) SELECT "django_migrations"."id", "django_migrations"."app", "django_migrations"."name", "django_migrations"."applied" FROM "django_migrations"; args=(); alias=default
+DEBUG 2025-11-06 18:47:02,334 utils (0.000) 
+            SELECT name, type FROM sqlite_master
+            WHERE type in ('table', 'view') AND NOT name='sqlite_sequence'
+            ORDER BY name; args=None; alias=default
+DEBUG 2025-11-06 18:47:02,336 utils (0.000) SELECT "django_migrations"."id", "django_migrations"."app", "django_migrations"."name", "django_migrations"."applied" FROM "django_migrations"; args=(); alias=default
+DEBUG 2025-11-06 18:47:02,383 utils (0.000) 
+            SELECT name, type FROM sqlite_master
+            WHERE type in ('table', 'view') AND NOT name='sqlite_sequence'
+            ORDER BY name; args=None; alias=default
+DEBUG 2025-11-06 18:47:02,384 utils (0.000) PRAGMA foreign_keys = OFF; args=None; alias=default
+DEBUG 2025-11-06 18:47:02,385 utils (0.000) PRAGMA foreign_keys; args=None; alias=default
+DEBUG 2025-11-06 18:47:02,385 utils (0.000) BEGIN; args=None; alias=default
+DEBUG 2025-11-06 18:47:02,418 schema CREATE TABLE "new__broyage_broyage" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "compt_fin" decimal NOT NULL, "clinker_fin" decimal NOT NULL, "gypse_fin" decimal NOT NULL, "dolomite_fin" decimal NOT NULL, "dif_compt" decimal NULL, "dif_clinker" decimal NULL, "dif_dolomite" decimal NULL, "dif_gypse" decimal NULL, "date" date NOT NULL, "slug" varchar(50) NOT NULL, "post_id" bigint NOT NULL REFERENCES "packing_post" ("id") DEFERRABLE INITIALLY DEFERRED, "site_id" bigint NOT NULL REFERENCES "accounts_site" ("id") DEFERRABLE INITIALLY DEFERRED, "user_id" integer NOT NULL REFERENCES "auth_user" ("id") DEFERRABLE INITIALLY DEFERRED, "totaliseur_id" bigint NOT NULL REFERENCES "broyage_totaliseur" ("id") DEFERRABLE INITIALLY DEFERRED, "title" varchar(50) NOT NULL); (params None)
+DEBUG 2025-11-06 18:47:02,425 utils (0.006) CREATE TABLE "new__broyage_broyage" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "compt_fin" decimal NOT NULL, "clinker_fin" decimal NOT NULL, "gypse_fin" decimal NOT NULL, "dolomite_fin" decimal NOT NULL, "dif_compt" decimal NULL, "dif_clinker" decimal NULL, "dif_dolomite" decimal NULL, "dif_gypse" decimal NULL, "date" date NOT NULL, "slug" varchar(50) NOT NULL, "post_id" bigint NOT NULL REFERENCES "packing_post" ("id") DEFERRABLE INITIALLY DEFERRED, "site_id" bigint NOT NULL REFERENCES "accounts_site" ("id") DEFERRABLE INITIALLY DEFERRED, "user_id" integer NOT NULL REFERENCES "auth_user" ("id") DEFERRABLE INITIALLY DEFERRED, "totaliseur_id" bigint NOT NULL REFERENCES "broyage_totaliseur" ("id") DEFERRABLE INITIALLY DEFERRED, "title" varchar(50) NOT NULL); args=None; alias=default
+DEBUG 2025-11-06 18:47:02,429 schema INSERT INTO "new__broyage_broyage" ("id", "compt_fin", "clinker_fin", "gypse_fin", "dolomite_fin", "dif_compt", "dif_clinker", "dif_dolomite", "dif_gypse", "date", "slug", "post_id", "site_id", "user_id", "totaliseur_id", "title") SELECT "id", "compt_fin", "clinker_fin", "gypse_fin", "dolomite_fin", "dif_compt", "dif_clinker", "dif_dolomite", "dif_gypse", "date", "slug", "post_id", "site_id", "user_id", "totaliseur_id", "title" FROM "broyage_broyage"; (params ())
+DEBUG 2025-11-06 18:47:02,433 utils (0.001) INSERT INTO "new__broyage_broyage" ("id", "compt_fin", "clinker_fin", "gypse_fin", "dolomite_fin", "dif_compt", "dif_clinker", "dif_dolomite", "dif_gypse", "date", "slug", "post_id", "site_id", "user_id", "totaliseur_id", "title") SELECT "id", "compt_fin", "clinker_fin", "gypse_fin", "dolomite_fin", "dif_compt", "dif_clinker", "dif_dolomite", "dif_gypse", "date", "slug", "post_id", "site_id", "user_id", "totaliseur_id", "title" FROM "broyage_broyage"; args=(); alias=default
+DEBUG 2025-11-06 18:47:02,434 schema DROP TABLE "broyage_broyage"; (params ())
+DEBUG 2025-11-06 18:47:02,436 utils (0.001) DROP TABLE "broyage_broyage"; args=(); alias=default
+DEBUG 2025-11-06 18:47:02,437 schema ALTER TABLE "new__broyage_broyage" RENAME TO "broyage_broyage"; (params ())
+DEBUG 2025-11-06 18:47:02,440 utils (0.003) ALTER TABLE "new__broyage_broyage" RENAME TO "broyage_broyage"; args=(); alias=default
+DEBUG 2025-11-06 18:47:02,441 schema CREATE INDEX "broyage_broyage_slug_40e369b9" ON "broyage_broyage" ("slug"); (params ())
+DEBUG 2025-11-06 18:47:02,442 utils (0.000) CREATE INDEX "broyage_broyage_slug_40e369b9" ON "broyage_broyage" ("slug"); args=(); alias=default
+DEBUG 2025-11-06 18:47:02,443 schema CREATE INDEX "broyage_broyage_post_id_40ff21d3" ON "broyage_broyage" ("post_id"); (params ())
+DEBUG 2025-11-06 18:47:02,443 utils (0.000) CREATE INDEX "broyage_broyage_post_id_40ff21d3" ON "broyage_broyage" ("post_id"); args=(); alias=default
+DEBUG 2025-11-06 18:47:02,444 schema CREATE INDEX "broyage_broyage_site_id_5c0db30b" ON "broyage_broyage" ("site_id"); (params ())
+DEBUG 2025-11-06 18:47:02,444 utils (0.000) CREATE INDEX "broyage_broyage_site_id_5c0db30b" ON "broyage_broyage" ("site_id"); args=(); alias=default
+DEBUG 2025-11-06 18:47:02,445 schema CREATE INDEX "broyage_broyage_user_id_eef4aae8" ON "broyage_broyage" ("user_id"); (params ())
+DEBUG 2025-11-06 18:47:02,445 utils (0.000) CREATE INDEX "broyage_broyage_user_id_eef4aae8" ON "broyage_broyage" ("user_id"); args=(); alias=default
+DEBUG 2025-11-06 18:47:02,446 schema CREATE INDEX "broyage_broyage_totaliseur_id_2e9b9e35" ON "broyage_broyage" ("totaliseur_id"); (params ())
+DEBUG 2025-11-06 18:47:02,446 utils (0.000) CREATE INDEX "broyage_broyage_totaliseur_id_2e9b9e35" ON "broyage_broyage" ("totaliseur_id"); args=(); alias=default
+DEBUG 2025-11-06 18:47:02,447 utils (0.000) INSERT INTO "django_migrations" ("app", "name", "applied") VALUES ('broyage', '0002_alter_broyage_options_alter_broyage_title', '2025-11-06 18:47:02.447112') RETURNING "django_migrations"."id"; args=('broyage', '0002_alter_broyage_options_alter_broyage_title', '2025-11-06 18:47:02.447112'); alias=default
+DEBUG 2025-11-06 18:47:02,451 utils (0.003) PRAGMA foreign_key_check; args=None; alias=default
+DEBUG 2025-11-06 18:47:02,456 utils (0.004) COMMIT; args=None; alias=default
+DEBUG 2025-11-06 18:47:02,457 utils (0.000) PRAGMA foreign_keys = ON; args=None; alias=default
+DEBUG 2025-11-06 18:47:02,458 utils (0.000) PRAGMA foreign_keys = OFF; args=None; alias=default
+DEBUG 2025-11-06 18:47:02,458 utils (0.000) PRAGMA foreign_keys; args=None; alias=default
+DEBUG 2025-11-06 18:47:02,461 utils (0.000) BEGIN; args=None; alias=default
+DEBUG 2025-11-06 18:47:02,478 schema CREATE TABLE "new__packing_packing" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "title" varchar(20) NOT NULL, "livraison" integer NULL, "casse" integer NULL, "vrack" decimal NULL, "slug" varchar(50) NOT NULL, "site_id" bigint NOT NULL REFERENCES "accounts_site" ("id") DEFERRABLE INITIALLY DEFERRED, "user_id" integer NOT NULL REFERENCES "auth_user" ("id") DEFERRABLE INITIALLY DEFERRED, "post_id" bigint NOT NULL REFERENCES "packing_post" ("id") DEFERRABLE INITIALLY DEFERRED, "date" date NOT NULL); (params None)
+DEBUG 2025-11-06 18:47:02,480 utils (0.001) CREATE TABLE "new__packing_packing" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "title" varchar(20) NOT NULL, "livraison" integer NULL, "casse" integer NULL, "vrack" decimal NULL, "slug" varchar(50) NOT NULL, "site_id" bigint NOT NULL REFERENCES "accounts_site" ("id") DEFERRABLE INITIALLY DEFERRED, "user_id" integer NOT NULL REFERENCES "auth_user" ("id") DEFERRABLE INITIALLY DEFERRED, "post_id" bigint NOT NULL REFERENCES "packing_post" ("id") DEFERRABLE INITIALLY DEFERRED, "date" date NOT NULL); args=None; alias=default
+DEBUG 2025-11-06 18:47:02,481 schema INSERT INTO "new__packing_packing" ("id", "title", "livraison", "casse", "vrack", "slug", "site_id", "user_id", "post_id", "date") SELECT "id", "title", "livraison", "casse", "vrack", "slug", "site_id", "user_id", "post_id", "date" FROM "packing_packing"; (params ())
+DEBUG 2025-11-06 18:47:02,482 utils (0.000) INSERT INTO "new__packing_packing" ("id", "title", "livraison", "casse", "vrack", "slug", "site_id", "user_id", "post_id", "date") SELECT "id", "title", "livraison", "casse", "vrack", "slug", "site_id", "user_id", "post_id", "date" FROM "packing_packing"; args=(); alias=default
+DEBUG 2025-11-06 18:47:02,482 schema DROP TABLE "packing_packing"; (params ())
+DEBUG 2025-11-06 18:47:02,483 utils (0.001) DROP TABLE "packing_packing"; args=(); alias=default
+DEBUG 2025-11-06 18:47:02,484 schema ALTER TABLE "new__packing_packing" RENAME TO "packing_packing"; (params ())
+DEBUG 2025-11-06 18:47:02,486 utils (0.002) ALTER TABLE "new__packing_packing" RENAME TO "packing_packing"; args=(); alias=default
+DEBUG 2025-11-06 18:47:02,487 schema CREATE INDEX "packing_packing_slug_86ed4fae" ON "packing_packing" ("slug"); (params ())
+DEBUG 2025-11-06 18:47:02,487 utils (0.000) CREATE INDEX "packing_packing_slug_86ed4fae" ON "packing_packing" ("slug"); args=(); alias=default
+DEBUG 2025-11-06 18:47:02,488 schema CREATE INDEX "packing_packing_site_id_81194cd2" ON "packing_packing" ("site_id"); (params ())
+DEBUG 2025-11-06 18:47:02,490 utils (0.000) CREATE INDEX "packing_packing_site_id_81194cd2" ON "packing_packing" ("site_id"); args=(); alias=default
+DEBUG 2025-11-06 18:47:02,491 schema CREATE INDEX "packing_packing_user_id_ee846846" ON "packing_packing" ("user_id"); (params ())
+DEBUG 2025-11-06 18:47:02,491 utils (0.000) CREATE INDEX "packing_packing_user_id_ee846846" ON "packing_packing" ("user_id"); args=(); alias=default
+DEBUG 2025-11-06 18:47:02,492 schema CREATE INDEX "packing_packing_post_id_a96fb8a5" ON "packing_packing" ("post_id"); (params ())
+DEBUG 2025-11-06 18:47:02,492 utils (0.000) CREATE INDEX "packing_packing_post_id_a96fb8a5" ON "packing_packing" ("post_id"); args=(); alias=default
+DEBUG 2025-11-06 18:47:02,515 schema CREATE TABLE "new__packing_packing" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "livraison" integer NULL, "casse" integer NULL, "vrack" decimal NULL, "date" date NOT NULL, "slug" varchar(50) NOT NULL, "site_id" bigint NOT NULL REFERENCES "accounts_site" ("id") DEFERRABLE INITIALLY DEFERRED, "user_id" integer NOT NULL REFERENCES "auth_user" ("id") DEFERRABLE INITIALLY DEFERRED, "post_id" bigint NOT NULL REFERENCES "packing_post" ("id") DEFERRABLE INITIALLY DEFERRED, "title" varchar(50) NOT NULL); (params None)
+DEBUG 2025-11-06 18:47:02,516 utils (0.000) CREATE TABLE "new__packing_packing" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "livraison" integer NULL, "casse" integer NULL, "vrack" decimal NULL, "date" date NOT NULL, "slug" varchar(50) NOT NULL, "site_id" bigint NOT NULL REFERENCES "accounts_site" ("id") DEFERRABLE INITIALLY DEFERRED, "user_id" integer NOT NULL REFERENCES "auth_user" ("id") DEFERRABLE INITIALLY DEFERRED, "post_id" bigint NOT NULL REFERENCES "packing_post" ("id") DEFERRABLE INITIALLY DEFERRED, "title" varchar(50) NOT NULL); args=None; alias=default
+DEBUG 2025-11-06 18:47:02,518 schema INSERT INTO "new__packing_packing" ("id", "livraison", "casse", "vrack", "date", "slug", "site_id", "user_id", "post_id", "title") SELECT "id", "livraison", "casse", "vrack", "date", "slug", "site_id", "user_id", "post_id", "title" FROM "packing_packing"; (params ())
+DEBUG 2025-11-06 18:47:02,518 utils (0.000) INSERT INTO "new__packing_packing" ("id", "livraison", "casse", "vrack", "date", "slug", "site_id", "user_id", "post_id", "title") SELECT "id", "livraison", "casse", "vrack", "date", "slug", "site_id", "user_id", "post_id", "title" FROM "packing_packing"; args=(); alias=default
+DEBUG 2025-11-06 18:47:02,519 schema DROP TABLE "packing_packing"; (params ())
+DEBUG 2025-11-06 18:47:02,520 utils (0.001) DROP TABLE "packing_packing"; args=(); alias=default
+DEBUG 2025-11-06 18:47:02,520 schema ALTER TABLE "new__packing_packing" RENAME TO "packing_packing"; (params ())
+DEBUG 2025-11-06 18:47:02,525 utils (0.004) ALTER TABLE "new__packing_packing" RENAME TO "packing_packing"; args=(); alias=default
+DEBUG 2025-11-06 18:47:02,526 schema CREATE INDEX "packing_packing_slug_86ed4fae" ON "packing_packing" ("slug"); (params ())
+DEBUG 2025-11-06 18:47:02,526 utils (0.000) CREATE INDEX "packing_packing_slug_86ed4fae" ON "packing_packing" ("slug"); args=(); alias=default
+DEBUG 2025-11-06 18:47:02,527 schema CREATE INDEX "packing_packing_site_id_81194cd2" ON "packing_packing" ("site_id"); (params ())
+DEBUG 2025-11-06 18:47:02,527 utils (0.000) CREATE INDEX "packing_packing_site_id_81194cd2" ON "packing_packing" ("site_id"); args=(); alias=default
+DEBUG 2025-11-06 18:47:02,528 schema CREATE INDEX "packing_packing_user_id_ee846846" ON "packing_packing" ("user_id"); (params ())
+DEBUG 2025-11-06 18:47:02,532 utils (0.000) CREATE INDEX "packing_packing_user_id_ee846846" ON "packing_packing" ("user_id"); args=(); alias=default
+DEBUG 2025-11-06 18:47:02,532 schema CREATE INDEX "packing_packing_post_id_a96fb8a5" ON "packing_packing" ("post_id"); (params ())
+DEBUG 2025-11-06 18:47:02,533 utils (0.000) CREATE INDEX "packing_packing_post_id_a96fb8a5" ON "packing_packing" ("post_id"); args=(); alias=default
+DEBUG 2025-11-06 18:47:02,613 schema CREATE TABLE "new__packing_pannes" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "section" varchar(15) NULL, "start_panne" time NOT NULL, "end_panne" time NOT NULL, "duree" bigint NOT NULL, "description" text NOT NULL, "solution" text NULL, "date" date NOT NULL, "slug" varchar(50) NOT NULL, "packing_id" bigint NULL REFERENCES "packing_packing" ("id") DEFERRABLE INITIALLY DEFERRED, "site_id" bigint NOT NULL REFERENCES "accounts_site" ("id") DEFERRABLE INITIALLY DEFERRED, "broyage_id" bigint NULL REFERENCES "broyage_broyage" ("id") DEFERRABLE INITIALLY DEFERRED, "departement" varchar(50) NOT NULL); (params None)
+DEBUG 2025-11-06 18:47:02,614 utils (0.000) CREATE TABLE "new__packing_pannes" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "section" varchar(15) NULL, "start_panne" time NOT NULL, "end_panne" time NOT NULL, "duree" bigint NOT NULL, "description" text NOT NULL, "solution" text NULL, "date" date NOT NULL, "slug" varchar(50) NOT NULL, "packing_id" bigint NULL REFERENCES "packing_packing" ("id") DEFERRABLE INITIALLY DEFERRED, "site_id" bigint NOT NULL REFERENCES "accounts_site" ("id") DEFERRABLE INITIALLY DEFERRED, "broyage_id" bigint NULL REFERENCES "broyage_broyage" ("id") DEFERRABLE INITIALLY DEFERRED, "departement" varchar(50) NOT NULL); args=None; alias=default
+DEBUG 2025-11-06 18:47:02,615 schema INSERT INTO "new__packing_pannes" ("id", "section", "start_panne", "end_panne", "duree", "description", "solution", "date", "slug", "packing_id", "site_id", "broyage_id", "departement") SELECT "id", "section", "start_panne", "end_panne", "duree", "description", "solution", "date", "slug", "packing_id", "site_id", "broyage_id", "departement" FROM "packing_pannes"; (params ())
+DEBUG 2025-11-06 18:47:02,616 utils (0.000) INSERT INTO "new__packing_pannes" ("id", "section", "start_panne", "end_panne", "duree", "description", "solution", "date", "slug", "packing_id", "site_id", "broyage_id", "departement") SELECT "id", "section", "start_panne", "end_panne", "duree", "description", "solution", "date", "slug", "packing_id", "site_id", "broyage_id", "departement" FROM "packing_pannes"; args=(); alias=default
+DEBUG 2025-11-06 18:47:02,616 schema DROP TABLE "packing_pannes"; (params ())
+DEBUG 2025-11-06 18:47:02,617 utils (0.001) DROP TABLE "packing_pannes"; args=(); alias=default
+DEBUG 2025-11-06 18:47:02,618 schema ALTER TABLE "new__packing_pannes" RENAME TO "packing_pannes"; (params ())
+DEBUG 2025-11-06 18:47:02,620 utils (0.001) ALTER TABLE "new__packing_pannes" RENAME TO "packing_pannes"; args=(); alias=default
+DEBUG 2025-11-06 18:47:02,620 schema CREATE INDEX "packing_pannes_slug_49fe3c12" ON "packing_pannes" ("slug"); (params ())
+DEBUG 2025-11-06 18:47:02,622 utils (0.000) CREATE INDEX "packing_pannes_slug_49fe3c12" ON "packing_pannes" ("slug"); args=(); alias=default
+DEBUG 2025-11-06 18:47:02,627 schema CREATE INDEX "packing_pannes_packing_id_dc38219c" ON "packing_pannes" ("packing_id"); (params ())
+DEBUG 2025-11-06 18:47:02,628 utils (0.000) CREATE INDEX "packing_pannes_packing_id_dc38219c" ON "packing_pannes" ("packing_id"); args=(); alias=default
+DEBUG 2025-11-06 18:47:02,628 schema CREATE INDEX "packing_pannes_site_id_27c773a6" ON "packing_pannes" ("site_id"); (params ())
+DEBUG 2025-11-06 18:47:02,629 utils (0.000) CREATE INDEX "packing_pannes_site_id_27c773a6" ON "packing_pannes" ("site_id"); args=(); alias=default
+DEBUG 2025-11-06 18:47:02,629 schema CREATE INDEX "packing_pannes_broyage_id_ef8b7a09" ON "packing_pannes" ("broyage_id"); (params ())
+DEBUG 2025-11-06 18:47:02,630 utils (0.000) CREATE INDEX "packing_pannes_broyage_id_ef8b7a09" ON "packing_pannes" ("broyage_id"); args=(); alias=default
+DEBUG 2025-11-06 18:47:02,643 schema CREATE TABLE "new__packing_pannes" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "departement" varchar(50) NOT NULL, "start_panne" time NOT NULL, "end_panne" time NOT NULL, "duree" bigint NOT NULL, "description" text NOT NULL, "solution" text NULL, "date" date NOT NULL, "slug" varchar(50) NOT NULL, "packing_id" bigint NULL REFERENCES "packing_packing" ("id") DEFERRABLE INITIALLY DEFERRED, "site_id" bigint NOT NULL REFERENCES "accounts_site" ("id") DEFERRABLE INITIALLY DEFERRED, "broyage_id" bigint NULL REFERENCES "broyage_broyage" ("id") DEFERRABLE INITIALLY DEFERRED, "section" varchar(50) NULL); (params None)
+DEBUG 2025-11-06 18:47:02,644 utils (0.000) CREATE TABLE "new__packing_pannes" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "departement" varchar(50) NOT NULL, "start_panne" time NOT NULL, "end_panne" time NOT NULL, "duree" bigint NOT NULL, "description" text NOT NULL, "solution" text NULL, "date" date NOT NULL, "slug" varchar(50) NOT NULL, "packing_id" bigint NULL REFERENCES "packing_packing" ("id") DEFERRABLE INITIALLY DEFERRED, "site_id" bigint NOT NULL REFERENCES "accounts_site" ("id") DEFERRABLE INITIALLY DEFERRED, "broyage_id" bigint NULL REFERENCES "broyage_broyage" ("id") DEFERRABLE INITIALLY DEFERRED, "section" varchar(50) NULL); args=None; alias=default
+DEBUG 2025-11-06 18:47:02,645 schema INSERT INTO "new__packing_pannes" ("id", "departement", "start_panne", "end_panne", "duree", "description", "solution", "date", "slug", "packing_id", "site_id", "broyage_id", "section") SELECT "id", "departement", "start_panne", "end_panne", "duree", "description", "solution", "date", "slug", "packing_id", "site_id", "broyage_id", "section" FROM "packing_pannes"; (params ())
+DEBUG 2025-11-06 18:47:02,646 utils (0.000) INSERT INTO "new__packing_pannes" ("id", "departement", "start_panne", "end_panne", "duree", "description", "solution", "date", "slug", "packing_id", "site_id", "broyage_id", "section") SELECT "id", "departement", "start_panne", "end_panne", "duree", "description", "solution", "date", "slug", "packing_id", "site_id", "broyage_id", "section" FROM "packing_pannes"; args=(); alias=default
+DEBUG 2025-11-06 18:47:02,646 schema DROP TABLE "packing_pannes"; (params ())
+DEBUG 2025-11-06 18:47:02,647 utils (0.000) DROP TABLE "packing_pannes"; args=(); alias=default
+DEBUG 2025-11-06 18:47:02,647 schema ALTER TABLE "new__packing_pannes" RENAME TO "packing_pannes"; (params ())
+DEBUG 2025-11-06 18:47:02,649 utils (0.002) ALTER TABLE "new__packing_pannes" RENAME TO "packing_pannes"; args=(); alias=default
+DEBUG 2025-11-06 18:47:02,650 schema CREATE INDEX "packing_pannes_slug_49fe3c12" ON "packing_pannes" ("slug"); (params ())
+DEBUG 2025-11-06 18:47:02,651 utils (0.000) CREATE INDEX "packing_pannes_slug_49fe3c12" ON "packing_pannes" ("slug"); args=(); alias=default
+DEBUG 2025-11-06 18:47:02,651 schema CREATE INDEX "packing_pannes_packing_id_dc38219c" ON "packing_pannes" ("packing_id"); (params ())
+DEBUG 2025-11-06 18:47:02,652 utils (0.000) CREATE INDEX "packing_pannes_packing_id_dc38219c" ON "packing_pannes" ("packing_id"); args=(); alias=default
+DEBUG 2025-11-06 18:47:02,653 schema CREATE INDEX "packing_pannes_site_id_27c773a6" ON "packing_pannes" ("site_id"); (params ())
+DEBUG 2025-11-06 18:47:02,653 utils (0.000) CREATE INDEX "packing_pannes_site_id_27c773a6" ON "packing_pannes" ("site_id"); args=(); alias=default
+DEBUG 2025-11-06 18:47:02,654 schema CREATE INDEX "packing_pannes_broyage_id_ef8b7a09" ON "packing_pannes" ("broyage_id"); (params ())
+DEBUG 2025-11-06 18:47:02,656 utils (0.000) CREATE INDEX "packing_pannes_broyage_id_ef8b7a09" ON "packing_pannes" ("broyage_id"); args=(); alias=default
+DEBUG 2025-11-06 18:47:02,659 utils (0.000) INSERT INTO "django_migrations" ("app", "name", "applied") VALUES ('packing', '0003_alter_packing_date_alter_packing_title_and_more', '2025-11-06 18:47:02.657765') RETURNING "django_migrations"."id"; args=('packing', '0003_alter_packing_date_alter_packing_title_and_more', '2025-11-06 18:47:02.657765'); alias=default
+DEBUG 2025-11-06 18:47:02,660 utils (0.000) PRAGMA foreign_key_check; args=None; alias=default
+DEBUG 2025-11-06 18:47:02,663 utils (0.003) COMMIT; args=None; alias=default
+DEBUG 2025-11-06 18:47:02,664 utils (0.000) PRAGMA foreign_keys = ON; args=None; alias=default
+DEBUG 2025-11-06 18:47:02,665 utils (0.000) PRAGMA foreign_keys = OFF; args=None; alias=default
+DEBUG 2025-11-06 18:47:02,665 utils (0.000) PRAGMA foreign_keys; args=None; alias=default
+DEBUG 2025-11-06 18:47:02,666 utils (0.000) BEGIN; args=None; alias=default
+DEBUG 2025-11-06 18:47:02,685 schema CREATE TABLE "new__packing_packing" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "title" varchar(50) NOT NULL, "livraison" integer NULL, "casse" integer NULL, "vrack" decimal NULL, "slug" varchar(50) NOT NULL, "site_id" bigint NOT NULL REFERENCES "accounts_site" ("id") DEFERRABLE INITIALLY DEFERRED, "user_id" integer NOT NULL REFERENCES "auth_user" ("id") DEFERRABLE INITIALLY DEFERRED, "post_id" bigint NOT NULL REFERENCES "packing_post" ("id") DEFERRABLE INITIALLY DEFERRED, "date" date NOT NULL); (params None)
+DEBUG 2025-11-06 18:47:02,686 utils (0.001) CREATE TABLE "new__packing_packing" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "title" varchar(50) NOT NULL, "livraison" integer NULL, "casse" integer NULL, "vrack" decimal NULL, "slug" varchar(50) NOT NULL, "site_id" bigint NOT NULL REFERENCES "accounts_site" ("id") DEFERRABLE INITIALLY DEFERRED, "user_id" integer NOT NULL REFERENCES "auth_user" ("id") DEFERRABLE INITIALLY DEFERRED, "post_id" bigint NOT NULL REFERENCES "packing_post" ("id") DEFERRABLE INITIALLY DEFERRED, "date" date NOT NULL); args=None; alias=default
+DEBUG 2025-11-06 18:47:02,687 schema INSERT INTO "new__packing_packing" ("id", "title", "livraison", "casse", "vrack", "slug", "site_id", "user_id", "post_id", "date") SELECT "id", "title", "livraison", "casse", "vrack", "slug", "site_id", "user_id", "post_id", "date" FROM "packing_packing"; (params ())
+DEBUG 2025-11-06 18:47:02,689 utils (0.000) INSERT INTO "new__packing_packing" ("id", "title", "livraison", "casse", "vrack", "slug", "site_id", "user_id", "post_id", "date") SELECT "id", "title", "livraison", "casse", "vrack", "slug", "site_id", "user_id", "post_id", "date" FROM "packing_packing"; args=(); alias=default
+DEBUG 2025-11-06 18:47:02,692 schema DROP TABLE "packing_packing"; (params ())
+DEBUG 2025-11-06 18:47:02,693 utils (0.001) DROP TABLE "packing_packing"; args=(); alias=default
+DEBUG 2025-11-06 18:47:02,694 schema ALTER TABLE "new__packing_packing" RENAME TO "packing_packing"; (params ())
+DEBUG 2025-11-06 18:47:02,697 utils (0.003) ALTER TABLE "new__packing_packing" RENAME TO "packing_packing"; args=(); alias=default
+DEBUG 2025-11-06 18:47:02,697 schema CREATE INDEX "packing_packing_slug_86ed4fae" ON "packing_packing" ("slug"); (params ())
+DEBUG 2025-11-06 18:47:02,698 utils (0.000) CREATE INDEX "packing_packing_slug_86ed4fae" ON "packing_packing" ("slug"); args=(); alias=default
+DEBUG 2025-11-06 18:47:02,698 schema CREATE INDEX "packing_packing_site_id_81194cd2" ON "packing_packing" ("site_id"); (params ())
+DEBUG 2025-11-06 18:47:02,699 utils (0.000) CREATE INDEX "packing_packing_site_id_81194cd2" ON "packing_packing" ("site_id"); args=(); alias=default
+DEBUG 2025-11-06 18:47:02,700 schema CREATE INDEX "packing_packing_user_id_ee846846" ON "packing_packing" ("user_id"); (params ())
+DEBUG 2025-11-06 18:47:02,700 utils (0.000) CREATE INDEX "packing_packing_user_id_ee846846" ON "packing_packing" ("user_id"); args=(); alias=default
+DEBUG 2025-11-06 18:47:02,701 schema CREATE INDEX "packing_packing_post_id_a96fb8a5" ON "packing_packing" ("post_id"); (params ())
+DEBUG 2025-11-06 18:47:02,701 utils (0.000) CREATE INDEX "packing_packing_post_id_a96fb8a5" ON "packing_packing" ("post_id"); args=(); alias=default
+DEBUG 2025-11-06 18:47:02,702 utils (0.000) INSERT INTO "django_migrations" ("app", "name", "applied") VALUES ('packing', '0004_alter_packing_date', '2025-11-06 18:47:02.702053') RETURNING "django_migrations"."id"; args=('packing', '0004_alter_packing_date', '2025-11-06 18:47:02.702053'); alias=default
+DEBUG 2025-11-06 18:47:02,703 utils (0.000) PRAGMA foreign_key_check; args=None; alias=default
+DEBUG 2025-11-06 18:47:02,707 utils (0.004) COMMIT; args=None; alias=default
+DEBUG 2025-11-06 18:47:02,708 utils (0.000) PRAGMA foreign_keys = ON; args=None; alias=default
+DEBUG 2025-11-06 18:47:02,710 utils (0.000) SELECT "django_migrations"."id", "django_migrations"."app", "django_migrations"."name", "django_migrations"."applied" FROM "django_migrations"; args=(); alias=default
+DEBUG 2025-11-06 18:47:02,733 utils (0.000) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE "django_content_type"."app_label" = 'admin'; args=('admin',); alias=default
+DEBUG 2025-11-06 18:47:02,735 utils (0.000) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE ("django_content_type"."app_label" = 'admin' AND "django_content_type"."model" IN ('logentry')); args=('admin', 'logentry'); alias=default
+DEBUG 2025-11-06 18:47:02,740 utils (0.001) SELECT "auth_permission"."content_type_id" AS "content_type", "auth_permission"."codename" AS "codename" FROM "auth_permission" INNER JOIN "django_content_type" ON ("auth_permission"."content_type_id" = "django_content_type"."id") WHERE "auth_permission"."content_type_id" IN (1) ORDER BY "django_content_type"."app_label" ASC, "django_content_type"."model" ASC, 2 ASC; args=(1,); alias=default
+DEBUG 2025-11-06 18:47:02,743 utils (0.000) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE "django_content_type"."app_label" = 'admin'; args=('admin',); alias=default
+DEBUG 2025-11-06 18:47:02,744 utils (0.000) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE "django_content_type"."app_label" = 'auth'; args=('auth',); alias=default
+DEBUG 2025-11-06 18:47:02,748 utils (0.001) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE ("django_content_type"."app_label" = 'auth' AND "django_content_type"."model" IN ('group', 'user', 'permission')); args=('auth', 'group', 'user', 'permission'); alias=default
+DEBUG 2025-11-06 18:47:02,751 utils (0.000) SELECT "auth_permission"."content_type_id" AS "content_type", "auth_permission"."codename" AS "codename" FROM "auth_permission" INNER JOIN "django_content_type" ON ("auth_permission"."content_type_id" = "django_content_type"."id") WHERE "auth_permission"."content_type_id" IN (2, 3, 4) ORDER BY "django_content_type"."app_label" ASC, "django_content_type"."model" ASC, 2 ASC; args=(2, 3, 4); alias=default
+DEBUG 2025-11-06 18:47:02,752 utils (0.000) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE "django_content_type"."app_label" = 'auth'; args=('auth',); alias=default
+DEBUG 2025-11-06 18:47:02,754 utils (0.000) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE "django_content_type"."app_label" = 'contenttypes'; args=('contenttypes',); alias=default
+DEBUG 2025-11-06 18:47:02,759 utils (0.000) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE ("django_content_type"."app_label" = 'contenttypes' AND "django_content_type"."model" IN ('contenttype')); args=('contenttypes', 'contenttype'); alias=default
+DEBUG 2025-11-06 18:47:02,761 utils (0.000) SELECT "auth_permission"."content_type_id" AS "content_type", "auth_permission"."codename" AS "codename" FROM "auth_permission" INNER JOIN "django_content_type" ON ("auth_permission"."content_type_id" = "django_content_type"."id") WHERE "auth_permission"."content_type_id" IN (5) ORDER BY "django_content_type"."app_label" ASC, "django_content_type"."model" ASC, 2 ASC; args=(5,); alias=default
+DEBUG 2025-11-06 18:47:02,763 utils (0.000) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE "django_content_type"."app_label" = 'contenttypes'; args=('contenttypes',); alias=default
+DEBUG 2025-11-06 18:47:02,765 utils (0.000) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE "django_content_type"."app_label" = 'sessions'; args=('sessions',); alias=default
+DEBUG 2025-11-06 18:47:02,766 utils (0.000) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE ("django_content_type"."app_label" = 'sessions' AND "django_content_type"."model" IN ('session')); args=('sessions', 'session'); alias=default
+DEBUG 2025-11-06 18:47:02,769 utils (0.000) SELECT "auth_permission"."content_type_id" AS "content_type", "auth_permission"."codename" AS "codename" FROM "auth_permission" INNER JOIN "django_content_type" ON ("auth_permission"."content_type_id" = "django_content_type"."id") WHERE "auth_permission"."content_type_id" IN (6) ORDER BY "django_content_type"."app_label" ASC, "django_content_type"."model" ASC, 2 ASC; args=(6,); alias=default
+DEBUG 2025-11-06 18:47:02,773 utils (0.002) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE "django_content_type"."app_label" = 'sessions'; args=('sessions',); alias=default
+DEBUG 2025-11-06 18:47:02,776 utils (0.000) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE "django_content_type"."app_label" = 'accounts'; args=('accounts',); alias=default
+DEBUG 2025-11-06 18:47:02,777 utils (0.000) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE ("django_content_type"."app_label" = 'accounts' AND "django_content_type"."model" IN ('profil', 'site')); args=('accounts', 'profil', 'site'); alias=default
+DEBUG 2025-11-06 18:47:02,781 utils (0.000) SELECT "auth_permission"."content_type_id" AS "content_type", "auth_permission"."codename" AS "codename" FROM "auth_permission" INNER JOIN "django_content_type" ON ("auth_permission"."content_type_id" = "django_content_type"."id") WHERE "auth_permission"."content_type_id" IN (8, 7) ORDER BY "django_content_type"."app_label" ASC, "django_content_type"."model" ASC, 2 ASC; args=(8, 7); alias=default
+DEBUG 2025-11-06 18:47:02,783 utils (0.000) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE "django_content_type"."app_label" = 'accounts'; args=('accounts',); alias=default
+DEBUG 2025-11-06 18:47:02,784 utils (0.000) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE "django_content_type"."app_label" = 'broyage'; args=('broyage',); alias=default
+DEBUG 2025-11-06 18:47:02,786 utils (0.000) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE ("django_content_type"."app_label" = 'broyage' AND "django_content_type"."model" IN ('totaliseur', 'broyage')); args=('broyage', 'totaliseur', 'broyage'); alias=default
+DEBUG 2025-11-06 18:47:02,790 utils (0.000) SELECT "auth_permission"."content_type_id" AS "content_type", "auth_permission"."codename" AS "codename" FROM "auth_permission" INNER JOIN "django_content_type" ON ("auth_permission"."content_type_id" = "django_content_type"."id") WHERE "auth_permission"."content_type_id" IN (12, 13) ORDER BY "django_content_type"."app_label" ASC, "django_content_type"."model" ASC, 2 ASC; args=(12, 13); alias=default
+DEBUG 2025-11-06 18:47:02,793 utils (0.000) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE "django_content_type"."app_label" = 'broyage'; args=('broyage',); alias=default
+DEBUG 2025-11-06 18:47:02,794 utils (0.000) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE "django_content_type"."app_label" = 'packing'; args=('packing',); alias=default
+DEBUG 2025-11-06 18:47:02,796 utils (0.000) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE ("django_content_type"."app_label" = 'packing' AND "django_content_type"."model" IN ('pannes', 'packing', 'post')); args=('packing', 'pannes', 'packing', 'post'); alias=default
+DEBUG 2025-11-06 18:47:02,799 utils (0.000) SELECT "auth_permission"."content_type_id" AS "content_type", "auth_permission"."codename" AS "codename" FROM "auth_permission" INNER JOIN "django_content_type" ON ("auth_permission"."content_type_id" = "django_content_type"."id") WHERE "auth_permission"."content_type_id" IN (9, 10, 11) ORDER BY "django_content_type"."app_label" ASC, "django_content_type"."model" ASC, 2 ASC; args=(9, 10, 11); alias=default
+DEBUG 2025-11-06 18:47:02,800 utils (0.000) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE "django_content_type"."app_label" = 'packing'; args=('packing',); alias=default
+DEBUG 2025-11-06 18:47:02,801 utils (0.000) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE "django_content_type"."app_label" = 'widget_tweaks'; args=('widget_tweaks',); alias=default
+DEBUG 2025-11-06 18:47:02,804 utils (0.000) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE "django_content_type"."app_label" = 'widget_tweaks'; args=('widget_tweaks',); alias=default
+DEBUG 2025-11-06 18:47:13,379 utils (0.000) 
+            SELECT name, type FROM sqlite_master
+            WHERE type in ('table', 'view') AND NOT name='sqlite_sequence'
+            ORDER BY name; args=None; alias=default
+DEBUG 2025-11-06 18:47:13,385 utils (0.001) SELECT "django_migrations"."id", "django_migrations"."app", "django_migrations"."name", "django_migrations"."applied" FROM "django_migrations"; args=(); alias=default
+DEBUG 2025-11-06 18:47:18,586 utils (0.002) SELECT "packing_packing"."id", "packing_packing"."post_id", "packing_packing"."user_id", "packing_packing"."site_id", "packing_packing"."title", "packing_packing"."livraison", "packing_packing"."casse", "packing_packing"."vrack", "packing_packing"."date", "packing_packing"."slug" FROM "packing_packing" INNER JOIN "packing_post" ON ("packing_packing"."post_id" = "packing_post"."id") ORDER BY "packing_packing"."date" DESC, "packing_post"."post" ASC LIMIT 21; args=(); alias=default
+DEBUG 2025-11-06 18:47:18,589 utils (0.000) SELECT "packing_post"."id", "packing_post"."post", "packing_post"."start_post", "packing_post"."end_post" FROM "packing_post" WHERE "packing_post"."id" = 1 LIMIT 21; args=(1,); alias=default
+DEBUG 2025-11-06 18:47:18,590 utils (0.000) SELECT "accounts_site"."id", "accounts_site"."site" FROM "accounts_site" WHERE "accounts_site"."id" = 1 LIMIT 21; args=(1,); alias=default
+DEBUG 2025-11-06 18:47:18,592 utils (0.000) SELECT "packing_post"."id", "packing_post"."post", "packing_post"."start_post", "packing_post"."end_post" FROM "packing_post" WHERE "packing_post"."id" = 1 LIMIT 21; args=(1,); alias=default
+DEBUG 2025-11-06 18:47:18,594 utils (0.000) SELECT "accounts_site"."id", "accounts_site"."site" FROM "accounts_site" WHERE "accounts_site"."id" = 1 LIMIT 21; args=(1,); alias=default
+DEBUG 2025-11-06 18:47:18,596 utils (0.000) SELECT "packing_post"."id", "packing_post"."post", "packing_post"."start_post", "packing_post"."end_post" FROM "packing_post" WHERE "packing_post"."id" = 2 LIMIT 21; args=(2,); alias=default
+DEBUG 2025-11-06 18:47:18,597 utils (0.000) SELECT "accounts_site"."id", "accounts_site"."site" FROM "accounts_site" WHERE "accounts_site"."id" = 1 LIMIT 21; args=(1,); alias=default
+DEBUG 2025-11-06 18:47:18,599 utils (0.000) SELECT "packing_post"."id", "packing_post"."post", "packing_post"."start_post", "packing_post"."end_post" FROM "packing_post" WHERE "packing_post"."id" = 3 LIMIT 21; args=(3,); alias=default
+DEBUG 2025-11-06 18:47:18,600 utils (0.000) SELECT "accounts_site"."id", "accounts_site"."site" FROM "accounts_site" WHERE "accounts_site"."id" = 1 LIMIT 21; args=(1,); alias=default
+DEBUG 2025-11-06 18:47:18,601 utils (0.000) SELECT "packing_post"."id", "packing_post"."post", "packing_post"."start_post", "packing_post"."end_post" FROM "packing_post" WHERE "packing_post"."id" = 3 LIMIT 21; args=(3,); alias=default
+DEBUG 2025-11-06 18:47:18,605 utils (0.001) SELECT "accounts_site"."id", "accounts_site"."site" FROM "accounts_site" WHERE "accounts_site"."id" = 1 LIMIT 21; args=(1,); alias=default
+DEBUG 2025-11-06 18:47:18,607 utils (0.000) SELECT "packing_post"."id", "packing_post"."post", "packing_post"."start_post", "packing_post"."end_post" FROM "packing_post" WHERE "packing_post"."id" = 1 LIMIT 21; args=(1,); alias=default
+DEBUG 2025-11-06 18:47:18,611 utils (0.000) SELECT "accounts_site"."id", "accounts_site"."site" FROM "accounts_site" WHERE "accounts_site"."id" = 1 LIMIT 21; args=(1,); alias=default
+DEBUG 2025-11-06 18:47:18,616 utils (0.000) SELECT "packing_post"."id", "packing_post"."post", "packing_post"."start_post", "packing_post"."end_post" FROM "packing_post" WHERE "packing_post"."id" = 3 LIMIT 21; args=(3,); alias=default
+DEBUG 2025-11-06 18:47:18,617 utils (0.000) SELECT "accounts_site"."id", "accounts_site"."site" FROM "accounts_site" WHERE "accounts_site"."id" = 1 LIMIT 21; args=(1,); alias=default
+DEBUG 2025-11-06 18:47:18,619 utils (0.000) SELECT "packing_post"."id", "packing_post"."post", "packing_post"."start_post", "packing_post"."end_post" FROM "packing_post" WHERE "packing_post"."id" = 2 LIMIT 21; args=(2,); alias=default
+DEBUG 2025-11-06 18:47:18,620 utils (0.000) SELECT "accounts_site"."id", "accounts_site"."site" FROM "accounts_site" WHERE "accounts_site"."id" = 1 LIMIT 21; args=(1,); alias=default
+DEBUG 2025-11-06 18:47:18,621 utils (0.000) SELECT "packing_post"."id", "packing_post"."post", "packing_post"."start_post", "packing_post"."end_post" FROM "packing_post" WHERE "packing_post"."id" = 1 LIMIT 21; args=(1,); alias=default
+DEBUG 2025-11-06 18:47:18,623 utils (0.000) SELECT "accounts_site"."id", "accounts_site"."site" FROM "accounts_site" WHERE "accounts_site"."id" = 1 LIMIT 21; args=(1,); alias=default
+DEBUG 2025-11-06 18:47:18,625 utils (0.000) SELECT "packing_post"."id", "packing_post"."post", "packing_post"."start_post", "packing_post"."end_post" FROM "packing_post" WHERE "packing_post"."id" = 2 LIMIT 21; args=(2,); alias=default
+DEBUG 2025-11-06 18:47:18,626 utils (0.000) SELECT "accounts_site"."id", "accounts_site"."site" FROM "accounts_site" WHERE "accounts_site"."id" = 1 LIMIT 21; args=(1,); alias=default
+DEBUG 2025-11-06 18:47:18,628 utils (0.000) SELECT "packing_post"."id", "packing_post"."post", "packing_post"."start_post", "packing_post"."end_post" FROM "packing_post" WHERE "packing_post"."id" = 1 LIMIT 21; args=(1,); alias=default
+DEBUG 2025-11-06 18:47:18,629 utils (0.000) SELECT "accounts_site"."id", "accounts_site"."site" FROM "accounts_site" WHERE "accounts_site"."id" = 1 LIMIT 21; args=(1,); alias=default
+DEBUG 2025-11-06 18:47:18,632 utils (0.000) SELECT "packing_post"."id", "packing_post"."post", "packing_post"."start_post", "packing_post"."end_post" FROM "packing_post" WHERE "packing_post"."id" = 3 LIMIT 21; args=(3,); alias=default
+DEBUG 2025-11-06 18:47:18,634 utils (0.000) SELECT "accounts_site"."id", "accounts_site"."site" FROM "accounts_site" WHERE "accounts_site"."id" = 1 LIMIT 21; args=(1,); alias=default
+DEBUG 2025-11-06 18:47:18,635 utils (0.000) SELECT "packing_post"."id", "packing_post"."post", "packing_post"."start_post", "packing_post"."end_post" FROM "packing_post" WHERE "packing_post"."id" = 1 LIMIT 21; args=(1,); alias=default
+DEBUG 2025-11-06 18:47:18,636 utils (0.000) SELECT "accounts_site"."id", "accounts_site"."site" FROM "accounts_site" WHERE "accounts_site"."id" = 1 LIMIT 21; args=(1,); alias=default
+DEBUG 2025-11-06 18:47:18,637 utils (0.000) SELECT "packing_packing"."id", "packing_packing"."post_id", "packing_packing"."user_id", "packing_packing"."site_id", "packing_packing"."title", "packing_packing"."livraison", "packing_packing"."casse", "packing_packing"."vrack", "packing_packing"."date", "packing_packing"."slug" FROM "packing_packing" INNER JOIN "packing_post" ON ("packing_packing"."post_id" = "packing_post"."id") ORDER BY "packing_packing"."date" DESC, "packing_post"."post" ASC LIMIT 21; args=(); alias=default
+DEBUG 2025-11-06 18:47:18,639 utils (0.000) SELECT "packing_post"."id", "packing_post"."post", "packing_post"."start_post", "packing_post"."end_post" FROM "packing_post" WHERE "packing_post"."id" = 1 LIMIT 21; args=(1,); alias=default
+DEBUG 2025-11-06 18:47:18,641 utils (0.000) SELECT "accounts_site"."id", "accounts_site"."site" FROM "accounts_site" WHERE "accounts_site"."id" = 1 LIMIT 21; args=(1,); alias=default
+DEBUG 2025-11-06 18:47:18,643 utils (0.000) SELECT "packing_post"."id", "packing_post"."post", "packing_post"."start_post", "packing_post"."end_post" FROM "packing_post" WHERE "packing_post"."id" = 1 LIMIT 21; args=(1,); alias=default
+DEBUG 2025-11-06 18:47:18,644 utils (0.000) SELECT "accounts_site"."id", "accounts_site"."site" FROM "accounts_site" WHERE "accounts_site"."id" = 1 LIMIT 21; args=(1,); alias=default
+DEBUG 2025-11-06 18:47:18,645 utils (0.000) SELECT "packing_post"."id", "packing_post"."post", "packing_post"."start_post", "packing_post"."end_post" FROM "packing_post" WHERE "packing_post"."id" = 2 LIMIT 21; args=(2,); alias=default
+DEBUG 2025-11-06 18:47:18,649 utils (0.000) SELECT "accounts_site"."id", "accounts_site"."site" FROM "accounts_site" WHERE "accounts_site"."id" = 1 LIMIT 21; args=(1,); alias=default
+DEBUG 2025-11-06 18:47:18,651 utils (0.000) SELECT "packing_post"."id", "packing_post"."post", "packing_post"."start_post", "packing_post"."end_post" FROM "packing_post" WHERE "packing_post"."id" = 3 LIMIT 21; args=(3,); alias=default
+DEBUG 2025-11-06 18:47:18,652 utils (0.000) SELECT "accounts_site"."id", "accounts_site"."site" FROM "accounts_site" WHERE "accounts_site"."id" = 1 LIMIT 21; args=(1,); alias=default
+DEBUG 2025-11-06 18:47:18,653 utils (0.000) SELECT "packing_post"."id", "packing_post"."post", "packing_post"."start_post", "packing_post"."end_post" FROM "packing_post" WHERE "packing_post"."id" = 3 LIMIT 21; args=(3,); alias=default
+DEBUG 2025-11-06 18:47:18,654 utils (0.000) SELECT "accounts_site"."id", "accounts_site"."site" FROM "accounts_site" WHERE "accounts_site"."id" = 1 LIMIT 21; args=(1,); alias=default
+DEBUG 2025-11-06 18:47:18,655 utils (0.000) SELECT "packing_post"."id", "packing_post"."post", "packing_post"."start_post", "packing_post"."end_post" FROM "packing_post" WHERE "packing_post"."id" = 1 LIMIT 21; args=(1,); alias=default
+DEBUG 2025-11-06 18:47:18,656 utils (0.000) SELECT "accounts_site"."id", "accounts_site"."site" FROM "accounts_site" WHERE "accounts_site"."id" = 1 LIMIT 21; args=(1,); alias=default
+DEBUG 2025-11-06 18:47:18,660 utils (0.000) SELECT "packing_post"."id", "packing_post"."post", "packing_post"."start_post", "packing_post"."end_post" FROM "packing_post" WHERE "packing_post"."id" = 3 LIMIT 21; args=(3,); alias=default
+DEBUG 2025-11-06 18:47:18,661 utils (0.000) SELECT "accounts_site"."id", "accounts_site"."site" FROM "accounts_site" WHERE "accounts_site"."id" = 1 LIMIT 21; args=(1,); alias=default
+DEBUG 2025-11-06 18:47:18,662 utils (0.000) SELECT "packing_post"."id", "packing_post"."post", "packing_post"."start_post", "packing_post"."end_post" FROM "packing_post" WHERE "packing_post"."id" = 2 LIMIT 21; args=(2,); alias=default
+DEBUG 2025-11-06 18:47:18,665 utils (0.000) SELECT "accounts_site"."id", "accounts_site"."site" FROM "accounts_site" WHERE "accounts_site"."id" = 1 LIMIT 21; args=(1,); alias=default
+DEBUG 2025-11-06 18:47:18,667 utils (0.000) SELECT "packing_post"."id", "packing_post"."post", "packing_post"."start_post", "packing_post"."end_post" FROM "packing_post" WHERE "packing_post"."id" = 1 LIMIT 21; args=(1,); alias=default
+DEBUG 2025-11-06 18:47:18,668 utils (0.000) SELECT "accounts_site"."id", "accounts_site"."site" FROM "accounts_site" WHERE "accounts_site"."id" = 1 LIMIT 21; args=(1,); alias=default
+DEBUG 2025-11-06 18:47:18,669 utils (0.000) SELECT "packing_post"."id", "packing_post"."post", "packing_post"."start_post", "packing_post"."end_post" FROM "packing_post" WHERE "packing_post"."id" = 2 LIMIT 21; args=(2,); alias=default
+DEBUG 2025-11-06 18:47:18,670 utils (0.000) SELECT "accounts_site"."id", "accounts_site"."site" FROM "accounts_site" WHERE "accounts_site"."id" = 1 LIMIT 21; args=(1,); alias=default
+DEBUG 2025-11-06 18:47:18,671 utils (0.000) SELECT "packing_post"."id", "packing_post"."post", "packing_post"."start_post", "packing_post"."end_post" FROM "packing_post" WHERE "packing_post"."id" = 1 LIMIT 21; args=(1,); alias=default
+DEBUG 2025-11-06 18:47:18,672 utils (0.000) SELECT "accounts_site"."id", "accounts_site"."site" FROM "accounts_site" WHERE "accounts_site"."id" = 1 LIMIT 21; args=(1,); alias=default
+DEBUG 2025-11-06 18:47:18,673 utils (0.000) SELECT "packing_post"."id", "packing_post"."post", "packing_post"."start_post", "packing_post"."end_post" FROM "packing_post" WHERE "packing_post"."id" = 3 LIMIT 21; args=(3,); alias=default
+DEBUG 2025-11-06 18:47:18,677 utils (0.000) SELECT "accounts_site"."id", "accounts_site"."site" FROM "accounts_site" WHERE "accounts_site"."id" = 1 LIMIT 21; args=(1,); alias=default
+DEBUG 2025-11-06 18:47:18,680 utils (0.000) SELECT "packing_post"."id", "packing_post"."post", "packing_post"."start_post", "packing_post"."end_post" FROM "packing_post" WHERE "packing_post"."id" = 1 LIMIT 21; args=(1,); alias=default
+DEBUG 2025-11-06 18:47:18,681 utils (0.000) SELECT "accounts_site"."id", "accounts_site"."site" FROM "accounts_site" WHERE "accounts_site"."id" = 1 LIMIT 21; args=(1,); alias=default
+DEBUG 2025-11-06 18:47:18,682 utils (0.000) SELECT "packing_packing"."id", "packing_packing"."post_id", "packing_packing"."user_id", "packing_packing"."site_id", "packing_packing"."title", "packing_packing"."livraison", "packing_packing"."casse", "packing_packing"."vrack", "packing_packing"."date", "packing_packing"."slug" FROM "packing_packing" INNER JOIN "packing_post" ON ("packing_packing"."post_id" = "packing_post"."id") ORDER BY "packing_packing"."date" DESC, "packing_post"."post" ASC LIMIT 21; args=(); alias=default
+DEBUG 2025-11-06 18:47:18,683 utils (0.000) SELECT "packing_post"."id", "packing_post"."post", "packing_post"."start_post", "packing_post"."end_post" FROM "packing_post" WHERE "packing_post"."id" = 1 LIMIT 21; args=(1,); alias=default
+DEBUG 2025-11-06 18:47:18,685 utils (0.000) SELECT "accounts_site"."id", "accounts_site"."site" FROM "accounts_site" WHERE "accounts_site"."id" = 1 LIMIT 21; args=(1,); alias=default
+DEBUG 2025-11-06 18:47:18,686 utils (0.000) SELECT "packing_post"."id", "packing_post"."post", "packing_post"."start_post", "packing_post"."end_post" FROM "packing_post" WHERE "packing_post"."id" = 1 LIMIT 21; args=(1,); alias=default
+DEBUG 2025-11-06 18:47:18,687 utils (0.000) SELECT "accounts_site"."id", "accounts_site"."site" FROM "accounts_site" WHERE "accounts_site"."id" = 1 LIMIT 21; args=(1,); alias=default
+DEBUG 2025-11-06 18:47:18,688 utils (0.000) SELECT "packing_post"."id", "packing_post"."post", "packing_post"."start_post", "packing_post"."end_post" FROM "packing_post" WHERE "packing_post"."id" = 2 LIMIT 21; args=(2,); alias=default
+DEBUG 2025-11-06 18:47:18,689 utils (0.000) SELECT "accounts_site"."id", "accounts_site"."site" FROM "accounts_site" WHERE "accounts_site"."id" = 1 LIMIT 21; args=(1,); alias=default
+DEBUG 2025-11-06 18:47:18,690 utils (0.000) SELECT "packing_post"."id", "packing_post"."post", "packing_post"."start_post", "packing_post"."end_post" FROM "packing_post" WHERE "packing_post"."id" = 3 LIMIT 21; args=(3,); alias=default
+DEBUG 2025-11-06 18:47:18,692 utils (0.000) SELECT "accounts_site"."id", "accounts_site"."site" FROM "accounts_site" WHERE "accounts_site"."id" = 1 LIMIT 21; args=(1,); alias=default
+DEBUG 2025-11-06 18:47:18,693 utils (0.000) SELECT "packing_post"."id", "packing_post"."post", "packing_post"."start_post", "packing_post"."end_post" FROM "packing_post" WHERE "packing_post"."id" = 3 LIMIT 21; args=(3,); alias=default
+DEBUG 2025-11-06 18:47:18,695 utils (0.000) SELECT "accounts_site"."id", "accounts_site"."site" FROM "accounts_site" WHERE "accounts_site"."id" = 1 LIMIT 21; args=(1,); alias=default
+DEBUG 2025-11-06 18:47:18,698 utils (0.002) SELECT "packing_post"."id", "packing_post"."post", "packing_post"."start_post", "packing_post"."end_post" FROM "packing_post" WHERE "packing_post"."id" = 1 LIMIT 21; args=(1,); alias=default
+DEBUG 2025-11-06 18:47:18,700 utils (0.000) SELECT "accounts_site"."id", "accounts_site"."site" FROM "accounts_site" WHERE "accounts_site"."id" = 1 LIMIT 21; args=(1,); alias=default
+DEBUG 2025-11-06 18:47:18,701 utils (0.000) SELECT "packing_post"."id", "packing_post"."post", "packing_post"."start_post", "packing_post"."end_post" FROM "packing_post" WHERE "packing_post"."id" = 3 LIMIT 21; args=(3,); alias=default
+DEBUG 2025-11-06 18:47:18,702 utils (0.000) SELECT "accounts_site"."id", "accounts_site"."site" FROM "accounts_site" WHERE "accounts_site"."id" = 1 LIMIT 21; args=(1,); alias=default
+DEBUG 2025-11-06 18:47:18,703 utils (0.000) SELECT "packing_post"."id", "packing_post"."post", "packing_post"."start_post", "packing_post"."end_post" FROM "packing_post" WHERE "packing_post"."id" = 2 LIMIT 21; args=(2,); alias=default
+DEBUG 2025-11-06 18:47:18,704 utils (0.000) SELECT "accounts_site"."id", "accounts_site"."site" FROM "accounts_site" WHERE "accounts_site"."id" = 1 LIMIT 21; args=(1,); alias=default
+DEBUG 2025-11-06 18:47:18,705 utils (0.000) SELECT "packing_post"."id", "packing_post"."post", "packing_post"."start_post", "packing_post"."end_post" FROM "packing_post" WHERE "packing_post"."id" = 1 LIMIT 21; args=(1,); alias=default
+DEBUG 2025-11-06 18:47:18,706 utils (0.000) SELECT "accounts_site"."id", "accounts_site"."site" FROM "accounts_site" WHERE "accounts_site"."id" = 1 LIMIT 21; args=(1,); alias=default
+DEBUG 2025-11-06 18:47:18,708 utils (0.000) SELECT "packing_post"."id", "packing_post"."post", "packing_post"."start_post", "packing_post"."end_post" FROM "packing_post" WHERE "packing_post"."id" = 2 LIMIT 21; args=(2,); alias=default
+DEBUG 2025-11-06 18:47:18,711 utils (0.001) SELECT "accounts_site"."id", "accounts_site"."site" FROM "accounts_site" WHERE "accounts_site"."id" = 1 LIMIT 21; args=(1,); alias=default
+DEBUG 2025-11-06 18:47:18,712 utils (0.000) SELECT "packing_post"."id", "packing_post"."post", "packing_post"."start_post", "packing_post"."end_post" FROM "packing_post" WHERE "packing_post"."id" = 1 LIMIT 21; args=(1,); alias=default
+DEBUG 2025-11-06 18:47:18,714 utils (0.000) SELECT "accounts_site"."id", "accounts_site"."site" FROM "accounts_site" WHERE "accounts_site"."id" = 1 LIMIT 21; args=(1,); alias=default
+DEBUG 2025-11-06 18:47:18,715 utils (0.000) SELECT "packing_post"."id", "packing_post"."post", "packing_post"."start_post", "packing_post"."end_post" FROM "packing_post" WHERE "packing_post"."id" = 3 LIMIT 21; args=(3,); alias=default
+DEBUG 2025-11-06 18:47:18,717 utils (0.000) SELECT "accounts_site"."id", "accounts_site"."site" FROM "accounts_site" WHERE "accounts_site"."id" = 1 LIMIT 21; args=(1,); alias=default
+DEBUG 2025-11-06 18:47:18,719 utils (0.000) SELECT "packing_post"."id", "packing_post"."post", "packing_post"."start_post", "packing_post"."end_post" FROM "packing_post" WHERE "packing_post"."id" = 1 LIMIT 21; args=(1,); alias=default
+DEBUG 2025-11-06 18:47:18,720 utils (0.000) SELECT "accounts_site"."id", "accounts_site"."site" FROM "accounts_site" WHERE "accounts_site"."id" = 1 LIMIT 21; args=(1,); alias=default
+DEBUG 2025-11-06 18:47:18,721 utils (0.000) SELECT "packing_packing"."id", "packing_packing"."post_id", "packing_packing"."user_id", "packing_packing"."site_id", "packing_packing"."title", "packing_packing"."livraison", "packing_packing"."casse", "packing_packing"."vrack", "packing_packing"."date", "packing_packing"."slug" FROM "packing_packing" INNER JOIN "packing_post" ON ("packing_packing"."post_id" = "packing_post"."id") ORDER BY "packing_packing"."date" DESC, "packing_post"."post" ASC LIMIT 21; args=(); alias=default
+DEBUG 2025-11-06 18:47:18,723 utils (0.000) SELECT "packing_post"."id", "packing_post"."post", "packing_post"."start_post", "packing_post"."end_post" FROM "packing_post" WHERE "packing_post"."id" = 1 LIMIT 21; args=(1,); alias=default
+DEBUG 2025-11-06 18:47:18,724 utils (0.001) SELECT "accounts_site"."id", "accounts_site"."site" FROM "accounts_site" WHERE "accounts_site"."id" = 1 LIMIT 21; args=(1,); alias=default
+DEBUG 2025-11-06 18:47:18,727 utils (0.000) SELECT "packing_post"."id", "packing_post"."post", "packing_post"."start_post", "packing_post"."end_post" FROM "packing_post" WHERE "packing_post"."id" = 1 LIMIT 21; args=(1,); alias=default
+DEBUG 2025-11-06 18:47:18,730 utils (0.000) SELECT "accounts_site"."id", "accounts_site"."site" FROM "accounts_site" WHERE "accounts_site"."id" = 1 LIMIT 21; args=(1,); alias=default
+DEBUG 2025-11-06 18:47:18,731 utils (0.000) SELECT "packing_post"."id", "packing_post"."post", "packing_post"."start_post", "packing_post"."end_post" FROM "packing_post" WHERE "packing_post"."id" = 2 LIMIT 21; args=(2,); alias=default
+DEBUG 2025-11-06 18:47:18,732 utils (0.000) SELECT "accounts_site"."id", "accounts_site"."site" FROM "accounts_site" WHERE "accounts_site"."id" = 1 LIMIT 21; args=(1,); alias=default
+DEBUG 2025-11-06 18:47:18,733 utils (0.000) SELECT "packing_post"."id", "packing_post"."post", "packing_post"."start_post", "packing_post"."end_post" FROM "packing_post" WHERE "packing_post"."id" = 3 LIMIT 21; args=(3,); alias=default
+DEBUG 2025-11-06 18:47:18,734 utils (0.000) SELECT "accounts_site"."id", "accounts_site"."site" FROM "accounts_site" WHERE "accounts_site"."id" = 1 LIMIT 21; args=(1,); alias=default
+DEBUG 2025-11-06 18:47:18,736 utils (0.000) SELECT "packing_post"."id", "packing_post"."post", "packing_post"."start_post", "packing_post"."end_post" FROM "packing_post" WHERE "packing_post"."id" = 3 LIMIT 21; args=(3,); alias=default
+DEBUG 2025-11-06 18:47:18,737 utils (0.000) SELECT "accounts_site"."id", "accounts_site"."site" FROM "accounts_site" WHERE "accounts_site"."id" = 1 LIMIT 21; args=(1,); alias=default
+DEBUG 2025-11-06 18:47:18,738 utils (0.000) SELECT "packing_post"."id", "packing_post"."post", "packing_post"."start_post", "packing_post"."end_post" FROM "packing_post" WHERE "packing_post"."id" = 1 LIMIT 21; args=(1,); alias=default
+DEBUG 2025-11-06 18:47:18,739 utils (0.000) SELECT "accounts_site"."id", "accounts_site"."site" FROM "accounts_site" WHERE "accounts_site"."id" = 1 LIMIT 21; args=(1,); alias=default
+DEBUG 2025-11-06 18:47:18,741 utils (0.001) SELECT "packing_post"."id", "packing_post"."post", "packing_post"."start_post", "packing_post"."end_post" FROM "packing_post" WHERE "packing_post"."id" = 3 LIMIT 21; args=(3,); alias=default
+DEBUG 2025-11-06 18:47:18,745 utils (0.000) SELECT "accounts_site"."id", "accounts_site"."site" FROM "accounts_site" WHERE "accounts_site"."id" = 1 LIMIT 21; args=(1,); alias=default
+DEBUG 2025-11-06 18:47:18,747 utils (0.000) SELECT "packing_post"."id", "packing_post"."post", "packing_post"."start_post", "packing_post"."end_post" FROM "packing_post" WHERE "packing_post"."id" = 2 LIMIT 21; args=(2,); alias=default
+DEBUG 2025-11-06 18:47:18,748 utils (0.000) SELECT "accounts_site"."id", "accounts_site"."site" FROM "accounts_site" WHERE "accounts_site"."id" = 1 LIMIT 21; args=(1,); alias=default
+DEBUG 2025-11-06 18:47:18,749 utils (0.000) SELECT "packing_post"."id", "packing_post"."post", "packing_post"."start_post", "packing_post"."end_post" FROM "packing_post" WHERE "packing_post"."id" = 1 LIMIT 21; args=(1,); alias=default
+DEBUG 2025-11-06 18:47:18,750 utils (0.000) SELECT "accounts_site"."id", "accounts_site"."site" FROM "accounts_site" WHERE "accounts_site"."id" = 1 LIMIT 21; args=(1,); alias=default
+DEBUG 2025-11-06 18:47:18,753 utils (0.000) SELECT "packing_post"."id", "packing_post"."post", "packing_post"."start_post", "packing_post"."end_post" FROM "packing_post" WHERE "packing_post"."id" = 2 LIMIT 21; args=(2,); alias=default
+DEBUG 2025-11-06 18:47:18,755 utils (0.000) SELECT "accounts_site"."id", "accounts_site"."site" FROM "accounts_site" WHERE "accounts_site"."id" = 1 LIMIT 21; args=(1,); alias=default
+DEBUG 2025-11-06 18:47:18,756 utils (0.000) SELECT "packing_post"."id", "packing_post"."post", "packing_post"."start_post", "packing_post"."end_post" FROM "packing_post" WHERE "packing_post"."id" = 1 LIMIT 21; args=(1,); alias=default
+DEBUG 2025-11-06 18:47:18,758 utils (0.001) SELECT "accounts_site"."id", "accounts_site"."site" FROM "accounts_site" WHERE "accounts_site"."id" = 1 LIMIT 21; args=(1,); alias=default
+DEBUG 2025-11-06 18:47:18,759 utils (0.000) SELECT "packing_post"."id", "packing_post"."post", "packing_post"."start_post", "packing_post"."end_post" FROM "packing_post" WHERE "packing_post"."id" = 3 LIMIT 21; args=(3,); alias=default
+DEBUG 2025-11-06 18:47:18,762 utils (0.000) SELECT "accounts_site"."id", "accounts_site"."site" FROM "accounts_site" WHERE "accounts_site"."id" = 1 LIMIT 21; args=(1,); alias=default
+DEBUG 2025-11-06 18:47:18,763 utils (0.000) SELECT "packing_post"."id", "packing_post"."post", "packing_post"."start_post", "packing_post"."end_post" FROM "packing_post" WHERE "packing_post"."id" = 1 LIMIT 21; args=(1,); alias=default
+DEBUG 2025-11-06 18:47:18,764 utils (0.000) SELECT "accounts_site"."id", "accounts_site"."site" FROM "accounts_site" WHERE "accounts_site"."id" = 1 LIMIT 21; args=(1,); alias=default
+ERROR 2025-11-06 18:47:18,794 log Internal Server Error: /packing/
+Traceback (most recent call last):
+  File "C:\Users\mazxa\Desktop\Tk\env\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\mazxa\Desktop\Tk\env\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\mazxa\Desktop\Tk\env\Lib\site-packages\django\views\generic\base.py", line 105, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\mazxa\Desktop\Tk\env\Lib\site-packages\django\views\generic\base.py", line 144, in dispatch
+    return handler(request, *args, **kwargs)
+  File "C:\Users\mazxa\Desktop\Tk\env\Lib\site-packages\django\views\generic\list.py", line 178, in get
+    context = self.get_context_data()
+  File "C:\Users\mazxa\Desktop\Tk\config\packing\views.py", line 296, in get_context_data
+    profile = self.request.user.profil
+              ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\mazxa\Desktop\Tk\env\Lib\site-packages\django\utils\functional.py", line 253, in inner
+    return func(_wrapped, *args)
+AttributeError: 'AnonymousUser' object has no attribute 'profil'
+DEBUG 2025-11-06 18:47:21,309 utils (0.002) SELECT "broyage_broyage"."id", "broyage_broyage"."user_id", "broyage_broyage"."post_id", "broyage_broyage"."site_id", "broyage_broyage"."totaliseur_id", "broyage_broyage"."title", "broyage_broyage"."compt_fin", "broyage_broyage"."clinker_fin", "broyage_broyage"."gypse_fin", "broyage_broyage"."dolomite_fin", "broyage_broyage"."dif_compt", "broyage_broyage"."dif_clinker", "broyage_broyage"."dif_dolomite", "broyage_broyage"."dif_gypse", "broyage_broyage"."date", "broyage_broyage"."slug" FROM "broyage_broyage" ORDER BY "broyage_broyage"."site_id" ASC LIMIT 21; args=(); alias=default
+DEBUG 2025-11-06 18:47:21,313 utils (0.000) SELECT "broyage_broyage"."id", "broyage_broyage"."user_id", "broyage_broyage"."post_id", "broyage_broyage"."site_id", "broyage_broyage"."totaliseur_id", "broyage_broyage"."title", "broyage_broyage"."compt_fin", "broyage_broyage"."clinker_fin", "broyage_broyage"."gypse_fin", "broyage_broyage"."dolomite_fin", "broyage_broyage"."dif_compt", "broyage_broyage"."dif_clinker", "broyage_broyage"."dif_dolomite", "broyage_broyage"."dif_gypse", "broyage_broyage"."date", "broyage_broyage"."slug" FROM "broyage_broyage" ORDER BY "broyage_broyage"."site_id" ASC LIMIT 21; args=(); alias=default
+DEBUG 2025-11-06 18:47:21,316 utils (0.000) SELECT "broyage_broyage"."id", "broyage_broyage"."user_id", "broyage_broyage"."post_id", "broyage_broyage"."site_id", "broyage_broyage"."totaliseur_id", "broyage_broyage"."title", "broyage_broyage"."compt_fin", "broyage_broyage"."clinker_fin", "broyage_broyage"."gypse_fin", "broyage_broyage"."dolomite_fin", "broyage_broyage"."dif_compt", "broyage_broyage"."dif_clinker", "broyage_broyage"."dif_dolomite", "broyage_broyage"."dif_gypse", "broyage_broyage"."date", "broyage_broyage"."slug" FROM "broyage_broyage" ORDER BY "broyage_broyage"."site_id" ASC LIMIT 21; args=(); alias=default
+DEBUG 2025-11-06 18:47:21,318 utils (0.000) SELECT "broyage_broyage"."id", "broyage_broyage"."user_id", "broyage_broyage"."post_id", "broyage_broyage"."site_id", "broyage_broyage"."totaliseur_id", "broyage_broyage"."title", "broyage_broyage"."compt_fin", "broyage_broyage"."clinker_fin", "broyage_broyage"."gypse_fin", "broyage_broyage"."dolomite_fin", "broyage_broyage"."dif_compt", "broyage_broyage"."dif_clinker", "broyage_broyage"."dif_dolomite", "broyage_broyage"."dif_gypse", "broyage_broyage"."date", "broyage_broyage"."slug" FROM "broyage_broyage" ORDER BY "broyage_broyage"."site_id" ASC LIMIT 21; args=(); alias=default
+ERROR 2025-11-06 18:47:21,347 log Internal Server Error: /broyage/
+Traceback (most recent call last):
+  File "C:\Users\mazxa\Desktop\Tk\env\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\mazxa\Desktop\Tk\env\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\mazxa\Desktop\Tk\env\Lib\site-packages\django\views\generic\base.py", line 105, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\mazxa\Desktop\Tk\env\Lib\site-packages\django\views\generic\base.py", line 144, in dispatch
+    return handler(request, *args, **kwargs)
+  File "C:\Users\mazxa\Desktop\Tk\env\Lib\site-packages\django\views\generic\list.py", line 178, in get
+    context = self.get_context_data()
+  File "C:\Users\mazxa\Desktop\Tk\config\broyage\views.py", line 24, in get_context_data
+    site = self.request.user.profil.site
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\mazxa\Desktop\Tk\env\Lib\site-packages\django\utils\functional.py", line 253, in inner
+    return func(_wrapped, *args)
+AttributeError: 'AnonymousUser' object has no attribute 'profil'
+DEBUG 2025-11-06 18:47:58,328 utils (0.000) 
+            SELECT name, type FROM sqlite_master
+            WHERE type in ('table', 'view') AND NOT name='sqlite_sequence'
+            ORDER BY name; args=None; alias=default
+DEBUG 2025-11-06 18:47:58,332 utils (0.000) SELECT "django_migrations"."id", "django_migrations"."app", "django_migrations"."name", "django_migrations"."applied" FROM "django_migrations"; args=(); alias=default
+DEBUG 2025-11-06 18:47:58,342 utils (0.000) SELECT "auth_user"."id", "auth_user"."password", "auth_user"."last_login", "auth_user"."is_superuser", "auth_user"."username", "auth_user"."first_name", "auth_user"."last_name", "auth_user"."email", "auth_user"."is_staff", "auth_user"."is_active", "auth_user"."date_joined" FROM "auth_user" WHERE "auth_user"."username" = 'mazxa' LIMIT 21; args=('mazxa',); alias=default
+DEBUG 2025-11-06 18:48:06,775 utils (0.000) SELECT "auth_user"."id", "auth_user"."password", "auth_user"."last_login", "auth_user"."is_superuser", "auth_user"."username", "auth_user"."first_name", "auth_user"."last_name", "auth_user"."email", "auth_user"."is_staff", "auth_user"."is_active", "auth_user"."date_joined" FROM "auth_user" WHERE "auth_user"."username" = 'Xalpha' LIMIT 21; args=('Xalpha',); alias=default
+DEBUG 2025-11-06 18:48:41,619 utils (0.000) 
+            SELECT name, type FROM sqlite_master
+            WHERE type in ('table', 'view') AND NOT name='sqlite_sequence'
+            ORDER BY name; args=None; alias=default
+DEBUG 2025-11-06 18:48:41,624 utils (0.000) SELECT "django_migrations"."id", "django_migrations"."app", "django_migrations"."name", "django_migrations"."applied" FROM "django_migrations"; args=(); alias=default
+DEBUG 2025-11-06 18:48:43,769 utils (0.001) SELECT "auth_user"."id", "auth_user"."password", "auth_user"."last_login", "auth_user"."is_superuser", "auth_user"."username", "auth_user"."first_name", "auth_user"."last_name", "auth_user"."email", "auth_user"."is_staff", "auth_user"."is_active", "auth_user"."date_joined" FROM "auth_user" WHERE "auth_user"."username" = 'Xalpha' LIMIT 21; args=('Xalpha',); alias=default
+DEBUG 2025-11-06 18:48:44,961 utils (0.000) SELECT 1 AS "a" FROM "django_session" WHERE "django_session"."session_key" = 'nmj5dad0aozcbq49phbhnhpv00lohgi2' LIMIT 1; args=(1, 'nmj5dad0aozcbq49phbhnhpv00lohgi2'); alias=default
+DEBUG 2025-11-06 18:48:44,962 utils (0.000) BEGIN; args=None; alias=default
+DEBUG 2025-11-06 18:48:44,964 utils (0.001) INSERT INTO "django_session" ("session_key", "session_data", "expire_date") VALUES ('nmj5dad0aozcbq49phbhnhpv00lohgi2', 'e30:1vH52K:ryUa2lFmeQlXri6VfvMrj43Wx3Js8q6DcPIXbXRl3AQ', '2025-11-20 18:48:44.962477'); args=('nmj5dad0aozcbq49phbhnhpv00lohgi2', 'e30:1vH52K:ryUa2lFmeQlXri6VfvMrj43Wx3Js8q6DcPIXbXRl3AQ', '2025-11-20 18:48:44.962477'); alias=default
+DEBUG 2025-11-06 18:48:44,969 utils (0.003) COMMIT; args=None; alias=default
+DEBUG 2025-11-06 18:48:44,974 utils (0.004) UPDATE "auth_user" SET "last_login" = '2025-11-06 18:48:44.969567' WHERE "auth_user"."id" = 1; args=('2025-11-06 18:48:44.969567', 1); alias=default
+DEBUG 2025-11-06 18:48:44,976 utils (0.000) SELECT "accounts_profil"."id", "accounts_profil"."user_id", "accounts_profil"."poste", "accounts_profil"."role", "accounts_profil"."site_id", "accounts_profil"."avatar", "accounts_profil"."bio", "accounts_profil"."date_naissance" FROM "accounts_profil" WHERE "accounts_profil"."user_id" = 1 LIMIT 21; args=(1,); alias=default
+DEBUG 2025-11-06 18:48:44,981 utils (0.004) UPDATE "accounts_profil" SET "user_id" = 1, "poste" = 'packing', "role" = 'admin', "site_id" = 1, "avatar" = 'avatars/avatar.jpg', "bio" = '', "date_naissance" = NULL WHERE "accounts_profil"."id" = 1; args=(1, 'packing', 'admin', 1, 'avatars/avatar.jpg', '', 1); alias=default
+DEBUG 2025-11-06 18:48:44,987 utils (0.000) BEGIN; args=None; alias=default
+DEBUG 2025-11-06 18:48:44,989 utils (0.001) UPDATE "django_session" SET "session_data" = '.eJxVjMsOwiAURP-FtSGlRXpx6d5vIPcBUjU0Ke3K-O_SpAtdzpwz81YBtzWHrcYlTKIuyqjTb0fIz1h2IA8s91nzXNZlIr0r-qBV32aJr-vh_h1krLmtwQPZPiFGRsFEZBwD-8EjjNQynHvw5Lxj7iyQNOiscW4Q6pLnUX2-G9k5CQ:1vH52K:F-vAeQxUTk-34deQ3fwetYqjK42Z5OLkc-o8TQVeUR4', "expire_date" = '2025-11-20 18:48:44.986993' WHERE "django_session"."session_key" = 'nmj5dad0aozcbq49phbhnhpv00lohgi2'; args=('.eJxVjMsOwiAURP-FtSGlRXpx6d5vIPcBUjU0Ke3K-O_SpAtdzpwz81YBtzWHrcYlTKIuyqjTb0fIz1h2IA8s91nzXNZlIr0r-qBV32aJr-vh_h1krLmtwQPZPiFGRsFEZBwD-8EjjNQynHvw5Lxj7iyQNOiscW4Q6pLnUX2-G9k5CQ:1vH52K:F-vAeQxUTk-34deQ3fwetYqjK42Z5OLkc-o8TQVeUR4', '2025-11-20 18:48:44.986993', 'nmj5dad0aozcbq49phbhnhpv00lohgi2'); alias=default
+DEBUG 2025-11-06 18:48:44,992 utils (0.002) COMMIT; args=None; alias=default
+DEBUG 2025-11-06 18:48:45,002 utils (0.001) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2025-11-06 18:48:44.999528' AND "django_session"."session_key" = 'nmj5dad0aozcbq49phbhnhpv00lohgi2') LIMIT 21; args=('2025-11-06 18:48:44.999528', 'nmj5dad0aozcbq49phbhnhpv00lohgi2'); alias=default
+DEBUG 2025-11-06 18:48:45,005 utils (0.000) SELECT "auth_user"."id", "auth_user"."password", "auth_user"."last_login", "auth_user"."is_superuser", "auth_user"."username", "auth_user"."first_name", "auth_user"."last_name", "auth_user"."email", "auth_user"."is_staff", "auth_user"."is_active", "auth_user"."date_joined" FROM "auth_user" WHERE "auth_user"."id" = 1 LIMIT 21; args=(1,); alias=default
+DEBUG 2025-11-06 18:48:45,009 utils (0.001) SELECT COUNT(*) AS "__count" FROM "packing_pannes"; args=(); alias=default
+DEBUG 2025-11-06 18:48:45,010 utils (0.000) SELECT COUNT(*) AS "__count" FROM "packing_pannes"; args=(); alias=default
+DEBUG 2025-11-06 18:48:45,103 utils (0.000) SELECT "packing_pannes"."id", "packing_pannes"."site_id", "packing_pannes"."departement", "packing_pannes"."broyage_id", "packing_pannes"."packing_id", "packing_pannes"."section", "packing_pannes"."start_panne", "packing_pannes"."end_panne", "packing_pannes"."duree", "packing_pannes"."description", "packing_pannes"."solution", "packing_pannes"."date", "packing_pannes"."slug", "accounts_site"."id", "accounts_site"."site" FROM "packing_pannes" INNER JOIN "accounts_site" ON ("packing_pannes"."site_id" = "accounts_site"."id") ORDER BY "packing_pannes"."date" DESC, "packing_pannes"."id" DESC; args=(); alias=default
+DEBUG 2025-11-06 18:48:45,153 utils (0.000) SELECT "packing_packing"."id", "packing_packing"."post_id", "packing_packing"."user_id", "packing_packing"."site_id", "packing_packing"."title", "packing_packing"."livraison", "packing_packing"."casse", "packing_packing"."vrack", "packing_packing"."date", "packing_packing"."slug" FROM "packing_packing" WHERE "packing_packing"."id" = 51 LIMIT 21; args=(51,); alias=default
+DEBUG 2025-11-06 18:48:45,156 utils (0.000) SELECT "packing_post"."id", "packing_post"."post", "packing_post"."start_post", "packing_post"."end_post" FROM "packing_post" WHERE "packing_post"."id" = 1 LIMIT 21; args=(1,); alias=default
+DEBUG 2025-11-06 18:48:45,157 utils (0.000) SELECT "accounts_site"."id", "accounts_site"."site" FROM "accounts_site" WHERE "accounts_site"."id" = 1 LIMIT 21; args=(1,); alias=default
+DEBUG 2025-11-06 18:48:45,159 utils (0.000) SELECT "broyage_broyage"."id", "broyage_broyage"."user_id", "broyage_broyage"."post_id", "broyage_broyage"."site_id", "broyage_broyage"."totaliseur_id", "broyage_broyage"."title", "broyage_broyage"."compt_fin", "broyage_broyage"."clinker_fin", "broyage_broyage"."gypse_fin", "broyage_broyage"."dolomite_fin", "broyage_broyage"."dif_compt", "broyage_broyage"."dif_clinker", "broyage_broyage"."dif_dolomite", "broyage_broyage"."dif_gypse", "broyage_broyage"."date", "broyage_broyage"."slug" FROM "broyage_broyage" WHERE "broyage_broyage"."id" = 32 LIMIT 21; args=(32,); alias=default
+DEBUG 2025-11-06 18:48:45,163 utils (0.000) SELECT "packing_packing"."id", "packing_packing"."post_id", "packing_packing"."user_id", "packing_packing"."site_id", "packing_packing"."title", "packing_packing"."livraison", "packing_packing"."casse", "packing_packing"."vrack", "packing_packing"."date", "packing_packing"."slug" FROM "packing_packing" WHERE "packing_packing"."id" = 49 LIMIT 21; args=(49,); alias=default
+DEBUG 2025-11-06 18:48:45,171 utils (0.000) SELECT "packing_post"."id", "packing_post"."post", "packing_post"."start_post", "packing_post"."end_post" FROM "packing_post" WHERE "packing_post"."id" = 2 LIMIT 21; args=(2,); alias=default
+DEBUG 2025-11-06 18:48:45,174 utils (0.000) SELECT "accounts_site"."id", "accounts_site"."site" FROM "accounts_site" WHERE "accounts_site"."id" = 1 LIMIT 21; args=(1,); alias=default
+DEBUG 2025-11-06 18:48:45,176 utils (0.000) SELECT "packing_packing"."id", "packing_packing"."post_id", "packing_packing"."user_id", "packing_packing"."site_id", "packing_packing"."title", "packing_packing"."livraison", "packing_packing"."casse", "packing_packing"."vrack", "packing_packing"."date", "packing_packing"."slug" FROM "packing_packing" WHERE "packing_packing"."id" = 49 LIMIT 21; args=(49,); alias=default
+DEBUG 2025-11-06 18:48:45,178 utils (0.000) SELECT "packing_post"."id", "packing_post"."post", "packing_post"."start_post", "packing_post"."end_post" FROM "packing_post" WHERE "packing_post"."id" = 2 LIMIT 21; args=(2,); alias=default
+DEBUG 2025-11-06 18:48:45,180 utils (0.000) SELECT "accounts_site"."id", "accounts_site"."site" FROM "accounts_site" WHERE "accounts_site"."id" = 1 LIMIT 21; args=(1,); alias=default
+DEBUG 2025-11-06 18:48:45,184 utils (0.003) SELECT "packing_packing"."id", "packing_packing"."post_id", "packing_packing"."user_id", "packing_packing"."site_id", "packing_packing"."title", "packing_packing"."livraison", "packing_packing"."casse", "packing_packing"."vrack", "packing_packing"."date", "packing_packing"."slug" FROM "packing_packing" WHERE "packing_packing"."id" = 50 LIMIT 21; args=(50,); alias=default
+DEBUG 2025-11-06 18:48:45,189 utils (0.000) SELECT "packing_post"."id", "packing_post"."post", "packing_post"."start_post", "packing_post"."end_post" FROM "packing_post" WHERE "packing_post"."id" = 3 LIMIT 21; args=(3,); alias=default
+DEBUG 2025-11-06 18:48:45,193 utils (0.000) SELECT "accounts_site"."id", "accounts_site"."site" FROM "accounts_site" WHERE "accounts_site"."id" = 1 LIMIT 21; args=(1,); alias=default
+DEBUG 2025-11-06 18:48:45,195 utils (0.000) SELECT "broyage_broyage"."id", "broyage_broyage"."user_id", "broyage_broyage"."post_id", "broyage_broyage"."site_id", "broyage_broyage"."totaliseur_id", "broyage_broyage"."title", "broyage_broyage"."compt_fin", "broyage_broyage"."clinker_fin", "broyage_broyage"."gypse_fin", "broyage_broyage"."dolomite_fin", "broyage_broyage"."dif_compt", "broyage_broyage"."dif_clinker", "broyage_broyage"."dif_dolomite", "broyage_broyage"."dif_gypse", "broyage_broyage"."date", "broyage_broyage"."slug" FROM "broyage_broyage" WHERE "broyage_broyage"."id" = 29 LIMIT 21; args=(29,); alias=default
+DEBUG 2025-11-06 18:48:45,204 utils (0.000) SELECT "broyage_broyage"."id", "broyage_broyage"."user_id", "broyage_broyage"."post_id", "broyage_broyage"."site_id", "broyage_broyage"."totaliseur_id", "broyage_broyage"."title", "broyage_broyage"."compt_fin", "broyage_broyage"."clinker_fin", "broyage_broyage"."gypse_fin", "broyage_broyage"."dolomite_fin", "broyage_broyage"."dif_compt", "broyage_broyage"."dif_clinker", "broyage_broyage"."dif_dolomite", "broyage_broyage"."dif_gypse", "broyage_broyage"."date", "broyage_broyage"."slug" FROM "broyage_broyage" WHERE "broyage_broyage"."id" = 29 LIMIT 21; args=(29,); alias=default
+DEBUG 2025-11-06 18:48:45,210 utils (0.000) SELECT "packing_packing"."id", "packing_packing"."post_id", "packing_packing"."user_id", "packing_packing"."site_id", "packing_packing"."title", "packing_packing"."livraison", "packing_packing"."casse", "packing_packing"."vrack", "packing_packing"."date", "packing_packing"."slug" FROM "packing_packing" WHERE "packing_packing"."id" = 48 LIMIT 21; args=(48,); alias=default
+DEBUG 2025-11-06 18:48:45,214 utils (0.000) SELECT "packing_post"."id", "packing_post"."post", "packing_post"."start_post", "packing_post"."end_post" FROM "packing_post" WHERE "packing_post"."id" = 1 LIMIT 21; args=(1,); alias=default
+DEBUG 2025-11-06 18:48:45,217 utils (0.000) SELECT "accounts_site"."id", "accounts_site"."site" FROM "accounts_site" WHERE "accounts_site"."id" = 1 LIMIT 21; args=(1,); alias=default
+DEBUG 2025-11-06 18:48:45,222 utils (0.000) SELECT "packing_packing"."id", "packing_packing"."post_id", "packing_packing"."user_id", "packing_packing"."site_id", "packing_packing"."title", "packing_packing"."livraison", "packing_packing"."casse", "packing_packing"."vrack", "packing_packing"."date", "packing_packing"."slug" FROM "packing_packing" WHERE "packing_packing"."id" = 48 LIMIT 21; args=(48,); alias=default
+DEBUG 2025-11-06 18:48:45,224 utils (0.000) SELECT "packing_post"."id", "packing_post"."post", "packing_post"."start_post", "packing_post"."end_post" FROM "packing_post" WHERE "packing_post"."id" = 1 LIMIT 21; args=(1,); alias=default
+DEBUG 2025-11-06 18:48:45,225 utils (0.000) SELECT "accounts_site"."id", "accounts_site"."site" FROM "accounts_site" WHERE "accounts_site"."id" = 1 LIMIT 21; args=(1,); alias=default
+DEBUG 2025-11-06 18:48:45,228 utils (0.000) SELECT "packing_packing"."id", "packing_packing"."post_id", "packing_packing"."user_id", "packing_packing"."site_id", "packing_packing"."title", "packing_packing"."livraison", "packing_packing"."casse", "packing_packing"."vrack", "packing_packing"."date", "packing_packing"."slug" FROM "packing_packing" WHERE "packing_packing"."id" = 47 LIMIT 21; args=(47,); alias=default
+DEBUG 2025-11-06 18:48:45,230 utils (0.000) SELECT "packing_post"."id", "packing_post"."post", "packing_post"."start_post", "packing_post"."end_post" FROM "packing_post" WHERE "packing_post"."id" = 3 LIMIT 21; args=(3,); alias=default
+DEBUG 2025-11-06 18:48:45,233 utils (0.002) SELECT "accounts_site"."id", "accounts_site"."site" FROM "accounts_site" WHERE "accounts_site"."id" = 1 LIMIT 21; args=(1,); alias=default
+DEBUG 2025-11-06 18:48:45,236 utils (0.000) SELECT "broyage_broyage"."id", "broyage_broyage"."user_id", "broyage_broyage"."post_id", "broyage_broyage"."site_id", "broyage_broyage"."totaliseur_id", "broyage_broyage"."title", "broyage_broyage"."compt_fin", "broyage_broyage"."clinker_fin", "broyage_broyage"."gypse_fin", "broyage_broyage"."dolomite_fin", "broyage_broyage"."dif_compt", "broyage_broyage"."dif_clinker", "broyage_broyage"."dif_dolomite", "broyage_broyage"."dif_gypse", "broyage_broyage"."date", "broyage_broyage"."slug" FROM "broyage_broyage" WHERE "broyage_broyage"."id" = 26 LIMIT 21; args=(26,); alias=default
+DEBUG 2025-11-06 18:48:45,239 utils (0.000) SELECT "broyage_broyage"."id", "broyage_broyage"."user_id", "broyage_broyage"."post_id", "broyage_broyage"."site_id", "broyage_broyage"."totaliseur_id", "broyage_broyage"."title", "broyage_broyage"."compt_fin", "broyage_broyage"."clinker_fin", "broyage_broyage"."gypse_fin", "broyage_broyage"."dolomite_fin", "broyage_broyage"."dif_compt", "broyage_broyage"."dif_clinker", "broyage_broyage"."dif_dolomite", "broyage_broyage"."dif_gypse", "broyage_broyage"."date", "broyage_broyage"."slug" FROM "broyage_broyage" WHERE "broyage_broyage"."id" = 26 LIMIT 21; args=(26,); alias=default
+DEBUG 2025-11-06 18:48:45,242 utils (0.000) SELECT "packing_packing"."id", "packing_packing"."post_id", "packing_packing"."user_id", "packing_packing"."site_id", "packing_packing"."title", "packing_packing"."livraison", "packing_packing"."casse", "packing_packing"."vrack", "packing_packing"."date", "packing_packing"."slug" FROM "packing_packing" WHERE "packing_packing"."id" = 43 LIMIT 21; args=(43,); alias=default
+DEBUG 2025-11-06 18:48:45,244 utils (0.000) SELECT "packing_post"."id", "packing_post"."post", "packing_post"."start_post", "packing_post"."end_post" FROM "packing_post" WHERE "packing_post"."id" = 3 LIMIT 21; args=(3,); alias=default
+DEBUG 2025-11-06 18:48:45,245 utils (0.000) SELECT "accounts_site"."id", "accounts_site"."site" FROM "accounts_site" WHERE "accounts_site"."id" = 1 LIMIT 21; args=(1,); alias=default
+DEBUG 2025-11-06 18:48:45,248 utils (0.000) SELECT "broyage_broyage"."id", "broyage_broyage"."user_id", "broyage_broyage"."post_id", "broyage_broyage"."site_id", "broyage_broyage"."totaliseur_id", "broyage_broyage"."title", "broyage_broyage"."compt_fin", "broyage_broyage"."clinker_fin", "broyage_broyage"."gypse_fin", "broyage_broyage"."dolomite_fin", "broyage_broyage"."dif_compt", "broyage_broyage"."dif_clinker", "broyage_broyage"."dif_dolomite", "broyage_broyage"."dif_gypse", "broyage_broyage"."date", "broyage_broyage"."slug" FROM "broyage_broyage" WHERE "broyage_broyage"."id" = 18 LIMIT 21; args=(18,); alias=default
+DEBUG 2025-11-06 18:48:45,255 utils (0.000) SELECT "broyage_broyage"."id", "broyage_broyage"."user_id", "broyage_broyage"."post_id", "broyage_broyage"."site_id", "broyage_broyage"."totaliseur_id", "broyage_broyage"."title", "broyage_broyage"."compt_fin", "broyage_broyage"."clinker_fin", "broyage_broyage"."gypse_fin", "broyage_broyage"."dolomite_fin", "broyage_broyage"."dif_compt", "broyage_broyage"."dif_clinker", "broyage_broyage"."dif_dolomite", "broyage_broyage"."dif_gypse", "broyage_broyage"."date", "broyage_broyage"."slug" FROM "broyage_broyage" WHERE "broyage_broyage"."id" = 18 LIMIT 21; args=(18,); alias=default
+DEBUG 2025-11-06 18:48:45,258 utils (0.000) SELECT "broyage_broyage"."id", "broyage_broyage"."user_id", "broyage_broyage"."post_id", "broyage_broyage"."site_id", "broyage_broyage"."totaliseur_id", "broyage_broyage"."title", "broyage_broyage"."compt_fin", "broyage_broyage"."clinker_fin", "broyage_broyage"."gypse_fin", "broyage_broyage"."dolomite_fin", "broyage_broyage"."dif_compt", "broyage_broyage"."dif_clinker", "broyage_broyage"."dif_dolomite", "broyage_broyage"."dif_gypse", "broyage_broyage"."date", "broyage_broyage"."slug" FROM "broyage_broyage" WHERE "broyage_broyage"."id" = 19 LIMIT 21; args=(19,); alias=default
+DEBUG 2025-11-06 18:48:45,261 utils (0.000) SELECT "broyage_broyage"."id", "broyage_broyage"."user_id", "broyage_broyage"."post_id", "broyage_broyage"."site_id", "broyage_broyage"."totaliseur_id", "broyage_broyage"."title", "broyage_broyage"."compt_fin", "broyage_broyage"."clinker_fin", "broyage_broyage"."gypse_fin", "broyage_broyage"."dolomite_fin", "broyage_broyage"."dif_compt", "broyage_broyage"."dif_clinker", "broyage_broyage"."dif_dolomite", "broyage_broyage"."dif_gypse", "broyage_broyage"."date", "broyage_broyage"."slug" FROM "broyage_broyage" WHERE "broyage_broyage"."id" = 8 LIMIT 21; args=(8,); alias=default
+DEBUG 2025-11-06 18:48:45,264 utils (0.000) SELECT "packing_packing"."id", "packing_packing"."post_id", "packing_packing"."user_id", "packing_packing"."site_id", "packing_packing"."title", "packing_packing"."livraison", "packing_packing"."casse", "packing_packing"."vrack", "packing_packing"."date", "packing_packing"."slug" FROM "packing_packing" WHERE "packing_packing"."id" = 28 LIMIT 21; args=(28,); alias=default
+DEBUG 2025-11-06 18:48:45,270 utils (0.000) SELECT "packing_post"."id", "packing_post"."post", "packing_post"."start_post", "packing_post"."end_post" FROM "packing_post" WHERE "packing_post"."id" = 3 LIMIT 21; args=(3,); alias=default
+DEBUG 2025-11-06 18:48:45,272 utils (0.000) SELECT "accounts_site"."id", "accounts_site"."site" FROM "accounts_site" WHERE "accounts_site"."id" = 1 LIMIT 21; args=(1,); alias=default
+DEBUG 2025-11-06 18:48:45,273 utils (0.000) SELECT "packing_packing"."id", "packing_packing"."post_id", "packing_packing"."user_id", "packing_packing"."site_id", "packing_packing"."title", "packing_packing"."livraison", "packing_packing"."casse", "packing_packing"."vrack", "packing_packing"."date", "packing_packing"."slug" FROM "packing_packing" WHERE "packing_packing"."id" = 28 LIMIT 21; args=(28,); alias=default
+DEBUG 2025-11-06 18:48:45,276 utils (0.000) SELECT "packing_post"."id", "packing_post"."post", "packing_post"."start_post", "packing_post"."end_post" FROM "packing_post" WHERE "packing_post"."id" = 3 LIMIT 21; args=(3,); alias=default
+DEBUG 2025-11-06 18:48:45,277 utils (0.000) SELECT "accounts_site"."id", "accounts_site"."site" FROM "accounts_site" WHERE "accounts_site"."id" = 1 LIMIT 21; args=(1,); alias=default
+DEBUG 2025-11-06 18:48:45,278 utils (0.000) SELECT "packing_packing"."id", "packing_packing"."post_id", "packing_packing"."user_id", "packing_packing"."site_id", "packing_packing"."title", "packing_packing"."livraison", "packing_packing"."casse", "packing_packing"."vrack", "packing_packing"."date", "packing_packing"."slug" FROM "packing_packing" WHERE "packing_packing"."id" = 26 LIMIT 21; args=(26,); alias=default
+DEBUG 2025-11-06 18:48:45,280 utils (0.000) SELECT "packing_post"."id", "packing_post"."post", "packing_post"."start_post", "packing_post"."end_post" FROM "packing_post" WHERE "packing_post"."id" = 1 LIMIT 21; args=(1,); alias=default
+DEBUG 2025-11-06 18:48:45,283 utils (0.000) SELECT "accounts_site"."id", "accounts_site"."site" FROM "accounts_site" WHERE "accounts_site"."id" = 1 LIMIT 21; args=(1,); alias=default
+DEBUG 2025-11-06 18:48:45,286 utils (0.000) SELECT "broyage_broyage"."id", "broyage_broyage"."user_id", "broyage_broyage"."post_id", "broyage_broyage"."site_id", "broyage_broyage"."totaliseur_id", "broyage_broyage"."title", "broyage_broyage"."compt_fin", "broyage_broyage"."clinker_fin", "broyage_broyage"."gypse_fin", "broyage_broyage"."dolomite_fin", "broyage_broyage"."dif_compt", "broyage_broyage"."dif_clinker", "broyage_broyage"."dif_dolomite", "broyage_broyage"."dif_gypse", "broyage_broyage"."date", "broyage_broyage"."slug" FROM "broyage_broyage" WHERE "broyage_broyage"."id" = 16 LIMIT 21; args=(16,); alias=default
+DEBUG 2025-11-06 18:48:45,413 utils (0.001) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2025-11-06 18:48:45.410271' AND "django_session"."session_key" = 'nmj5dad0aozcbq49phbhnhpv00lohgi2') LIMIT 21; args=('2025-11-06 18:48:45.410271', 'nmj5dad0aozcbq49phbhnhpv00lohgi2'); alias=default
+DEBUG 2025-11-06 18:48:45,424 utils (0.000) SELECT "auth_user"."id", "auth_user"."password", "auth_user"."last_login", "auth_user"."is_superuser", "auth_user"."username", "auth_user"."first_name", "auth_user"."last_name", "auth_user"."email", "auth_user"."is_staff", "auth_user"."is_active", "auth_user"."date_joined" FROM "auth_user" WHERE "auth_user"."id" = 1 LIMIT 21; args=(1,); alias=default
+DEBUG 2025-11-06 18:48:48,914 utils (0.000) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2025-11-06 18:48:48.910961' AND "django_session"."session_key" = 'nmj5dad0aozcbq49phbhnhpv00lohgi2') LIMIT 21; args=('2025-11-06 18:48:48.910961', 'nmj5dad0aozcbq49phbhnhpv00lohgi2'); alias=default
+DEBUG 2025-11-06 18:48:48,917 utils (0.000) SELECT "auth_user"."id", "auth_user"."password", "auth_user"."last_login", "auth_user"."is_superuser", "auth_user"."username", "auth_user"."first_name", "auth_user"."last_name", "auth_user"."email", "auth_user"."is_staff", "auth_user"."is_active", "auth_user"."date_joined" FROM "auth_user" WHERE "auth_user"."id" = 1 LIMIT 21; args=(1,); alias=default
+DEBUG 2025-11-06 18:48:48,919 utils (0.000) SELECT "accounts_profil"."id", "accounts_profil"."user_id", "accounts_profil"."poste", "accounts_profil"."role", "accounts_profil"."site_id", "accounts_profil"."avatar", "accounts_profil"."bio", "accounts_profil"."date_naissance" FROM "accounts_profil" WHERE "accounts_profil"."user_id" = 1 LIMIT 21; args=(1,); alias=default
+DEBUG 2025-11-06 18:48:48,921 utils (0.000) SELECT "accounts_site"."id", "accounts_site"."site" FROM "accounts_site" WHERE "accounts_site"."id" = 1 LIMIT 21; args=(1,); alias=default
+DEBUG 2025-11-06 18:48:48,924 utils (0.000) SELECT "broyage_broyage"."id", "broyage_broyage"."user_id", "broyage_broyage"."post_id", "broyage_broyage"."site_id", "broyage_broyage"."totaliseur_id", "broyage_broyage"."title", "broyage_broyage"."compt_fin", "broyage_broyage"."clinker_fin", "broyage_broyage"."gypse_fin", "broyage_broyage"."dolomite_fin", "broyage_broyage"."dif_compt", "broyage_broyage"."dif_clinker", "broyage_broyage"."dif_dolomite", "broyage_broyage"."dif_gypse", "broyage_broyage"."date", "broyage_broyage"."slug" FROM "broyage_broyage" WHERE ("broyage_broyage"."site_id" = 1 AND "broyage_broyage"."date" = '2025-11-06') ORDER BY "broyage_broyage"."site_id" ASC; args=(1, '2025-11-06'); alias=default
+DEBUG 2025-11-06 18:48:48,944 utils (0.001) SELECT "broyage_totaliseur"."id", "broyage_totaliseur"."post_id", "broyage_totaliseur"."site_id", "broyage_totaliseur"."compt_debut", "broyage_totaliseur"."clinker_debut", "broyage_totaliseur"."gypse_debut", "broyage_totaliseur"."dolomite_debut", "broyage_totaliseur"."date", "broyage_totaliseur"."slug" FROM "broyage_totaliseur" INNER JOIN "packing_post" ON ("broyage_totaliseur"."post_id" = "packing_post"."id") WHERE ("broyage_totaliseur"."site_id" = 1 AND "broyage_totaliseur"."date" = '2025-11-06' AND "packing_post"."post" = '06H-14H') ORDER BY "broyage_totaliseur"."date" DESC, "packing_post"."post" ASC; args=(1, '2025-11-06', '06H-14H'); alias=default
+DEBUG 2025-11-06 18:48:48,950 utils (0.001) SELECT "broyage_broyage"."id", "broyage_broyage"."user_id", "broyage_broyage"."post_id", "broyage_broyage"."site_id", "broyage_broyage"."totaliseur_id", "broyage_broyage"."title", "broyage_broyage"."compt_fin", "broyage_broyage"."clinker_fin", "broyage_broyage"."gypse_fin", "broyage_broyage"."dolomite_fin", "broyage_broyage"."dif_compt", "broyage_broyage"."dif_clinker", "broyage_broyage"."dif_dolomite", "broyage_broyage"."dif_gypse", "broyage_broyage"."date", "broyage_broyage"."slug" FROM "broyage_broyage" INNER JOIN "packing_post" ON ("broyage_broyage"."post_id" = "packing_post"."id") WHERE ("broyage_broyage"."site_id" = 1 AND "broyage_broyage"."date" = '2025-11-06' AND "packing_post"."post" = '06H-14H') ORDER BY "broyage_broyage"."site_id" ASC; args=(1, '2025-11-06', '06H-14H'); alias=default
+DEBUG 2025-11-06 18:48:48,952 utils (0.000) SELECT "broyage_totaliseur"."id", "broyage_totaliseur"."post_id", "broyage_totaliseur"."site_id", "broyage_totaliseur"."compt_debut", "broyage_totaliseur"."clinker_debut", "broyage_totaliseur"."gypse_debut", "broyage_totaliseur"."dolomite_debut", "broyage_totaliseur"."date", "broyage_totaliseur"."slug" FROM "broyage_totaliseur" INNER JOIN "packing_post" ON ("broyage_totaliseur"."post_id" = "packing_post"."id") WHERE ("broyage_totaliseur"."site_id" = 1 AND "broyage_totaliseur"."date" = '2025-11-06' AND "packing_post"."post" = '14H-22H') ORDER BY "broyage_totaliseur"."date" DESC, "packing_post"."post" ASC; args=(1, '2025-11-06', '14H-22H'); alias=default
+DEBUG 2025-11-06 18:48:48,955 utils (0.000) SELECT "broyage_broyage"."id", "broyage_broyage"."user_id", "broyage_broyage"."post_id", "broyage_broyage"."site_id", "broyage_broyage"."totaliseur_id", "broyage_broyage"."title", "broyage_broyage"."compt_fin", "broyage_broyage"."clinker_fin", "broyage_broyage"."gypse_fin", "broyage_broyage"."dolomite_fin", "broyage_broyage"."dif_compt", "broyage_broyage"."dif_clinker", "broyage_broyage"."dif_dolomite", "broyage_broyage"."dif_gypse", "broyage_broyage"."date", "broyage_broyage"."slug" FROM "broyage_broyage" INNER JOIN "packing_post" ON ("broyage_broyage"."post_id" = "packing_post"."id") WHERE ("broyage_broyage"."site_id" = 1 AND "broyage_broyage"."date" = '2025-11-06' AND "packing_post"."post" = '14H-22H') ORDER BY "broyage_broyage"."site_id" ASC; args=(1, '2025-11-06', '14H-22H'); alias=default
+DEBUG 2025-11-06 18:48:48,957 utils (0.000) SELECT "broyage_totaliseur"."id", "broyage_totaliseur"."post_id", "broyage_totaliseur"."site_id", "broyage_totaliseur"."compt_debut", "broyage_totaliseur"."clinker_debut", "broyage_totaliseur"."gypse_debut", "broyage_totaliseur"."dolomite_debut", "broyage_totaliseur"."date", "broyage_totaliseur"."slug" FROM "broyage_totaliseur" INNER JOIN "packing_post" ON ("broyage_totaliseur"."post_id" = "packing_post"."id") WHERE ("broyage_totaliseur"."site_id" = 1 AND "broyage_totaliseur"."date" = '2025-11-06' AND "packing_post"."post" = '22H-06H') ORDER BY "broyage_totaliseur"."date" DESC, "packing_post"."post" ASC; args=(1, '2025-11-06', '22H-06H'); alias=default
+DEBUG 2025-11-06 18:48:48,959 utils (0.000) SELECT "broyage_broyage"."id", "broyage_broyage"."user_id", "broyage_broyage"."post_id", "broyage_broyage"."site_id", "broyage_broyage"."totaliseur_id", "broyage_broyage"."title", "broyage_broyage"."compt_fin", "broyage_broyage"."clinker_fin", "broyage_broyage"."gypse_fin", "broyage_broyage"."dolomite_fin", "broyage_broyage"."dif_compt", "broyage_broyage"."dif_clinker", "broyage_broyage"."dif_dolomite", "broyage_broyage"."dif_gypse", "broyage_broyage"."date", "broyage_broyage"."slug" FROM "broyage_broyage" INNER JOIN "packing_post" ON ("broyage_broyage"."post_id" = "packing_post"."id") WHERE ("broyage_broyage"."site_id" = 1 AND "broyage_broyage"."date" = '2025-11-06' AND "packing_post"."post" = '22H-06H') ORDER BY "broyage_broyage"."site_id" ASC; args=(1, '2025-11-06', '22H-06H'); alias=default
+DEBUG 2025-11-06 18:48:48,968 utils (0.000) SELECT "packing_pannes"."id", "packing_pannes"."site_id", "packing_pannes"."departement", "packing_pannes"."broyage_id", "packing_pannes"."packing_id", "packing_pannes"."section", "packing_pannes"."start_panne", "packing_pannes"."end_panne", "packing_pannes"."duree", "packing_pannes"."description", "packing_pannes"."solution", "packing_pannes"."date", "packing_pannes"."slug" FROM "packing_pannes" WHERE ("packing_pannes"."section" = 'broyage' AND "packing_pannes"."site_id" = 1 AND "packing_pannes"."date" = '2025-11-06') ORDER BY "packing_pannes"."date" DESC; args=('broyage', 1, '2025-11-06'); alias=default
+DEBUG 2025-11-06 18:48:51,150 utils (0.000) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2025-11-06 18:48:51.148685' AND "django_session"."session_key" = 'nmj5dad0aozcbq49phbhnhpv00lohgi2') LIMIT 21; args=('2025-11-06 18:48:51.148685', 'nmj5dad0aozcbq49phbhnhpv00lohgi2'); alias=default
+DEBUG 2025-11-06 18:48:51,151 utils (0.000) SELECT "auth_user"."id", "auth_user"."password", "auth_user"."last_login", "auth_user"."is_superuser", "auth_user"."username", "auth_user"."first_name", "auth_user"."last_name", "auth_user"."email", "auth_user"."is_staff", "auth_user"."is_active", "auth_user"."date_joined" FROM "auth_user" WHERE "auth_user"."id" = 1 LIMIT 21; args=(1,); alias=default
+DEBUG 2025-11-06 18:48:51,152 utils (0.000) SELECT "accounts_profil"."id", "accounts_profil"."user_id", "accounts_profil"."poste", "accounts_profil"."role", "accounts_profil"."site_id", "accounts_profil"."avatar", "accounts_profil"."bio", "accounts_profil"."date_naissance" FROM "accounts_profil" WHERE "accounts_profil"."user_id" = 1 LIMIT 21; args=(1,); alias=default
+DEBUG 2025-11-06 18:48:51,154 utils (0.001) SELECT "accounts_site"."id", "accounts_site"."site" FROM "accounts_site" WHERE "accounts_site"."id" = 1 LIMIT 21; args=(1,); alias=default
+DEBUG 2025-11-06 18:48:51,158 utils (0.000) SELECT 1 AS "a" FROM "packing_packing" WHERE ("packing_packing"."date" = '2025-11-06' AND "packing_packing"."site_id" = 1) LIMIT 1; args=(1, '2025-11-06', 1); alias=default
+DEBUG 2025-11-06 18:48:51,161 utils (0.001) SELECT 1 AS "a" FROM "broyage_broyage" WHERE ("broyage_broyage"."date" = '2025-11-06' AND "broyage_broyage"."site_id" = 1) LIMIT 1; args=(1, '2025-11-06', 1); alias=default
+DEBUG 2025-11-06 18:48:51,164 utils (0.000) SELECT "packing_packing"."date" AS "date" FROM "packing_packing" ORDER BY 1 DESC LIMIT 1; args=(); alias=default
+DEBUG 2025-11-06 18:48:51,167 utils (0.001) SELECT COUNT(*) AS "__count" FROM "packing_packing" WHERE ("packing_packing"."site_id" = 1 AND "packing_packing"."date" = '2025-11-04'); args=(1, '2025-11-04'); alias=default
+DEBUG 2025-11-06 18:48:51,169 utils (0.001) SELECT "packing_pannes"."id", "packing_pannes"."site_id", "packing_pannes"."departement", "packing_pannes"."broyage_id", "packing_pannes"."packing_id", "packing_pannes"."section", "packing_pannes"."start_panne", "packing_pannes"."end_panne", "packing_pannes"."duree", "packing_pannes"."description", "packing_pannes"."solution", "packing_pannes"."date", "packing_pannes"."slug" FROM "packing_pannes" WHERE ("packing_pannes"."section" = 'packing' AND "packing_pannes"."site_id" = 1 AND "packing_pannes"."date" = '2025-11-04') ORDER BY "packing_pannes"."date" DESC; args=('packing', 1, '2025-11-04'); alias=default
+DEBUG 2025-11-06 18:48:51,172 utils (0.000) SELECT SUM("packing_pannes"."duree") AS "total" FROM "packing_pannes" WHERE ("packing_pannes"."section" = 'packing' AND "packing_pannes"."site_id" = 1 AND "packing_pannes"."date" = '2025-11-04'); args=('packing', 1, '2025-11-04'); alias=default
+DEBUG 2025-11-06 18:48:51,175 utils (0.000) SELECT "packing_packing"."id", "packing_packing"."post_id", "packing_packing"."user_id", "packing_packing"."site_id", "packing_packing"."title", "packing_packing"."livraison", "packing_packing"."casse", "packing_packing"."vrack", "packing_packing"."date", "packing_packing"."slug" FROM "packing_packing" INNER JOIN "packing_post" ON ("packing_packing"."post_id" = "packing_post"."id") WHERE ("packing_packing"."site_id" = 1 AND "packing_packing"."date" = '2025-11-04') ORDER BY "packing_packing"."date" DESC, "packing_post"."post" ASC; args=(1, '2025-11-04'); alias=default
+DEBUG 2025-11-06 18:48:51,176 utils (0.000) SELECT "packing_post"."id", "packing_post"."post", "packing_post"."start_post", "packing_post"."end_post" FROM "packing_post" WHERE "packing_post"."id" = 1 LIMIT 21; args=(1,); alias=default
+DEBUG 2025-11-06 18:48:51,180 utils (0.000) SELECT SUM("packing_pannes"."duree") AS "total" FROM "packing_pannes" WHERE ("packing_pannes"."section" = 'packing' AND "packing_pannes"."site_id" = 1 AND "packing_pannes"."date" = '2025-11-04' AND "packing_pannes"."packing_id" = 51); args=('packing', 1, '2025-11-04', 51); alias=default
+DEBUG 2025-11-06 18:48:51,184 utils (0.000) SELECT 1 AS "a" FROM "broyage_broyage" WHERE ("broyage_broyage"."date" = '2025-11-06' AND "broyage_broyage"."site_id" = 1) LIMIT 1; args=(1, '2025-11-06', 1); alias=default
+DEBUG 2025-11-06 18:48:51,185 utils (0.000) SELECT 1 AS "a" FROM "packing_packing" WHERE ("packing_packing"."date" = '2025-11-06' AND "packing_packing"."site_id" = 1) LIMIT 1; args=(1, '2025-11-06', 1); alias=default
+DEBUG 2025-11-06 18:48:51,186 utils (0.000) SELECT "broyage_broyage"."date" AS "date" FROM "broyage_broyage" ORDER BY 1 DESC LIMIT 1; args=(); alias=default
+DEBUG 2025-11-06 18:48:51,188 utils (0.000) SELECT COUNT(*) AS "__count" FROM "broyage_broyage" WHERE ("broyage_broyage"."site_id" = 1 AND "broyage_broyage"."date" = '2025-11-04'); args=(1, '2025-11-04'); alias=default
+DEBUG 2025-11-06 18:48:51,189 utils (0.000) SELECT "packing_pannes"."id", "packing_pannes"."site_id", "packing_pannes"."departement", "packing_pannes"."broyage_id", "packing_pannes"."packing_id", "packing_pannes"."section", "packing_pannes"."start_panne", "packing_pannes"."end_panne", "packing_pannes"."duree", "packing_pannes"."description", "packing_pannes"."solution", "packing_pannes"."date", "packing_pannes"."slug" FROM "packing_pannes" WHERE ("packing_pannes"."section" = 'broyage' AND "packing_pannes"."site_id" = 1 AND "packing_pannes"."date" = '2025-11-04') ORDER BY "packing_pannes"."date" DESC; args=('broyage', 1, '2025-11-04'); alias=default
+DEBUG 2025-11-06 18:48:51,190 utils (0.000) SELECT SUM("packing_pannes"."duree") AS "total" FROM "packing_pannes" WHERE ("packing_pannes"."section" = 'broyage' AND "packing_pannes"."site_id" = 1 AND "packing_pannes"."date" = '2025-11-04'); args=('broyage', 1, '2025-11-04'); alias=default
+DEBUG 2025-11-06 18:48:51,191 utils (0.000) SELECT "broyage_broyage"."id", "broyage_broyage"."user_id", "broyage_broyage"."post_id", "broyage_broyage"."site_id", "broyage_broyage"."totaliseur_id", "broyage_broyage"."title", "broyage_broyage"."compt_fin", "broyage_broyage"."clinker_fin", "broyage_broyage"."gypse_fin", "broyage_broyage"."dolomite_fin", "broyage_broyage"."dif_compt", "broyage_broyage"."dif_clinker", "broyage_broyage"."dif_dolomite", "broyage_broyage"."dif_gypse", "broyage_broyage"."date", "broyage_broyage"."slug" FROM "broyage_broyage" WHERE ("broyage_broyage"."site_id" = 1 AND "broyage_broyage"."date" = '2025-11-04') ORDER BY "broyage_broyage"."site_id" ASC; args=(1, '2025-11-04'); alias=default
+DEBUG 2025-11-06 18:48:51,194 utils (0.001) SELECT "packing_post"."id", "packing_post"."post", "packing_post"."start_post", "packing_post"."end_post" FROM "packing_post" WHERE "packing_post"."id" = 1 LIMIT 21; args=(1,); alias=default
+DEBUG 2025-11-06 18:48:51,199 utils (0.000) SELECT SUM("packing_pannes"."duree") AS "total" FROM "packing_pannes" WHERE ("packing_pannes"."section" = 'broyage' AND "packing_pannes"."site_id" = 1 AND "packing_pannes"."date" = '2025-11-04' AND "packing_pannes"."broyage_id" = 32); args=('broyage', 1, '2025-11-04', 32); alias=default
+DEBUG 2025-11-06 18:48:51,218 utils (0.000) SELECT "broyage_broyage"."id", "broyage_broyage"."user_id", "broyage_broyage"."post_id", "broyage_broyage"."site_id", "broyage_broyage"."totaliseur_id", "broyage_broyage"."title", "broyage_broyage"."compt_fin", "broyage_broyage"."clinker_fin", "broyage_broyage"."gypse_fin", "broyage_broyage"."dolomite_fin", "broyage_broyage"."dif_compt", "broyage_broyage"."dif_clinker", "broyage_broyage"."dif_dolomite", "broyage_broyage"."dif_gypse", "broyage_broyage"."date", "broyage_broyage"."slug" FROM "broyage_broyage" INNER JOIN "packing_post" ON ("broyage_broyage"."post_id" = "packing_post"."id") WHERE ("broyage_broyage"."site_id" = 1 AND "broyage_broyage"."date" = '2025-11-04' AND "packing_post"."post" = '06H-14H') ORDER BY "broyage_broyage"."site_id" ASC; args=(1, '2025-11-04', '06H-14H'); alias=default
+DEBUG 2025-11-06 18:48:51,220 utils (0.000) SELECT "broyage_broyage"."id", "broyage_broyage"."user_id", "broyage_broyage"."post_id", "broyage_broyage"."site_id", "broyage_broyage"."totaliseur_id", "broyage_broyage"."title", "broyage_broyage"."compt_fin", "broyage_broyage"."clinker_fin", "broyage_broyage"."gypse_fin", "broyage_broyage"."dolomite_fin", "broyage_broyage"."dif_compt", "broyage_broyage"."dif_clinker", "broyage_broyage"."dif_dolomite", "broyage_broyage"."dif_gypse", "broyage_broyage"."date", "broyage_broyage"."slug" FROM "broyage_broyage" INNER JOIN "packing_post" ON ("broyage_broyage"."post_id" = "packing_post"."id") WHERE ("broyage_broyage"."site_id" = 1 AND "broyage_broyage"."date" = '2025-11-04' AND "packing_post"."post" = '14H-22H') ORDER BY "broyage_broyage"."site_id" ASC; args=(1, '2025-11-04', '14H-22H'); alias=default
+DEBUG 2025-11-06 18:48:51,224 utils (0.000) SELECT "broyage_broyage"."id", "broyage_broyage"."user_id", "broyage_broyage"."post_id", "broyage_broyage"."site_id", "broyage_broyage"."totaliseur_id", "broyage_broyage"."title", "broyage_broyage"."compt_fin", "broyage_broyage"."clinker_fin", "broyage_broyage"."gypse_fin", "broyage_broyage"."dolomite_fin", "broyage_broyage"."dif_compt", "broyage_broyage"."dif_clinker", "broyage_broyage"."dif_dolomite", "broyage_broyage"."dif_gypse", "broyage_broyage"."date", "broyage_broyage"."slug" FROM "broyage_broyage" INNER JOIN "packing_post" ON ("broyage_broyage"."post_id" = "packing_post"."id") WHERE ("broyage_broyage"."site_id" = 1 AND "broyage_broyage"."date" = '2025-11-04' AND "packing_post"."post" = '22H-06H') ORDER BY "broyage_broyage"."site_id" ASC; args=(1, '2025-11-04', '22H-06H'); alias=default
+DEBUG 2025-11-06 18:48:51,229 utils (0.000) SELECT "packing_packing"."id", "packing_packing"."post_id", "packing_packing"."user_id", "packing_packing"."site_id", "packing_packing"."title", "packing_packing"."livraison", "packing_packing"."casse", "packing_packing"."vrack", "packing_packing"."date", "packing_packing"."slug" FROM "packing_packing" INNER JOIN "packing_post" ON ("packing_packing"."post_id" = "packing_post"."id") WHERE ("packing_packing"."site_id" = 1 AND "packing_packing"."date" = '2025-11-04' AND "packing_post"."post" = '06H-14H') ORDER BY "packing_packing"."date" DESC, "packing_post"."post" ASC; args=(1, '2025-11-04', '06H-14H'); alias=default
+DEBUG 2025-11-06 18:48:51,233 utils (0.000) SELECT "packing_packing"."id", "packing_packing"."post_id", "packing_packing"."user_id", "packing_packing"."site_id", "packing_packing"."title", "packing_packing"."livraison", "packing_packing"."casse", "packing_packing"."vrack", "packing_packing"."date", "packing_packing"."slug" FROM "packing_packing" INNER JOIN "packing_post" ON ("packing_packing"."post_id" = "packing_post"."id") WHERE ("packing_packing"."site_id" = 1 AND "packing_packing"."date" = '2025-11-04' AND "packing_post"."post" = '14H-22H') ORDER BY "packing_packing"."date" DESC, "packing_post"."post" ASC; args=(1, '2025-11-04', '14H-22H'); alias=default
+DEBUG 2025-11-06 18:48:51,235 utils (0.000) SELECT "packing_packing"."id", "packing_packing"."post_id", "packing_packing"."user_id", "packing_packing"."site_id", "packing_packing"."title", "packing_packing"."livraison", "packing_packing"."casse", "packing_packing"."vrack", "packing_packing"."date", "packing_packing"."slug" FROM "packing_packing" INNER JOIN "packing_post" ON ("packing_packing"."post_id" = "packing_post"."id") WHERE ("packing_packing"."site_id" = 1 AND "packing_packing"."date" = '2025-11-04' AND "packing_post"."post" = '22H-06H') ORDER BY "packing_packing"."date" DESC, "packing_post"."post" ASC; args=(1, '2025-11-04', '22H-06H'); alias=default
+DEBUG 2025-11-06 18:48:51,239 utils (0.000) SELECT "broyage_broyage"."id", "broyage_broyage"."user_id", "broyage_broyage"."post_id", "broyage_broyage"."site_id", "broyage_broyage"."totaliseur_id", "broyage_broyage"."title", "broyage_broyage"."compt_fin", "broyage_broyage"."clinker_fin", "broyage_broyage"."gypse_fin", "broyage_broyage"."dolomite_fin", "broyage_broyage"."dif_compt", "broyage_broyage"."dif_clinker", "broyage_broyage"."dif_dolomite", "broyage_broyage"."dif_gypse", "broyage_broyage"."date", "broyage_broyage"."slug" FROM "broyage_broyage" WHERE "broyage_broyage"."id" = 32 LIMIT 21; args=(32,); alias=default
+DEBUG 2025-11-06 18:48:51,241 utils (0.000) SELECT "packing_post"."id", "packing_post"."post", "packing_post"."start_post", "packing_post"."end_post" FROM "packing_post" WHERE "packing_post"."id" = 1 LIMIT 21; args=(1,); alias=default
+DEBUG 2025-11-06 18:48:51,242 utils (0.000) SELECT "packing_packing"."id", "packing_packing"."post_id", "packing_packing"."user_id", "packing_packing"."site_id", "packing_packing"."title", "packing_packing"."livraison", "packing_packing"."casse", "packing_packing"."vrack", "packing_packing"."date", "packing_packing"."slug" FROM "packing_packing" WHERE "packing_packing"."id" = 51 LIMIT 21; args=(51,); alias=default
+DEBUG 2025-11-06 18:48:51,245 utils (0.001) SELECT "packing_post"."id", "packing_post"."post", "packing_post"."start_post", "packing_post"."end_post" FROM "packing_post" WHERE "packing_post"."id" = 1 LIMIT 21; args=(1,); alias=default
+DEBUG 2025-11-06 18:49:00,746 utils (0.000) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2025-11-06 18:49:00.743545' AND "django_session"."session_key" = 'nmj5dad0aozcbq49phbhnhpv00lohgi2') LIMIT 21; args=('2025-11-06 18:49:00.743545', 'nmj5dad0aozcbq49phbhnhpv00lohgi2'); alias=default
+DEBUG 2025-11-06 18:49:00,748 utils (0.000) SELECT "auth_user"."id", "auth_user"."password", "auth_user"."last_login", "auth_user"."is_superuser", "auth_user"."username", "auth_user"."first_name", "auth_user"."last_name", "auth_user"."email", "auth_user"."is_staff", "auth_user"."is_active", "auth_user"."date_joined" FROM "auth_user" WHERE "auth_user"."id" = 1 LIMIT 21; args=(1,); alias=default
+DEBUG 2025-11-06 18:49:00,749 utils (0.000) SELECT "accounts_profil"."id", "accounts_profil"."user_id", "accounts_profil"."poste", "accounts_profil"."role", "accounts_profil"."site_id", "accounts_profil"."avatar", "accounts_profil"."bio", "accounts_profil"."date_naissance" FROM "accounts_profil" WHERE "accounts_profil"."user_id" = 1 LIMIT 21; args=(1,); alias=default
+DEBUG 2025-11-06 18:49:00,753 utils (0.000) SELECT "accounts_site"."id", "accounts_site"."site" FROM "accounts_site" WHERE "accounts_site"."id" = 1 LIMIT 21; args=(1,); alias=default
+DEBUG 2025-11-06 18:49:00,761 utils (0.000) SELECT 1 AS "a" FROM "packing_packing" WHERE ("packing_packing"."date" = '2025-11-06' AND "packing_packing"."site_id" = 1) LIMIT 1; args=(1, '2025-11-06', 1); alias=default
+DEBUG 2025-11-06 18:49:00,763 utils (0.000) SELECT 1 AS "a" FROM "broyage_broyage" WHERE ("broyage_broyage"."date" = '2025-11-06' AND "broyage_broyage"."site_id" = 1) LIMIT 1; args=(1, '2025-11-06', 1); alias=default
+DEBUG 2025-11-06 18:49:00,776 utils (0.000) SELECT COUNT(*) AS "__count" FROM "packing_packing" WHERE ("packing_packing"."site_id" = 1 AND "packing_packing"."date" = '2025-11-03'); args=(1, '2025-11-03'); alias=default
+DEBUG 2025-11-06 18:49:00,781 utils (0.001) SELECT "packing_pannes"."id", "packing_pannes"."site_id", "packing_pannes"."departement", "packing_pannes"."broyage_id", "packing_pannes"."packing_id", "packing_pannes"."section", "packing_pannes"."start_panne", "packing_pannes"."end_panne", "packing_pannes"."duree", "packing_pannes"."description", "packing_pannes"."solution", "packing_pannes"."date", "packing_pannes"."slug" FROM "packing_pannes" WHERE ("packing_pannes"."section" = 'packing' AND "packing_pannes"."site_id" = 1 AND "packing_pannes"."date" = '2025-11-03') ORDER BY "packing_pannes"."date" DESC; args=('packing', 1, '2025-11-03'); alias=default
+DEBUG 2025-11-06 18:49:00,786 utils (0.000) SELECT SUM("packing_pannes"."duree") AS "total" FROM "packing_pannes" WHERE ("packing_pannes"."section" = 'packing' AND "packing_pannes"."site_id" = 1 AND "packing_pannes"."date" = '2025-11-03'); args=('packing', 1, '2025-11-03'); alias=default
+DEBUG 2025-11-06 18:49:00,788 utils (0.000) SELECT SUM("packing_pannes"."duree") AS "total" FROM "packing_pannes" WHERE ("packing_pannes"."section" = 'packing' AND "packing_pannes"."site_id" = 1 AND "packing_pannes"."date" = '2025-11-03'); args=('packing', 1, '2025-11-03'); alias=default
+DEBUG 2025-11-06 18:49:00,790 utils (0.000) SELECT SUM("packing_pannes"."duree") AS "total" FROM "packing_pannes" WHERE ("packing_pannes"."section" = 'packing' AND "packing_pannes"."site_id" = 1 AND "packing_pannes"."date" = '2025-11-03'); args=('packing', 1, '2025-11-03'); alias=default
+DEBUG 2025-11-06 18:49:00,791 utils (0.000) SELECT SUM("packing_pannes"."duree") AS "total" FROM "packing_pannes" WHERE ("packing_pannes"."section" = 'packing' AND "packing_pannes"."site_id" = 1 AND "packing_pannes"."date" = '2025-11-03'); args=('packing', 1, '2025-11-03'); alias=default
+DEBUG 2025-11-06 18:49:00,794 utils (0.000) SELECT SUM("packing_pannes"."duree") AS "total" FROM "packing_pannes" WHERE ("packing_pannes"."section" = 'packing' AND "packing_pannes"."site_id" = 1 AND "packing_pannes"."date" = '2025-11-03'); args=('packing', 1, '2025-11-03'); alias=default
+DEBUG 2025-11-06 18:49:00,795 utils (0.000) SELECT "packing_packing"."id", "packing_packing"."post_id", "packing_packing"."user_id", "packing_packing"."site_id", "packing_packing"."title", "packing_packing"."livraison", "packing_packing"."casse", "packing_packing"."vrack", "packing_packing"."date", "packing_packing"."slug" FROM "packing_packing" INNER JOIN "packing_post" ON ("packing_packing"."post_id" = "packing_post"."id") WHERE ("packing_packing"."site_id" = 1 AND "packing_packing"."date" = '2025-11-03') ORDER BY "packing_packing"."date" DESC, "packing_post"."post" ASC; args=(1, '2025-11-03'); alias=default
+DEBUG 2025-11-06 18:49:00,797 utils (0.000) SELECT "packing_post"."id", "packing_post"."post", "packing_post"."start_post", "packing_post"."end_post" FROM "packing_post" WHERE "packing_post"."id" = 1 LIMIT 21; args=(1,); alias=default
+DEBUG 2025-11-06 18:49:00,798 utils (0.000) SELECT SUM("packing_pannes"."duree") AS "total" FROM "packing_pannes" WHERE ("packing_pannes"."section" = 'packing' AND "packing_pannes"."site_id" = 1 AND "packing_pannes"."date" = '2025-11-03' AND "packing_pannes"."packing_id" = 48); args=('packing', 1, '2025-11-03', 48); alias=default
+DEBUG 2025-11-06 18:49:00,799 utils (0.000) SELECT "packing_post"."id", "packing_post"."post", "packing_post"."start_post", "packing_post"."end_post" FROM "packing_post" WHERE "packing_post"."id" = 2 LIMIT 21; args=(2,); alias=default
+DEBUG 2025-11-06 18:49:00,801 utils (0.000) SELECT SUM("packing_pannes"."duree") AS "total" FROM "packing_pannes" WHERE ("packing_pannes"."section" = 'packing' AND "packing_pannes"."site_id" = 1 AND "packing_pannes"."date" = '2025-11-03' AND "packing_pannes"."packing_id" = 49); args=('packing', 1, '2025-11-03', 49); alias=default
+DEBUG 2025-11-06 18:49:00,804 utils (0.000) SELECT "packing_post"."id", "packing_post"."post", "packing_post"."start_post", "packing_post"."end_post" FROM "packing_post" WHERE "packing_post"."id" = 3 LIMIT 21; args=(3,); alias=default
+DEBUG 2025-11-06 18:49:00,806 utils (0.000) SELECT SUM("packing_pannes"."duree") AS "total" FROM "packing_pannes" WHERE ("packing_pannes"."section" = 'packing' AND "packing_pannes"."site_id" = 1 AND "packing_pannes"."date" = '2025-11-03' AND "packing_pannes"."packing_id" = 50); args=('packing', 1, '2025-11-03', 50); alias=default
+DEBUG 2025-11-06 18:49:00,809 utils (0.000) SELECT 1 AS "a" FROM "broyage_broyage" WHERE ("broyage_broyage"."date" = '2025-11-06' AND "broyage_broyage"."site_id" = 1) LIMIT 1; args=(1, '2025-11-06', 1); alias=default
+DEBUG 2025-11-06 18:49:00,811 utils (0.000) SELECT 1 AS "a" FROM "packing_packing" WHERE ("packing_packing"."date" = '2025-11-06' AND "packing_packing"."site_id" = 1) LIMIT 1; args=(1, '2025-11-06', 1); alias=default
+DEBUG 2025-11-06 18:49:00,812 utils (0.000) SELECT COUNT(*) AS "__count" FROM "broyage_broyage" WHERE ("broyage_broyage"."site_id" = 1 AND "broyage_broyage"."date" = '2025-11-03'); args=(1, '2025-11-03'); alias=default
+DEBUG 2025-11-06 18:49:00,813 utils (0.000) SELECT "packing_pannes"."id", "packing_pannes"."site_id", "packing_pannes"."departement", "packing_pannes"."broyage_id", "packing_pannes"."packing_id", "packing_pannes"."section", "packing_pannes"."start_panne", "packing_pannes"."end_panne", "packing_pannes"."duree", "packing_pannes"."description", "packing_pannes"."solution", "packing_pannes"."date", "packing_pannes"."slug" FROM "packing_pannes" WHERE ("packing_pannes"."section" = 'broyage' AND "packing_pannes"."site_id" = 1 AND "packing_pannes"."date" = '2025-11-03') ORDER BY "packing_pannes"."date" DESC; args=('broyage', 1, '2025-11-03'); alias=default
+DEBUG 2025-11-06 18:49:00,815 utils (0.000) SELECT SUM("packing_pannes"."duree") AS "total" FROM "packing_pannes" WHERE ("packing_pannes"."section" = 'broyage' AND "packing_pannes"."site_id" = 1 AND "packing_pannes"."date" = '2025-11-03'); args=('broyage', 1, '2025-11-03'); alias=default
+DEBUG 2025-11-06 18:49:00,816 utils (0.000) SELECT SUM("packing_pannes"."duree") AS "total" FROM "packing_pannes" WHERE ("packing_pannes"."section" = 'broyage' AND "packing_pannes"."site_id" = 1 AND "packing_pannes"."date" = '2025-11-03'); args=('broyage', 1, '2025-11-03'); alias=default
+DEBUG 2025-11-06 18:49:00,820 utils (0.001) SELECT "broyage_broyage"."id", "broyage_broyage"."user_id", "broyage_broyage"."post_id", "broyage_broyage"."site_id", "broyage_broyage"."totaliseur_id", "broyage_broyage"."title", "broyage_broyage"."compt_fin", "broyage_broyage"."clinker_fin", "broyage_broyage"."gypse_fin", "broyage_broyage"."dolomite_fin", "broyage_broyage"."dif_compt", "broyage_broyage"."dif_clinker", "broyage_broyage"."dif_dolomite", "broyage_broyage"."dif_gypse", "broyage_broyage"."date", "broyage_broyage"."slug" FROM "broyage_broyage" WHERE ("broyage_broyage"."site_id" = 1 AND "broyage_broyage"."date" = '2025-11-03') ORDER BY "broyage_broyage"."site_id" ASC; args=(1, '2025-11-03'); alias=default
+DEBUG 2025-11-06 18:49:00,824 utils (0.000) SELECT "packing_post"."id", "packing_post"."post", "packing_post"."start_post", "packing_post"."end_post" FROM "packing_post" WHERE "packing_post"."id" = 1 LIMIT 21; args=(1,); alias=default
+DEBUG 2025-11-06 18:49:00,825 utils (0.000) SELECT SUM("packing_pannes"."duree") AS "total" FROM "packing_pannes" WHERE ("packing_pannes"."section" = 'broyage' AND "packing_pannes"."site_id" = 1 AND "packing_pannes"."date" = '2025-11-03' AND "packing_pannes"."broyage_id" = 29); args=('broyage', 1, '2025-11-03', 29); alias=default
+DEBUG 2025-11-06 18:49:00,826 utils (0.000) SELECT "packing_post"."id", "packing_post"."post", "packing_post"."start_post", "packing_post"."end_post" FROM "packing_post" WHERE "packing_post"."id" = 2 LIMIT 21; args=(2,); alias=default
+DEBUG 2025-11-06 18:49:00,827 utils (0.000) SELECT SUM("packing_pannes"."duree") AS "total" FROM "packing_pannes" WHERE ("packing_pannes"."section" = 'broyage' AND "packing_pannes"."site_id" = 1 AND "packing_pannes"."date" = '2025-11-03' AND "packing_pannes"."broyage_id" = 30); args=('broyage', 1, '2025-11-03', 30); alias=default
+DEBUG 2025-11-06 18:49:00,828 utils (0.000) SELECT "packing_post"."id", "packing_post"."post", "packing_post"."start_post", "packing_post"."end_post" FROM "packing_post" WHERE "packing_post"."id" = 3 LIMIT 21; args=(3,); alias=default
+DEBUG 2025-11-06 18:49:00,830 utils (0.000) SELECT SUM("packing_pannes"."duree") AS "total" FROM "packing_pannes" WHERE ("packing_pannes"."section" = 'broyage' AND "packing_pannes"."site_id" = 1 AND "packing_pannes"."date" = '2025-11-03' AND "packing_pannes"."broyage_id" = 31); args=('broyage', 1, '2025-11-03', 31); alias=default
+DEBUG 2025-11-06 18:49:00,832 utils (0.000) SELECT "broyage_broyage"."id", "broyage_broyage"."user_id", "broyage_broyage"."post_id", "broyage_broyage"."site_id", "broyage_broyage"."totaliseur_id", "broyage_broyage"."title", "broyage_broyage"."compt_fin", "broyage_broyage"."clinker_fin", "broyage_broyage"."gypse_fin", "broyage_broyage"."dolomite_fin", "broyage_broyage"."dif_compt", "broyage_broyage"."dif_clinker", "broyage_broyage"."dif_dolomite", "broyage_broyage"."dif_gypse", "broyage_broyage"."date", "broyage_broyage"."slug" FROM "broyage_broyage" INNER JOIN "packing_post" ON ("broyage_broyage"."post_id" = "packing_post"."id") WHERE ("broyage_broyage"."site_id" = 1 AND "broyage_broyage"."date" = '2025-11-03' AND "packing_post"."post" = '06H-14H') ORDER BY "broyage_broyage"."site_id" ASC; args=(1, '2025-11-03', '06H-14H'); alias=default
+DEBUG 2025-11-06 18:49:00,839 utils (0.004) SELECT "broyage_broyage"."id", "broyage_broyage"."user_id", "broyage_broyage"."post_id", "broyage_broyage"."site_id", "broyage_broyage"."totaliseur_id", "broyage_broyage"."title", "broyage_broyage"."compt_fin", "broyage_broyage"."clinker_fin", "broyage_broyage"."gypse_fin", "broyage_broyage"."dolomite_fin", "broyage_broyage"."dif_compt", "broyage_broyage"."dif_clinker", "broyage_broyage"."dif_dolomite", "broyage_broyage"."dif_gypse", "broyage_broyage"."date", "broyage_broyage"."slug" FROM "broyage_broyage" INNER JOIN "packing_post" ON ("broyage_broyage"."post_id" = "packing_post"."id") WHERE ("broyage_broyage"."site_id" = 1 AND "broyage_broyage"."date" = '2025-11-03' AND "packing_post"."post" = '14H-22H') ORDER BY "broyage_broyage"."site_id" ASC; args=(1, '2025-11-03', '14H-22H'); alias=default
+DEBUG 2025-11-06 18:49:00,842 utils (0.000) SELECT "broyage_broyage"."id", "broyage_broyage"."user_id", "broyage_broyage"."post_id", "broyage_broyage"."site_id", "broyage_broyage"."totaliseur_id", "broyage_broyage"."title", "broyage_broyage"."compt_fin", "broyage_broyage"."clinker_fin", "broyage_broyage"."gypse_fin", "broyage_broyage"."dolomite_fin", "broyage_broyage"."dif_compt", "broyage_broyage"."dif_clinker", "broyage_broyage"."dif_dolomite", "broyage_broyage"."dif_gypse", "broyage_broyage"."date", "broyage_broyage"."slug" FROM "broyage_broyage" INNER JOIN "packing_post" ON ("broyage_broyage"."post_id" = "packing_post"."id") WHERE ("broyage_broyage"."site_id" = 1 AND "broyage_broyage"."date" = '2025-11-03' AND "packing_post"."post" = '22H-06H') ORDER BY "broyage_broyage"."site_id" ASC; args=(1, '2025-11-03', '22H-06H'); alias=default
+DEBUG 2025-11-06 18:49:00,846 utils (0.000) SELECT "packing_packing"."id", "packing_packing"."post_id", "packing_packing"."user_id", "packing_packing"."site_id", "packing_packing"."title", "packing_packing"."livraison", "packing_packing"."casse", "packing_packing"."vrack", "packing_packing"."date", "packing_packing"."slug" FROM "packing_packing" INNER JOIN "packing_post" ON ("packing_packing"."post_id" = "packing_post"."id") WHERE ("packing_packing"."site_id" = 1 AND "packing_packing"."date" = '2025-11-03' AND "packing_post"."post" = '06H-14H') ORDER BY "packing_packing"."date" DESC, "packing_post"."post" ASC; args=(1, '2025-11-03', '06H-14H'); alias=default
+DEBUG 2025-11-06 18:49:00,852 utils (0.000) SELECT "packing_packing"."id", "packing_packing"."post_id", "packing_packing"."user_id", "packing_packing"."site_id", "packing_packing"."title", "packing_packing"."livraison", "packing_packing"."casse", "packing_packing"."vrack", "packing_packing"."date", "packing_packing"."slug" FROM "packing_packing" INNER JOIN "packing_post" ON ("packing_packing"."post_id" = "packing_post"."id") WHERE ("packing_packing"."site_id" = 1 AND "packing_packing"."date" = '2025-11-03' AND "packing_post"."post" = '14H-22H') ORDER BY "packing_packing"."date" DESC, "packing_post"."post" ASC; args=(1, '2025-11-03', '14H-22H'); alias=default
+DEBUG 2025-11-06 18:49:00,859 utils (0.000) SELECT "packing_packing"."id", "packing_packing"."post_id", "packing_packing"."user_id", "packing_packing"."site_id", "packing_packing"."title", "packing_packing"."livraison", "packing_packing"."casse", "packing_packing"."vrack", "packing_packing"."date", "packing_packing"."slug" FROM "packing_packing" INNER JOIN "packing_post" ON ("packing_packing"."post_id" = "packing_post"."id") WHERE ("packing_packing"."site_id" = 1 AND "packing_packing"."date" = '2025-11-03' AND "packing_post"."post" = '22H-06H') ORDER BY "packing_packing"."date" DESC, "packing_post"."post" ASC; args=(1, '2025-11-03', '22H-06H'); alias=default
+DEBUG 2025-11-06 18:49:00,861 utils (0.000) SELECT "broyage_broyage"."id", "broyage_broyage"."user_id", "broyage_broyage"."post_id", "broyage_broyage"."site_id", "broyage_broyage"."totaliseur_id", "broyage_broyage"."title", "broyage_broyage"."compt_fin", "broyage_broyage"."clinker_fin", "broyage_broyage"."gypse_fin", "broyage_broyage"."dolomite_fin", "broyage_broyage"."dif_compt", "broyage_broyage"."dif_clinker", "broyage_broyage"."dif_dolomite", "broyage_broyage"."dif_gypse", "broyage_broyage"."date", "broyage_broyage"."slug" FROM "broyage_broyage" WHERE "broyage_broyage"."id" = 29 LIMIT 21; args=(29,); alias=default
+DEBUG 2025-11-06 18:49:00,866 utils (0.000) SELECT "packing_post"."id", "packing_post"."post", "packing_post"."start_post", "packing_post"."end_post" FROM "packing_post" WHERE "packing_post"."id" = 1 LIMIT 21; args=(1,); alias=default
+DEBUG 2025-11-06 18:49:00,870 utils (0.000) SELECT "broyage_broyage"."id", "broyage_broyage"."user_id", "broyage_broyage"."post_id", "broyage_broyage"."site_id", "broyage_broyage"."totaliseur_id", "broyage_broyage"."title", "broyage_broyage"."compt_fin", "broyage_broyage"."clinker_fin", "broyage_broyage"."gypse_fin", "broyage_broyage"."dolomite_fin", "broyage_broyage"."dif_compt", "broyage_broyage"."dif_clinker", "broyage_broyage"."dif_dolomite", "broyage_broyage"."dif_gypse", "broyage_broyage"."date", "broyage_broyage"."slug" FROM "broyage_broyage" WHERE "broyage_broyage"."id" = 29 LIMIT 21; args=(29,); alias=default
+DEBUG 2025-11-06 18:49:00,872 utils (0.000) SELECT "packing_post"."id", "packing_post"."post", "packing_post"."start_post", "packing_post"."end_post" FROM "packing_post" WHERE "packing_post"."id" = 1 LIMIT 21; args=(1,); alias=default
+DEBUG 2025-11-06 18:49:00,874 utils (0.000) SELECT "packing_packing"."id", "packing_packing"."post_id", "packing_packing"."user_id", "packing_packing"."site_id", "packing_packing"."title", "packing_packing"."livraison", "packing_packing"."casse", "packing_packing"."vrack", "packing_packing"."date", "packing_packing"."slug" FROM "packing_packing" WHERE "packing_packing"."id" = 48 LIMIT 21; args=(48,); alias=default
+DEBUG 2025-11-06 18:49:00,876 utils (0.000) SELECT "packing_post"."id", "packing_post"."post", "packing_post"."start_post", "packing_post"."end_post" FROM "packing_post" WHERE "packing_post"."id" = 1 LIMIT 21; args=(1,); alias=default
+DEBUG 2025-11-06 18:49:00,877 utils (0.000) SELECT "packing_packing"."id", "packing_packing"."post_id", "packing_packing"."user_id", "packing_packing"."site_id", "packing_packing"."title", "packing_packing"."livraison", "packing_packing"."casse", "packing_packing"."vrack", "packing_packing"."date", "packing_packing"."slug" FROM "packing_packing" WHERE "packing_packing"."id" = 48 LIMIT 21; args=(48,); alias=default
+DEBUG 2025-11-06 18:49:00,878 utils (0.000) SELECT "packing_post"."id", "packing_post"."post", "packing_post"."start_post", "packing_post"."end_post" FROM "packing_post" WHERE "packing_post"."id" = 1 LIMIT 21; args=(1,); alias=default
+DEBUG 2025-11-06 18:49:00,880 utils (0.000) SELECT "packing_packing"."id", "packing_packing"."post_id", "packing_packing"."user_id", "packing_packing"."site_id", "packing_packing"."title", "packing_packing"."livraison", "packing_packing"."casse", "packing_packing"."vrack", "packing_packing"."date", "packing_packing"."slug" FROM "packing_packing" WHERE "packing_packing"."id" = 50 LIMIT 21; args=(50,); alias=default
+DEBUG 2025-11-06 18:49:00,881 utils (0.000) SELECT "packing_post"."id", "packing_post"."post", "packing_post"."start_post", "packing_post"."end_post" FROM "packing_post" WHERE "packing_post"."id" = 3 LIMIT 21; args=(3,); alias=default
+DEBUG 2025-11-06 18:49:00,882 utils (0.000) SELECT "packing_packing"."id", "packing_packing"."post_id", "packing_packing"."user_id", "packing_packing"."site_id", "packing_packing"."title", "packing_packing"."livraison", "packing_packing"."casse", "packing_packing"."vrack", "packing_packing"."date", "packing_packing"."slug" FROM "packing_packing" WHERE "packing_packing"."id" = 49 LIMIT 21; args=(49,); alias=default
+DEBUG 2025-11-06 18:49:00,883 utils (0.000) SELECT "packing_post"."id", "packing_post"."post", "packing_post"."start_post", "packing_post"."end_post" FROM "packing_post" WHERE "packing_post"."id" = 2 LIMIT 21; args=(2,); alias=default
+DEBUG 2025-11-06 18:49:00,887 utils (0.000) SELECT "packing_packing"."id", "packing_packing"."post_id", "packing_packing"."user_id", "packing_packing"."site_id", "packing_packing"."title", "packing_packing"."livraison", "packing_packing"."casse", "packing_packing"."vrack", "packing_packing"."date", "packing_packing"."slug" FROM "packing_packing" WHERE "packing_packing"."id" = 49 LIMIT 21; args=(49,); alias=default
+DEBUG 2025-11-06 18:49:00,890 utils (0.000) SELECT "packing_post"."id", "packing_post"."post", "packing_post"."start_post", "packing_post"."end_post" FROM "packing_post" WHERE "packing_post"."id" = 2 LIMIT 21; args=(2,); alias=default
+DEBUG 2025-11-06 19:25:32,736 utils (0.428) 
+            SELECT
+                c.relname,
+                CASE
+                    WHEN c.relispartition THEN 'p'
+                    WHEN c.relkind IN ('m', 'v') THEN 'v'
+                    ELSE 't'
+                END,
+                obj_description(c.oid, 'pg_class')
+            FROM pg_catalog.pg_class c
+            LEFT JOIN pg_catalog.pg_namespace n ON n.oid = c.relnamespace
+            WHERE c.relkind IN ('f', 'm', 'p', 'r', 'v')
+                AND n.nspname NOT IN ('pg_catalog', 'pg_toast')
+                AND pg_catalog.pg_table_is_visible(c.oid)
+        ; args=None; alias=default
+DEBUG 2025-11-06 19:25:33,086 utils (0.342) SELECT "django_migrations"."id", "django_migrations"."app", "django_migrations"."name", "django_migrations"."applied" FROM "django_migrations"; args=(); alias=default
+DEBUG 2025-11-06 19:27:08,924 utils (0.358) 
+            SELECT
+                c.relname,
+                CASE
+                    WHEN c.relispartition THEN 'p'
+                    WHEN c.relkind IN ('m', 'v') THEN 'v'
+                    ELSE 't'
+                END,
+                obj_description(c.oid, 'pg_class')
+            FROM pg_catalog.pg_class c
+            LEFT JOIN pg_catalog.pg_namespace n ON n.oid = c.relnamespace
+            WHERE c.relkind IN ('f', 'm', 'p', 'r', 'v')
+                AND n.nspname NOT IN ('pg_catalog', 'pg_toast')
+                AND pg_catalog.pg_table_is_visible(c.oid)
+        ; args=None; alias=default
+DEBUG 2025-11-06 19:27:09,275 utils (0.346) SELECT "django_migrations"."id", "django_migrations"."app", "django_migrations"."name", "django_migrations"."applied" FROM "django_migrations"; args=(); alias=default
+DEBUG 2025-11-06 19:27:42,973 utils (0.362) 
+            SELECT
+                c.relname,
+                CASE
+                    WHEN c.relispartition THEN 'p'
+                    WHEN c.relkind IN ('m', 'v') THEN 'v'
+                    ELSE 't'
+                END,
+                obj_description(c.oid, 'pg_class')
+            FROM pg_catalog.pg_class c
+            LEFT JOIN pg_catalog.pg_namespace n ON n.oid = c.relnamespace
+            WHERE c.relkind IN ('f', 'm', 'p', 'r', 'v')
+                AND n.nspname NOT IN ('pg_catalog', 'pg_toast')
+                AND pg_catalog.pg_table_is_visible(c.oid)
+        ; args=None; alias=default
+DEBUG 2025-11-06 19:27:43,326 utils (0.345) SELECT "django_migrations"."id", "django_migrations"."app", "django_migrations"."name", "django_migrations"."applied" FROM "django_migrations"; args=(); alias=default
+DEBUG 2025-11-06 19:28:06,880 utils (0.358) 
+            SELECT
+                c.relname,
+                CASE
+                    WHEN c.relispartition THEN 'p'
+                    WHEN c.relkind IN ('m', 'v') THEN 'v'
+                    ELSE 't'
+                END,
+                obj_description(c.oid, 'pg_class')
+            FROM pg_catalog.pg_class c
+            LEFT JOIN pg_catalog.pg_namespace n ON n.oid = c.relnamespace
+            WHERE c.relkind IN ('f', 'm', 'p', 'r', 'v')
+                AND n.nspname NOT IN ('pg_catalog', 'pg_toast')
+                AND pg_catalog.pg_table_is_visible(c.oid)
+        ; args=None; alias=default
+DEBUG 2025-11-06 19:28:07,241 utils (0.353) SELECT "django_migrations"."id", "django_migrations"."app", "django_migrations"."name", "django_migrations"."applied" FROM "django_migrations"; args=(); alias=default
+DEBUG 2025-11-06 19:28:12,852 utils (0.403) 
+            SELECT
+                c.relname,
+                CASE
+                    WHEN c.relispartition THEN 'p'
+                    WHEN c.relkind IN ('m', 'v') THEN 'v'
+                    ELSE 't'
+                END,
+                obj_description(c.oid, 'pg_class')
+            FROM pg_catalog.pg_class c
+            LEFT JOIN pg_catalog.pg_namespace n ON n.oid = c.relnamespace
+            WHERE c.relkind IN ('f', 'm', 'p', 'r', 'v')
+                AND n.nspname NOT IN ('pg_catalog', 'pg_toast')
+                AND pg_catalog.pg_table_is_visible(c.oid)
+        ; args=None; alias=default
+DEBUG 2025-11-06 19:28:13,195 utils (0.338) SELECT "django_migrations"."id", "django_migrations"."app", "django_migrations"."name", "django_migrations"."applied" FROM "django_migrations"; args=(); alias=default
+DEBUG 2025-11-06 19:28:18,723 utils (0.362) 
+            SELECT
+                c.relname,
+                CASE
+                    WHEN c.relispartition THEN 'p'
+                    WHEN c.relkind IN ('m', 'v') THEN 'v'
+                    ELSE 't'
+                END,
+                obj_description(c.oid, 'pg_class')
+            FROM pg_catalog.pg_class c
+            LEFT JOIN pg_catalog.pg_namespace n ON n.oid = c.relnamespace
+            WHERE c.relkind IN ('f', 'm', 'p', 'r', 'v')
+                AND n.nspname NOT IN ('pg_catalog', 'pg_toast')
+                AND pg_catalog.pg_table_is_visible(c.oid)
+        ; args=None; alias=default
+DEBUG 2025-11-06 19:28:19,110 utils (0.378) SELECT "django_migrations"."id", "django_migrations"."app", "django_migrations"."name", "django_migrations"."applied" FROM "django_migrations"; args=(); alias=default
+DEBUG 2025-11-06 19:28:45,966 utils (0.402) 
+            SELECT
+                c.relname,
+                CASE
+                    WHEN c.relispartition THEN 'p'
+                    WHEN c.relkind IN ('m', 'v') THEN 'v'
+                    ELSE 't'
+                END,
+                obj_description(c.oid, 'pg_class')
+            FROM pg_catalog.pg_class c
+            LEFT JOIN pg_catalog.pg_namespace n ON n.oid = c.relnamespace
+            WHERE c.relkind IN ('f', 'm', 'p', 'r', 'v')
+                AND n.nspname NOT IN ('pg_catalog', 'pg_toast')
+                AND pg_catalog.pg_table_is_visible(c.oid)
+        ; args=None; alias=default
+DEBUG 2025-11-06 19:28:57,365 utils (0.375) 
+            SELECT
+                c.relname,
+                CASE
+                    WHEN c.relispartition THEN 'p'
+                    WHEN c.relkind IN ('m', 'v') THEN 'v'
+                    ELSE 't'
+                END,
+                obj_description(c.oid, 'pg_class')
+            FROM pg_catalog.pg_class c
+            LEFT JOIN pg_catalog.pg_namespace n ON n.oid = c.relnamespace
+            WHERE c.relkind IN ('f', 'm', 'p', 'r', 'v')
+                AND n.nspname NOT IN ('pg_catalog', 'pg_toast')
+                AND pg_catalog.pg_table_is_visible(c.oid)
+        ; args=None; alias=default
+DEBUG 2025-11-06 19:28:57,742 utils (0.370) SELECT "django_migrations"."id", "django_migrations"."app", "django_migrations"."name", "django_migrations"."applied" FROM "django_migrations"; args=(); alias=default
+DEBUG 2025-11-06 19:29:25,280 utils (0.375) 
+            SELECT
+                c.relname,
+                CASE
+                    WHEN c.relispartition THEN 'p'
+                    WHEN c.relkind IN ('m', 'v') THEN 'v'
+                    ELSE 't'
+                END,
+                obj_description(c.oid, 'pg_class')
+            FROM pg_catalog.pg_class c
+            LEFT JOIN pg_catalog.pg_namespace n ON n.oid = c.relnamespace
+            WHERE c.relkind IN ('f', 'm', 'p', 'r', 'v')
+                AND n.nspname NOT IN ('pg_catalog', 'pg_toast')
+                AND pg_catalog.pg_table_is_visible(c.oid)
+        ; args=None; alias=default
+DEBUG 2025-11-06 19:29:25,770 utils (0.484) SELECT "django_migrations"."id", "django_migrations"."app", "django_migrations"."name", "django_migrations"."applied" FROM "django_migrations"; args=(); alias=default
+DEBUG 2025-11-06 19:30:16,777 utils (0.385) 
+            SELECT
+                c.relname,
+                CASE
+                    WHEN c.relispartition THEN 'p'
+                    WHEN c.relkind IN ('m', 'v') THEN 'v'
+                    ELSE 't'
+                END,
+                obj_description(c.oid, 'pg_class')
+            FROM pg_catalog.pg_class c
+            LEFT JOIN pg_catalog.pg_namespace n ON n.oid = c.relnamespace
+            WHERE c.relkind IN ('f', 'm', 'p', 'r', 'v')
+                AND n.nspname NOT IN ('pg_catalog', 'pg_toast')
+                AND pg_catalog.pg_table_is_visible(c.oid)
+        ; args=None; alias=default
+DEBUG 2025-11-06 19:30:17,202 utils (0.419) SELECT "django_migrations"."id", "django_migrations"."app", "django_migrations"."name", "django_migrations"."applied" FROM "django_migrations"; args=(); alias=default
+DEBUG 2025-11-06 19:30:37,699 utils (0.385) 
+            SELECT
+                c.relname,
+                CASE
+                    WHEN c.relispartition THEN 'p'
+                    WHEN c.relkind IN ('m', 'v') THEN 'v'
+                    ELSE 't'
+                END,
+                obj_description(c.oid, 'pg_class')
+            FROM pg_catalog.pg_class c
+            LEFT JOIN pg_catalog.pg_namespace n ON n.oid = c.relnamespace
+            WHERE c.relkind IN ('f', 'm', 'p', 'r', 'v')
+                AND n.nspname NOT IN ('pg_catalog', 'pg_toast')
+                AND pg_catalog.pg_table_is_visible(c.oid)
+        ; args=None; alias=default
+DEBUG 2025-11-06 19:30:38,074 utils (0.368) SELECT "django_migrations"."id", "django_migrations"."app", "django_migrations"."name", "django_migrations"."applied" FROM "django_migrations"; args=(); alias=default
+DEBUG 2025-11-06 19:31:04,706 utils (0.363) 
+            SELECT
+                c.relname,
+                CASE
+                    WHEN c.relispartition THEN 'p'
+                    WHEN c.relkind IN ('m', 'v') THEN 'v'
+                    ELSE 't'
+                END,
+                obj_description(c.oid, 'pg_class')
+            FROM pg_catalog.pg_class c
+            LEFT JOIN pg_catalog.pg_namespace n ON n.oid = c.relnamespace
+            WHERE c.relkind IN ('f', 'm', 'p', 'r', 'v')
+                AND n.nspname NOT IN ('pg_catalog', 'pg_toast')
+                AND pg_catalog.pg_table_is_visible(c.oid)
+        ; args=None; alias=default
+DEBUG 2025-11-06 19:31:05,081 utils (0.368) SELECT "django_migrations"."id", "django_migrations"."app", "django_migrations"."name", "django_migrations"."applied" FROM "django_migrations"; args=(); alias=default
+DEBUG 2025-11-06 19:31:05,421 utils (0.338) 
+            SELECT
+                c.relname,
+                CASE
+                    WHEN c.relispartition THEN 'p'
+                    WHEN c.relkind IN ('m', 'v') THEN 'v'
+                    ELSE 't'
+                END,
+                obj_description(c.oid, 'pg_class')
+            FROM pg_catalog.pg_class c
+            LEFT JOIN pg_catalog.pg_namespace n ON n.oid = c.relnamespace
+            WHERE c.relkind IN ('f', 'm', 'p', 'r', 'v')
+                AND n.nspname NOT IN ('pg_catalog', 'pg_toast')
+                AND pg_catalog.pg_table_is_visible(c.oid)
+        ; args=None; alias=default
+DEBUG 2025-11-06 19:31:05,803 utils (0.378) SELECT "django_migrations"."id", "django_migrations"."app", "django_migrations"."name", "django_migrations"."applied" FROM "django_migrations"; args=(); alias=default
+DEBUG 2025-11-06 19:31:06,253 utils (0.415) 
+            SELECT
+                c.relname,
+                CASE
+                    WHEN c.relispartition THEN 'p'
+                    WHEN c.relkind IN ('m', 'v') THEN 'v'
+                    ELSE 't'
+                END,
+                obj_description(c.oid, 'pg_class')
+            FROM pg_catalog.pg_class c
+            LEFT JOIN pg_catalog.pg_namespace n ON n.oid = c.relnamespace
+            WHERE c.relkind IN ('f', 'm', 'p', 'r', 'v')
+                AND n.nspname NOT IN ('pg_catalog', 'pg_toast')
+                AND pg_catalog.pg_table_is_visible(c.oid)
+        ; args=None; alias=default
+DEBUG 2025-11-06 19:31:06,255 utils (0.000) BEGIN; args=None; alias=default
+DEBUG 2025-11-06 19:31:06,962 utils (0.695) INSERT INTO "django_migrations" ("app", "name", "applied") VALUES ('packing', '0004_alter_packing_date', '2025-11-06T19:31:06.267363+00:00'::timestamptz) RETURNING "django_migrations"."id"; args=('packing', '0004_alter_packing_date', datetime.datetime(2025, 11, 6, 19, 31, 6, 267363, tzinfo=datetime.timezone.utc)); alias=default
+DEBUG 2025-11-06 19:31:07,302 utils (0.339) COMMIT; args=None; alias=default
+DEBUG 2025-11-06 19:31:07,792 utils (0.488) SELECT "django_migrations"."id", "django_migrations"."app", "django_migrations"."name", "django_migrations"."applied" FROM "django_migrations"; args=(); alias=default
+DEBUG 2025-11-06 19:31:08,155 utils (0.348) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE "django_content_type"."app_label" = 'admin'; args=('admin',); alias=default
+DEBUG 2025-11-06 19:31:08,561 utils (0.405) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE ("django_content_type"."app_label" = 'admin' AND "django_content_type"."model" IN ('logentry')); args=('admin', 'logentry'); alias=default
+DEBUG 2025-11-06 19:31:08,935 utils (0.369) SELECT "auth_permission"."content_type_id" AS "content_type", "auth_permission"."codename" AS "codename" FROM "auth_permission" INNER JOIN "django_content_type" ON ("auth_permission"."content_type_id" = "django_content_type"."id") WHERE "auth_permission"."content_type_id" IN (1) ORDER BY "django_content_type"."app_label" ASC, "django_content_type"."model" ASC, 2 ASC; args=(1,); alias=default
+DEBUG 2025-11-06 19:31:09,298 utils (0.359) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE "django_content_type"."app_label" = 'admin'; args=('admin',); alias=default
+DEBUG 2025-11-06 19:31:09,690 utils (0.389) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE "django_content_type"."app_label" = 'auth'; args=('auth',); alias=default
+DEBUG 2025-11-06 19:31:10,036 utils (0.344) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE ("django_content_type"."app_label" = 'auth' AND "django_content_type"."model" IN ('user', 'permission', 'group')); args=('auth', 'user', 'permission', 'group'); alias=default
+DEBUG 2025-11-06 19:31:10,381 utils (0.341) SELECT "auth_permission"."content_type_id" AS "content_type", "auth_permission"."codename" AS "codename" FROM "auth_permission" INNER JOIN "django_content_type" ON ("auth_permission"."content_type_id" = "django_content_type"."id") WHERE "auth_permission"."content_type_id" IN (2, 3, 4) ORDER BY "django_content_type"."app_label" ASC, "django_content_type"."model" ASC, 2 ASC; args=(2, 3, 4); alias=default
+DEBUG 2025-11-06 19:31:10,830 utils (0.446) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE "django_content_type"."app_label" = 'auth'; args=('auth',); alias=default
+DEBUG 2025-11-06 19:31:11,192 utils (0.359) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE "django_content_type"."app_label" = 'contenttypes'; args=('contenttypes',); alias=default
+DEBUG 2025-11-06 19:31:11,560 utils (0.365) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE ("django_content_type"."app_label" = 'contenttypes' AND "django_content_type"."model" IN ('contenttype')); args=('contenttypes', 'contenttype'); alias=default
+DEBUG 2025-11-06 19:31:11,935 utils (0.370) SELECT "auth_permission"."content_type_id" AS "content_type", "auth_permission"."codename" AS "codename" FROM "auth_permission" INNER JOIN "django_content_type" ON ("auth_permission"."content_type_id" = "django_content_type"."id") WHERE "auth_permission"."content_type_id" IN (5) ORDER BY "django_content_type"."app_label" ASC, "django_content_type"."model" ASC, 2 ASC; args=(5,); alias=default
+DEBUG 2025-11-06 19:31:12,309 utils (0.371) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE "django_content_type"."app_label" = 'contenttypes'; args=('contenttypes',); alias=default
+DEBUG 2025-11-06 19:31:12,647 utils (0.337) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE "django_content_type"."app_label" = 'sessions'; args=('sessions',); alias=default
+DEBUG 2025-11-06 19:31:13,017 utils (0.368) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE ("django_content_type"."app_label" = 'sessions' AND "django_content_type"."model" IN ('session')); args=('sessions', 'session'); alias=default
+DEBUG 2025-11-06 19:31:13,391 utils (0.371) SELECT "auth_permission"."content_type_id" AS "content_type", "auth_permission"."codename" AS "codename" FROM "auth_permission" INNER JOIN "django_content_type" ON ("auth_permission"."content_type_id" = "django_content_type"."id") WHERE "auth_permission"."content_type_id" IN (6) ORDER BY "django_content_type"."app_label" ASC, "django_content_type"."model" ASC, 2 ASC; args=(6,); alias=default
+DEBUG 2025-11-06 19:31:13,767 utils (0.374) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE "django_content_type"."app_label" = 'sessions'; args=('sessions',); alias=default
+DEBUG 2025-11-06 19:31:14,102 utils (0.332) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE "django_content_type"."app_label" = 'accounts'; args=('accounts',); alias=default
+DEBUG 2025-11-06 19:31:14,444 utils (0.339) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE ("django_content_type"."app_label" = 'accounts' AND "django_content_type"."model" IN ('profil', 'site')); args=('accounts', 'profil', 'site'); alias=default
+DEBUG 2025-11-06 19:31:14,810 utils (0.364) SELECT "auth_permission"."content_type_id" AS "content_type", "auth_permission"."codename" AS "codename" FROM "auth_permission" INNER JOIN "django_content_type" ON ("auth_permission"."content_type_id" = "django_content_type"."id") WHERE "auth_permission"."content_type_id" IN (8, 7) ORDER BY "django_content_type"."app_label" ASC, "django_content_type"."model" ASC, 2 ASC; args=(8, 7); alias=default
+DEBUG 2025-11-06 19:31:15,296 utils (0.483) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE "django_content_type"."app_label" = 'accounts'; args=('accounts',); alias=default
+DEBUG 2025-11-06 19:31:15,653 utils (0.354) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE "django_content_type"."app_label" = 'broyage'; args=('broyage',); alias=default
+DEBUG 2025-11-06 19:31:16,028 utils (0.371) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE ("django_content_type"."app_label" = 'broyage' AND "django_content_type"."model" IN ('broyage', 'totaliseur')); args=('broyage', 'broyage', 'totaliseur'); alias=default
+DEBUG 2025-11-06 19:31:16,403 utils (0.371) SELECT "auth_permission"."content_type_id" AS "content_type", "auth_permission"."codename" AS "codename" FROM "auth_permission" INNER JOIN "django_content_type" ON ("auth_permission"."content_type_id" = "django_content_type"."id") WHERE "auth_permission"."content_type_id" IN (9, 10) ORDER BY "django_content_type"."app_label" ASC, "django_content_type"."model" ASC, 2 ASC; args=(9, 10); alias=default
+DEBUG 2025-11-06 19:31:16,798 utils (0.392) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE "django_content_type"."app_label" = 'broyage'; args=('broyage',); alias=default
+DEBUG 2025-11-06 19:31:17,139 utils (0.337) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE "django_content_type"."app_label" = 'packing'; args=('packing',); alias=default
+DEBUG 2025-11-06 19:31:17,496 utils (0.355) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE ("django_content_type"."app_label" = 'packing' AND "django_content_type"."model" IN ('pannes', 'post', 'packing')); args=('packing', 'pannes', 'post', 'packing'); alias=default
+DEBUG 2025-11-06 19:31:17,870 utils (0.370) SELECT "auth_permission"."content_type_id" AS "content_type", "auth_permission"."codename" AS "codename" FROM "auth_permission" INNER JOIN "django_content_type" ON ("auth_permission"."content_type_id" = "django_content_type"."id") WHERE "auth_permission"."content_type_id" IN (11, 12, 13) ORDER BY "django_content_type"."app_label" ASC, "django_content_type"."model" ASC, 2 ASC; args=(11, 12, 13); alias=default
+DEBUG 2025-11-06 19:31:18,263 utils (0.388) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE "django_content_type"."app_label" = 'packing'; args=('packing',); alias=default
+DEBUG 2025-11-06 19:31:18,597 utils (0.331) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE "django_content_type"."app_label" = 'widget_tweaks'; args=('widget_tweaks',); alias=default
+DEBUG 2025-11-06 19:31:18,968 utils (0.366) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE "django_content_type"."app_label" = 'widget_tweaks'; args=('widget_tweaks',); alias=default
+DEBUG 2025-11-06 19:31:34,622 utils (0.375) 
+            SELECT
+                c.relname,
+                CASE
+                    WHEN c.relispartition THEN 'p'
+                    WHEN c.relkind IN ('m', 'v') THEN 'v'
+                    ELSE 't'
+                END,
+                obj_description(c.oid, 'pg_class')
+            FROM pg_catalog.pg_class c
+            LEFT JOIN pg_catalog.pg_namespace n ON n.oid = c.relnamespace
+            WHERE c.relkind IN ('f', 'm', 'p', 'r', 'v')
+                AND n.nspname NOT IN ('pg_catalog', 'pg_toast')
+                AND pg_catalog.pg_table_is_visible(c.oid)
+        ; args=None; alias=default
+DEBUG 2025-11-06 19:31:34,987 utils (0.359) SELECT "django_migrations"."id", "django_migrations"."app", "django_migrations"."name", "django_migrations"."applied" FROM "django_migrations"; args=(); alias=default
