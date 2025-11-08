@@ -37,7 +37,7 @@
       <tbody>
         {% if object_pack %}
           {% for iteam in object_pack %}
-            <tr class="align-middle {% if iteam.livraison|default:0 > 270 %}table-success{% elif iteam.livraison|default:0 > 200 %}table-warning{% else %}table-danger{% endif %}">
+            <tr class="align-middle {% if iteam.livraison|default:0 > 206 %}table-success{% elif iteam.livraison|default:0 > 200 %}table-warning{% else %}table-danger{% endif %}">
               <td class="fw-bold">{{ forloop.counter }}</td>
 
               {% if admin %}

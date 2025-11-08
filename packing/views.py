@@ -57,7 +57,6 @@ class homeView(ListView):
         search_date = self.request.GET.get('search')
         
         filters_pack = Q(site=site)
-        filters_broy = Q(site=site)
         filters_pann = Q(site=site, section=section)
         
         existe = Packing.objects.filter(date=date.today(), site=site).exists()
@@ -73,10 +72,11 @@ class homeView(ListView):
                 filters_pann &= Q(pk__isnull=True)
         
         else:
-            if existe or broyage_existe:
+            if existe:
                 search_date = date.today()
                 filters_pack &= Q(date=search_date)
                 filters_pann &= Q(date=search_date)
+            
             else:
                 search_date = Packing.objects.order_by('-date').values_list('date', flat=True).first()
                 filters_pack &= Q(date=search_date)
@@ -211,10 +211,11 @@ class homeView(ListView):
                 filters_pann &= Q(pk__isnull=True)
             
         else:
-            if existe or packing_existe:
+            if existe:
                 search_date = date.today()
                 filters_broy &= Q(date=search_date)
                 filters_pann &= Q(date=search_date)
+            
             else:
                 search_date = Broyage.objects.order_by('-date').values_list('date', flat=True).first()
                 filters_broy &= Q(date=search_date)
