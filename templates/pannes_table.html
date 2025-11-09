@@ -12,11 +12,19 @@
       <thead class="table-primary text-uppercase small">
         <tr>
           <th rowspan="2" class="fs-6 align-middle">#</th>
+          {% if admin %}
+            <th rowspan="2" class="fs-6 align-middle">🧑‍💼 user</th>
+          {% endif %}
           <th rowspan="2" class="fs-6 align-middle">🕒 Poste</th>
           <th colspan="3" class="fs-6 align-middle">🔧 Temps de Panne</th>
           <th rowspan="2" class="fs-6 align-middle">🏭 Département</th>
           <th rowspan="2" class="fs-6 align-middle">📝 Cause</th>
           <th rowspan="2" class="fs-6 align-middle">🛠 Action</th>
+
+          {% if packing_panne or broyage_panne %}
+            <th rowspan="2" class="fs-6 align-middle">🛠 Update</th>
+          {% endif %}
+            
         </tr>
         <tr class="table-light">
           <th class="fs-6">Début</th>
@@ -31,6 +39,15 @@
           {% for panne in object_pann %}
             <tr class="align-middle {% if panne.duree|default:0 > 60 %}table-danger{% elif panne.duree|default:0 > 30 %}table-warning {% else %} table-light {% endif %}">
               <td class="fw-bold">{{ forloop.counter }}</td>
+              {% if admin %}
+                
+                {% if packing %}
+                  <td class="fw-bold text-primary">{{ panne.packing.user }}</td>
+                {% elif broyage %}
+                  <td class="fw-bold text-primary">{{ panne.broyage.user }}</td>
+                {% endif %}
+                  
+              {% endif %}
               <td class="fw-semibold text-primary">
                 {% if broyage %}
                   {{ panne.broyage.title }}
@@ -55,22 +72,37 @@
 
               <td class="text-start text-dark px-3">{{ panne.description|truncatechars:550 }}</td>
               <td class="text-start text-dark px-3">{{ panne.solution|truncatechars:550 }}</td>
-
-              {% comment %} <td>
-                {% if user.is_authenticated and user.profil.poste == 'packing' %}
-                  <div class="d-flex justify-content-center gap-2">
-                    <a href="{% url 'packing:modifier-panne' panne.slug %}" class="btn btn-outline-primary btn-sm rounded-pill px-3 shadow-sm">✏️</a>
-                    <a href="{% url 'packing:supprimer-panne' panne.slug %}" class="btn btn-outline-danger btn-sm rounded-pill px-3 shadow-sm" onclick="return confirm('Supprimer cette panne ?');">🗑️</a>
-                  </div>
-                {% else %}
-                  <span class="text-muted fst-italic">—</span>
+              
+              {% if user.is_authenticated   %}
+                
+                {% if packing_panne %}
+                  <td>
+                    <div class="d-flex justify-content-center gap-2">
+                      <a href="{% url 'packing:modifier-panne' panne.slug %}" class="btn btn-outline-primary btn-sm rounded-pill px-3 shadow-sm">✏️</a>
+                    </div>
+                  </td>
+                {% elif broyage_panne %}
+                  <td>
+                    <div class="d-flex justify-content-center gap-2">
+                      <a href="{% url 'broyage:modifier-panne' panne.slug %}" class="btn btn-outline-primary btn-sm rounded-pill px-3 shadow-sm">✏️</a>
+                    </div>
+                  </td>
                 {% endif %}
-              </td> {% endcomment %}
+                  
+              {% endif %}
+                
+              
             </tr>
           {% endfor %}
         {% else %}
           <tr>
-            <td colspan="8" class="text-center text-muted py-4 fst-italic">🌟 Aucune panne enregistrée pour cette date.</td>
+            
+            {% if packing_panne or broyage_panne %}
+              <td colspan="9" class="text-center text-muted py-4 fst-italic">🌟 Aucune panne enregistrée pour cette date.</td>
+              {% else %}
+              <td colspan="8" class="text-center text-muted py-4 fst-italic">🌟 Aucune panne enregistrée pour cette date.</td>
+            {% endif %}
+              
           </tr>
         {% endif %}
       </tbody>
@@ -79,8 +111,8 @@
       {% if total %}
         <tfoot class="text-white fw-bold" style="background: linear-gradient(90deg, #198754, #20c997); letter-spacing: 0.5px;">
           <tr>
-            <td colspan="5" class="text-end pe-3 border-0 fs-6">🌟 Total Temps d’Arrêt :</td>
-            <td colspan="3" class="text-start ps-3 border-0 fs-5">{{ total_temp_arret }}</td>
+            <td colspan="3" class="text-end pe-3 border-0 fs-6">🌟 Total Temps d’Arrêt :</td>
+            <td colspan="6" class="text-start ps-3 border-0 fs-5 text-center">{{ total_temp_arret }}</td>
           </tr>
         </tfoot>
       {% endif %}

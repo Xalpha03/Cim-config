@@ -89,6 +89,7 @@ class broyageHomeList(ListView):
         print(temp_march_converter)
         context.update({
             'broyage': 'broyage',
+            'broyage_panne': 'broyage_panne',
             'search_date': search_date,
             'object_broy': object_broy,
             'object_pann': object_pann,
@@ -474,7 +475,7 @@ class adminBroyage(ListView):
                 filter_pann &= Q(date__month=search_date)
                 
             
-        object_broy = Broyage.objects.filter(filter_broy)
+        object_broy = Broyage.objects.filter(filter_broy).order_by('-date', 'post__post')
         object_pann = Pannes.objects.filter(filter_pann)
         nbr_obj = object_broy.count()
         
@@ -550,6 +551,7 @@ class adminBroyage(ListView):
         
         
         context.update({
+            'admin': 'admin',
             'search_date': search_date,
             'object_broy': object_broy,
             
@@ -608,6 +610,7 @@ class adminBroyagePanne(ListView):
         object_pann = Pannes.objects.filter(filter_pann)
         
         context.update({
+            'admin': 'admin',
             'total': 'total',
             'broyage': 'broyage',
             'object_pann': object_pann,

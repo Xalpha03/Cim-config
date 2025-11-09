@@ -11,6 +11,9 @@
       <thead class="table-primary text-uppercase small">
         <tr>
           <th rowspan="2" class="fs-6 align-middle">#</th>
+          {% if admin %}
+            <th rowspan="2" class="fs-6 align-middle">🧑‍💼 user</th>
+          {% endif %}
           <th rowspan="2" class="fs-6 align-middle">📍 Poste</th>
           <th colspan="3" class="fs-6 align-middle">🏭 Broyage</th>
           <th colspan="2" class="fs-6 align-middle">⏱️ Durée</th>
@@ -30,6 +33,9 @@
           {% for iteam in object_broy %}
             <tr class="align-middle {% if iteam.prod|default:0 > 206 %}table-success{% elif iteam.prod|default:0 > 200 %}table-warning{% else %}table-danger{% endif %}">
               <td class="fw-bold">{{ forloop.counter }}</td>
+              {% if admin %}
+                <td class="fw-bold text-primary">{{ iteam.user }}</td>
+              {% endif %}
               <td class="fw-bold text-primary">{{ iteam.title }}</td>
               <td>{{ iteam.prod|default:'—' }}</td>
               <td>{{ iteam.rend|default:'—' }}</td>

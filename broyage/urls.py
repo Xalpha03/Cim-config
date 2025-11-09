@@ -9,7 +9,7 @@ urlpatterns = [
     path('ajout-broyage-panne/<slug:slug>/', ajoutPanne.as_view(), name='ajout-broyage-panne'),
     path('update-totalisuer/ <slug:slug>/', updateTotali.as_view(), name='update-totaliseur'),
     path('update-broyage/ <slug:slug>/', updateBroyage.as_view(), name='update-broyage'),
-    path('update-panne/<slug:slug>/', updatePanne.as_view(), name='update-panne'),
+    path('modifier-panne/<slug:slug>/', updatePanne.as_view(), name='modifier-panne'),
     
     path('broyage-user-view/<str:username>/', broyageUserView.as_view(), name='broyage-user-view'),
     path('broyage-panne-user-view/<str:username>/', broyeurPanneUserView.as_view(), name='broyage-panne-user-view'),

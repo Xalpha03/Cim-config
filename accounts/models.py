@@ -7,6 +7,8 @@ POSTES = [
     ('packing', 'Responsable Packing'),
     ('maintenance', 'Technicien Maintenance'),
     ('administration', 'Administration'),
+    ('laborantin', 'Laborantin'),
+    # ('broyage', 'Responsable Broyage'),
 ]
 class  Site(models.Model):
     site = models.CharField(max_length=20)

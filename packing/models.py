@@ -91,13 +91,16 @@ DEPARTEMENT_CHOICES = [
     ('COMM', 'COMMERCIALE')
 ]
 
-
+SECTION_CHOICES = [
+    ('broyage', 'broyage'),
+    ('packing', 'packing'),
+]
 class Pannes(models.Model):
     site = models.ForeignKey(Site, on_delete=models.CASCADE)
     departement = models.CharField(max_length=50, choices=DEPARTEMENT_CHOICES, default="MEC")
     broyage = models.ForeignKey(Broyage, on_delete=models.CASCADE, blank=True, null=True)
     packing = models.ForeignKey(Packing, on_delete=models.CASCADE, blank=True, null=True)
-    section = models.CharField(max_length=50, blank=True, null=True)
+    section = models.CharField(max_length=50, choices=SECTION_CHOICES, blank=True, null=True)
     start_panne =models.TimeField()
     end_panne = models.TimeField()
     duree = models.DurationField()

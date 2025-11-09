@@ -342,7 +342,9 @@ class packingHomeList(ListView):
             obj.rend = rend.quantize(Decimal('0.1'), rounding=ROUND_HALF_UP)
 
         context.update({
+            
             'packing': 'packing',
+            'packing_panne': 'packing_panne',
             'search_date': search_date,
             'object_post_06h': query_pack.filter(post__post='06H-14H'),
             'object_post_14h': query_pack.filter(post__post='14H-22H'),
@@ -641,18 +643,19 @@ class updatePackingPanne(UpdateView):
         
     def get_success_url(self):
         slug = self.object.slug
-        base_url = reverse_lazy('packing:packing-panne-update', kwargs={'slug': slug})
+        base_url = reverse_lazy('packing:modifier-panne', kwargs={'slug': slug})
         return f'{base_url}'
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         
         slug = self.kwargs.get('slug')
+        print(slug)
         
         query_pan=Pannes.objects.filter(slug=slug)
         
         context.update({
-            'object_pan': query_pan,
+            'object_pann': query_pan,
             'total_temp_arret': query_pan.aggregate(total=Sum('duree'))['total'] or timedelta()
         })
         return context
@@ -854,6 +857,7 @@ class adminPackingPanneViews(ListView):
         total_temp_arret_formate = f'{heure:02d}:{minute:02d}'
         
         context.update({
+            'admin': 'admin',
             'total': 'total',
             'packing': 'packing',
             'total': 'total',

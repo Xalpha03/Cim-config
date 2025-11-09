@@ -1,0 +1,14 @@
+<td>
+                {% if user.is_authenticated and user.profil.poste == 'packing' %}
+                  
+                    
+                    {% if packing %}
+                      
+                    {% endif %}
+                      
+                    {% comment %} <a href="{% url 'packing:supprimer-panne' panne.slug %}" class="btn btn-outline-danger btn-sm rounded-pill px-3 shadow-sm" onclick="return confirm('Supprimer cette panne ?');">🗑️</a> {% endcomment %}
+                  </div>
+                {% comment %} {% else %}
+                  <span class="text-muted fst-italic">—</span> {% endcomment %}
+                {% endif %}
+              </td>
