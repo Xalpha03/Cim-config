@@ -43,8 +43,10 @@
                 
                 {% if packing %}
                   <td class="fw-bold text-primary text-uppercase">{{ panne.packing.user }}</td>
+                  <td class="fw-bold text-primary text-uppercase">{{ panne.packing.user.last_name }}</td>
                 {% elif broyage %}
                   <td class="fw-bold text-primary text-uppercase">{{ panne.broyage.user }}</td>
+                  <td class="fw-bold text-primary text-uppercase">{{ panne.broyage.user.last_name }}</td>
                 {% endif %}
                   
               {% endif %}

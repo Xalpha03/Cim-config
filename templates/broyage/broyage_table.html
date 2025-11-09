@@ -34,7 +34,7 @@
             <tr class="align-middle {% if iteam.prod|default:0 > 206 %}table-success{% elif iteam.prod|default:0 > 200 %}table-warning{% else %}table-danger{% endif %}">
               <td class="fw-bold">{{ forloop.counter }}</td>
               {% if admin %}
-                <td class="fw-bold text-primary">{{ iteam.user }}</td>
+                <td class="fw-bold text-primary">{{ iteam.user.last_name }}</td>
               {% endif %}
               <td class="fw-bold text-primary">{{ iteam.title }}</td>
               <td>{{ iteam.prod|default:'—' }}</td>
