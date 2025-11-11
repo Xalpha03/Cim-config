@@ -59,8 +59,10 @@ class homeView(ListView):
         filters_pack = Q(site=site)
         filters_pann = Q(site=site, section=section)
         
-        existe = Packing.objects.filter(date=date.today(), site=site).exists()
-        broyage_existe = Broyage.objects.filter(date=date.today(), site=site).exists()
+        broyage_existe = Broyage.objects.filter(date=date.today(), site=site)
+        packing_existe = Packing.objects.filter(date=date.today(), site=site)
+        print('broyage_existe : ', broyage_existe.exists())
+        print('packing_existe : ', packing_existe.exists())
         
         if search_date:
             try:
@@ -72,7 +74,12 @@ class homeView(ListView):
                 filters_pann &= Q(pk__isnull=True)
         
         else:
-            if existe:
+            if packing_existe.exists():
+                search_date = date.today()
+                filters_pack &= Q(date=search_date)
+                filters_pann &= Q(date=search_date)
+                
+            elif broyage_existe.exists():
                 search_date = date.today()
                 filters_pack &= Q(date=search_date)
                 filters_pann &= Q(date=search_date)
@@ -198,8 +205,10 @@ class homeView(ListView):
         filters_broy = Q(site=site)
         filters_pann = Q(site=site, section=section)
             
-        existe = Broyage.objects.filter(date=date.today(), site=site).exists()
-        packing_existe = Packing.objects.filter(date=date.today(), site=site).exists()
+        broyage_existe = Broyage.objects.filter(date=date.today(), site=site)
+        packing_existe = Packing.objects.filter(date=date.today(), site=site)
+        print('broyage_existe : ', broyage_existe.exists())
+        print('packing_existe : ', packing_existe.exists())
             
         if search_date:
             try:
@@ -211,8 +220,14 @@ class homeView(ListView):
                 filters_pann &= Q(pk__isnull=True)
             
         else:
-            if existe:
+            if broyage_existe.exists():
                 search_date = date.today()
+                filters_broy &= Q(date=search_date)
+                filters_pann &= Q(date=search_date)
+                
+            elif packing_existe.exists():
+                search_date = Packing.objects.order_by('-date').values_list('date', flat=True).first()
+                print('search_date : ', search_date)
                 filters_broy &= Q(date=search_date)
                 filters_pann &= Q(date=search_date)
             

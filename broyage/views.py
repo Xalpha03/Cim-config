@@ -52,7 +52,7 @@ class broyageHomeList(ListView):
         for obj in object_broy:
             start = datetime.combine(search_date, obj.post.start_post)
             end = datetime.combine(search_date, obj.post.end_post)
-            print('date : ', obj.date)
+
             if end < start:
                 end += timedelta(days=1)
             duree = end - start
@@ -86,7 +86,7 @@ class broyageHomeList(ListView):
             minute = int(total_temp_arret.total_seconds()%3600//60)
             total_temp_arret_formate = f'{heure:02d}:{minute:02d}'
 
-        print(temp_march_converter)
+
         context.update({
             'broyage': 'broyage',
             'broyage_panne': 'broyage_panne',
