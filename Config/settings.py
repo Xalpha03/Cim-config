@@ -120,6 +120,9 @@ WSGI_APPLICATION = 'Config.wsgi.application'
 #     }
 # }
 
+
+
+
 DATABASES = {
     'default':dj_database_url.parse(config('DATABASE_URL'))
 }

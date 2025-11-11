@@ -41,7 +41,8 @@
               <td class="fw-bold">{{ forloop.counter }}</td>
 
               {% if admin %}
-                <td class="fw-bold text-primary">{{ iteam.user.last_name }}</td>
+                <td class="fw-bold text-primary">{{ iteam.user.user }}</td>
+                {% comment %} <td class="fw-bold text-primary">{{ iteam.user.last_name }}</td> {% endcomment %}
               {% endif %}
 
               <td class="fw-bold text-primary">{{ iteam.title }}</td>
