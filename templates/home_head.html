@@ -49,7 +49,7 @@
             {% if object.post.post == '06H-14H' %}
               <td class="text-dark bg-info-subtle fw-bolder">
                 {% if object.user %}
-                  {{ object.user.get_full_name|default:'—' }}
+                  {{ object.user.get_full_nam|default:'—' }}
                 {% endif %}
               </td>
             {% endif %}
@@ -100,7 +100,7 @@
             {% if object.post.post == '14H-22H' %}
               <td class="text-dark bg-info-subtle fw-bolder">
                 {% if object.user %}
-                  {{ object.user.get_full_name|default:'—' }}
+                  {{ object.user.get_full_nam|default:'—' }}
                 {% endif %}
               </td>
             {% endif %}
@@ -151,7 +151,7 @@
             {% if object.post.post == '22H-06H' %}
               <td class="text-dark bg-info-subtle fw-bolder">
                 {% if object.user %}
-                  {{ object.user.get_full_name|default:'—' }}
+                  {{ object.user.get_full_nam|default:'—' }}
                 {% endif %}
               </td>
             {% endif %}
