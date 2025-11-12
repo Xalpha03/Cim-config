@@ -1,147 +1,166 @@
-<div class="row">
-  <div class="col-8 bg-light m-0">
-    <table class="table table-bordered border-black table-hover table-sm align-middle text-center mb-0">
-      <tbody class="">
-        <tr>
-          <th colspan="2" class="bg-light"></th>
-          <th class="text-dark bg-success-subtle">Post</th>
-          <th class="text-dark bg-orange-100">Conducteur</th>
-          <th colspan="2" class="bg-light"></th>
-        </tr>
+<div class="col-8 bg-light m-0">
+  <table class="table table-bordered border-black table-hover table-sm align-middle text-center mb-0">
+    <tbody class="">
+      <tr>
+        <th colspan="2" class="bg-light"></th>
+        <th class="text-dark bg-success-subtle">Post</th>
+        <th class="text-dark bg-orange-100">Conducteur</th>
+        <th colspan="2" class="bg-light"></th>
+      </tr>
 
-        {% comment %}Partie A{% endcomment %}
-        <tr>
-          <th class="text-dark fw-bolder bg-light">Packing Shift A Leader</th>
+      {% comment %}Partie A{% endcomment %}
+      <tr>
+        <th class="text-dark fw-bolder bg-light">Packing Shift A Leader</th>
 
-          {% if object_post_06h %}
-            {% for object in object_pack %}
-              {% if object.post.post == '06H-14H' %}
-                <td class="text-dark bg-info-subtle fw-bolder">{{ object.user.get_full_name|default:'—' }}</td>
-              {% else %}
-                <td class="text-dark bg-info-subtle fw-bolder">—</td>
-              {% endif %}
-            {% endfor %}
-          {% else %}
-            <td class="text-dark bg-info-subtle fw-bolder">—</td>
-          {% endif %}
+        {% if object_post_06h %}
+          {% for object in object_pack %}
+            {% if object.post.post == '06H-14H' %}
+              <td class="text-dark bg-info-subtle fw-bolder">
+                {% if object.user %}
+                  {{ object.user.get_full_name|default:'—' }}
+                {% endif %}
+              </td>
+            {% endif %}
+          {% endfor %}
+        {% else %}
+          <td class="text-dark bg-info-subtle fw-bolder">—</td>
+        {% endif %}
 
-          <td class="text-dark fw-bolder bg-light">A</td>
+        <td class="text-dark bg-light fw-bolder">A</td>
 
-          {% if object_broy_post_06h %}
-            {% for object in object_broy %}
-              {% if object.post.post == '06H-14H' %}
-                <td class="text-dark bg-info-subtle fw-bolder">{{ object.user.get_full_name|default:'—' }}</td>
-              {% else %}
-                <td class="text-dark bg-info-subtle fw-bolder">—</td>
-              {% endif %}
-            {% endfor %}
-          {% else %}
-            <td class="text-dark bg-info-subtle fw-bolder">—</td>
-          {% endif %}
+        {% if object_broy_post_06h %}
+          {% for object in object_broy %}
+            {% if object.post.post == '06H-14H' %}
+              <td class="text-dark bg-info-subtle fw-bolder">
+                {% if object.user %}
+                  {{ object.user.get_full_name|default:'—' }}
+                {% endif %}
+              </td>
+            {% endif %}
+          {% endfor %}
+        {% else %}
+          <td class="text-dark bg-info-subtle fw-bolder">—</td>
+        {% endif %}
 
-          <th class="text-dark fw-bolder bg-light">Grinding Shift A Leader</th>
-          {% if object_broy_post_06h %}
-            {% for object in object_broy %}
-              {% if object.post.post == '06H-14H' %}
-                <td class="text-dark bg-info-subtle fw-bolder">BATABA Tom</td>
-              {% else %}
-                <td class="text-dark bg-info-subtle fw-bolder">—</td>
-              {% endif %}
-            {% endfor %}
-          {% else %}
-            <td class="text-dark bg-info-subtle fw-bolder">—</td>
-          {% endif %}
-        </tr>
+        <th class="text-dark fw-bolder bg-light">Grinding Shift A Leader</th>
 
-        {% comment %}Partie B{% endcomment %}
-        <tr>
-          <th class="text-dark fw-bolder bg-light">Packing Shift B Leader</th>
+        {% if object_broy_post_06h %}
+          {% for object in object_broy %}
+            {% if object.post.post == '06H-14H' %}
+              <td class="text-dark bg-info-subtle fw-bolder">
+                {% if object.user %}
+                  {{ object.user.get_full_name|default:'—' }}
+                {% endif %}
+              </td>
+            {% endif %}
+          {% endfor %}
+        {% else %}
+          <td class="text-dark bg-info-subtle fw-bolder">—</td>
+        {% endif %}
+      </tr>
 
-          {% if object_post_14h %}
-            {% for object in object_pack %}
-              {% if object.post.post == '14H-22H' %}
-                <td class="text-dark bg-info-subtle fw-bolder">{{ object.user.get_full_name|default:'—' }}</td>
-              {% else %}
-                <td class="text-dark bg-info-subtle fw-bolder">—</td>
-              {% endif %}
-            {% endfor %}
-          {% else %}
-            <td class="text-dark bg-info-subtle fw-bolder">—</td>
-          {% endif %}
+      {% comment %}Partie B {% endcomment %}
+      <tr>
+        <th class="text-dark fw-bolder bg-light">Packing Shift B Leader</th>
 
-          <td class="text-dark fw-bolder bg-light">B</td>
+        {% if object_post_14h %}
+          {% for object in object_pack %}
+            {% if object.post.post == '14H-22H' %}
+              <td class="text-dark bg-info-subtle fw-bolder">
+                {% if object.user %}
+                  {{ object.user.get_full_name|default:'—' }}
+                {% endif %}
+              </td>
+            {% endif %}
+          {% endfor %}
+        {% else %}
+          <td class="text-dark bg-info-subtle fw-bolder">—</td>
+        {% endif %}
 
-          {% if object_broy_post_14h %}
-            {% for object in object_broy %}
-              {% if object.post.post == '14H-22H' %}
-                <td class="text-dark bg-info-subtle fw-bolder">{{ object.user.get_full_name|default:'—' }}</td>
-              {% else %}
-                <td class="text-dark bg-info-subtle fw-bolder">—</td>
-              {% endif %}
-            {% endfor %}
-          {% else %}
-            <td class="text-dark bg-info-subtle fw-bolder">—</td>
-          {% endif %}
+        <td class="text-dark bg-light fw-bolder">B</td>
 
-          <th class="text-dark fw-bolder bg-light">Grinding Shift B Leader</th>
-          {% if object_broy_post_14h %}
-            {% for object in object_broy %}
-              {% if object.post.post == '14H-22H' %}
-                <td class="text-dark bg-info-subtle fw-bolder">BATABA Tom</td>
-              {% else %}
-                <td class="text-dark bg-info-subtle fw-bolder">—</td>
-              {% endif %}
-            {% endfor %}
-          {% else %}
-            <td class="text-dark bg-info-subtle fw-bolder">—</td>
-          {% endif %}
-        </tr>
+        {% if object_broy_post_14h %}
+          {% for object in object_broy %}
+            {% if object.post.post == '14H-22H' %}
+              <td class="text-dark bg-info-subtle fw-bolder">
+                {% if object.user %}
+                  {{ object.user.get_full_name|default:'—' }}
+                {% endif %}
+              </td>
+            {% endif %}
+          {% endfor %}
+        {% else %}
+          <td class="text-dark bg-info-subtle fw-bolder">—</td>
+        {% endif %}
 
-        {% comment %}Partie C{% endcomment %}
-        <tr>
-          <th class="text-dark fw-bolder bg-light">Packing Shift C Leader</th>
+        <th class="text-dark fw-bolder bg-light">Grinding Shift B Leader</th>
 
-          {% if object_post_22h %}
-            {% for object in object_pack %}
-              {% if object.post.post == '22H-06H' %}
-                <td class="text-dark bg-info-subtle fw-bolder">{{ object.user.get_full_name|default:'—' }}</td>
-              {% else %}
-                <td class="text-dark bg-info-subtle fw-bolder">—</td>
-              {% endif %}
-            {% endfor %}
-          {% else %}
-            <td class="text-dark bg-info-subtle fw-bolder">—</td>
-          {% endif %}
+        {% if object_broy_post_14h %}
+          {% for object in object_broy %}
+            {% if object.post.post == '14H-22H' %}
+              <td class="text-dark bg-info-subtle fw-bolder">
+                {% if object.user %}
+                  {{ object.user.get_full_name|default:'—' }}
+                {% endif %}
+              </td>
+            {% endif %}
+          {% endfor %}
+        {% else %}
+          <td class="text-dark bg-info-subtle fw-bolder">—</td>
+        {% endif %}
+      </tr>
 
-          <td class="text-dark fw-bolder bg-light">C</td>
+      {% comment %}Partie C {% endcomment %}
+      <tr>
+        <th class="text-dark fw-bolder bg-light">Packing Shift C Leader</th>
 
-          {% if object_broy_post_22h %}
-            {% for object in object_broy %}
-              {% if object.post.post == '22H-06H' %}
-                <td class="text-dark bg-info-subtle fw-bolder">{{ object.user.get_full_name|default:'—' }}</td>
-              {% else %}
-                <td class="text-dark bg-info-subtle fw-bolder">—</td>
-              {% endif %}
-            {% endfor %}
-          {% else %}
-            <td class="text-dark bg-info-subtle fw-bolder">—</td>
-          {% endif %}
+        {% if object_post_22h %}
+          {% for object in object_pack %}
+            {% if object.post.post == '22H-06H' %}
+              <td class="text-dark bg-info-subtle fw-bolder">
+                {% if object.user %}
+                  {{ object.user.get_full_name|default:'—' }}
+                {% endif %}
+              </td>
+            {% endif %}
+          {% endfor %}
+        {% else %}
+          <td class="text-dark bg-info-subtle fw-bolder">—</td>
+        {% endif %}
 
-          <th class="text-dark fw-bolder bg-light">Grinding Shift C Leader</th>
-          {% if object_broy_post_22h %}
-            {% for object in object_broy %}
-              {% if object.post.post == '22H-06H' %}
-                <td class="text-dark bg-info-subtle fw-bolder">BATABA Tom</td>
-              {% else %}
-                <td class="text-dark bg-info-subtle fw-bolder">—</td>
-              {% endif %}
-            {% endfor %}
-          {% else %}
-            <td class="text-dark bg-info-subtle fw-bolder">—</td>
-          {% endif %}
-        </tr>
-      </tbody>
-    </table>
-  </div>
-  <div class="col-4 bg-light"></div>
+        <td class="text-dark bg-light fw-bolder">C</td>
+
+        {% if object_broy_post_22h %}
+          {% for object in object_broy %}
+            {% if object.post.post == '22H-06H' %}
+              <td class="text-dark bg-info-subtle fw-bolder">
+                {% if object.user %}
+                  {{ object.user.get_full_name|default:'—' }}
+                {% endif %}
+              </td>
+            {% endif %}
+          {% endfor %}
+        {% else %}
+          <td class="text-dark bg-info-subtle fw-bolder">—</td>
+        {% endif %}
+
+        <th class="text-dark fw-bolder bg-light">Grinding Shift C Leader</th>
+
+        {% if object_broy_post_22h %}
+          {% for object in object_broy %}
+            {% if object.post.post == '22H-06H' %}
+              <td class="text-dark bg-info-subtle fw-bolder">
+                {% if object.user %}
+                  {{ object.user.get_full_name|default:'—' }}
+                {% endif %}
+              </td>
+            {% endif %}
+          {% endfor %}
+        {% else %}
+          <td class="text-dark bg-info-subtle fw-bolder">—</td>
+        {% endif %}
+      </tr>
+    </tbody>
+  </table>
 </div>
+<div class="col-4 bg-light"></div>
