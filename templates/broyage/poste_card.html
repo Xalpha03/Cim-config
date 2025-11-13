@@ -27,7 +27,7 @@
                 <td>{{ t.gypse_debut|floatformat:0 }}</td>
                 <td>{{ t.dolomite_debut|floatformat:0 }}</td>
                 <td>
-                  {% if user.is_authenticated and user.profil.poste == 'broyage' %}
+                  {% if user.is_authenticated and user.profil.poste == 'broyage' or user.profil.role == 'admin' %}
                     <a href="{% url 'broyage:update-totaliseur' t.slug %}" class="text-warning"><i class="fas fa-pen"></i></a>
                   {% endif %}
                 </td>
@@ -37,7 +37,7 @@
             <tr>
               <td colspan="3" class="text-muted">—</td>
               <td>
-                {% if user.is_authenticated and user.profil.poste == 'broyage' %}
+                {% if user.is_authenticated and user.profil.poste == 'broyage' or user.profil.role == 'admin' %}
                   <a href="{% url 'broyage:ajout-totalisuer' %}" class="text-success"><i class="fas fa-plus-circle"></i></a>
                 {% endif %}
               </td>
@@ -52,7 +52,7 @@
                 <td>{{ o.gypse_fin|floatformat:0 }}</td>
                 <td>{{ o.dolomite_fin|floatformat:0 }}</td>
                 <td>
-                  {% if user.is_authenticated and user.profil.poste == 'broyage' %}
+                  {% if user.is_authenticated and user.profil.poste == 'broyage' or user.profil.role == 'admin' %}
                     <a href="{% url 'broyage:update-broyage' o.slug %}" class="text-warning"><i class="fas fa-pen"></i></a>
                   {% endif %}
                 </td>
@@ -72,7 +72,7 @@
               <td colspan="3">—</td>
               <td>
                 {% for iteam in object_tot %}
-                  {% if user.is_authenticated and user.profil.poste == 'broyage' %}
+                  {% if user.is_authenticated and user.profil.poste == 'broyage' or user.profil.role == 'admin' %}
                     <a href="{% url 'broyage:ajout-broyage' iteam.slug %}" class="text-success"><i class="fas fa-circle-plus"></i></a>
                   {% endif %}
                 {% endfor %}
@@ -134,7 +134,7 @@
 
         {% for o in object_broy %}
           {% if o.post.post == poste %}
-            {% if user.is_authenticated and user.profil.poste == 'broyage' %}
+            {% if user.is_authenticated and user.profil.poste == 'broyage' or user.profil.role == 'admin' %}
               <a href="{% url 'broyage:ajout-broyage-panne' o.slug %}" class="btn btn-outline-{{ couleur }} btn-sm rounded-pill shadow-sm">➕ Panne</a>
             {% endif %}
           {% endif %}
