@@ -71,7 +71,7 @@ class Broyage(models.Model):
     class Meta:
         verbose_name = 'Grinding'
         verbose_name_plural = 'Grinding'
-        ordering =  ['site']
+        ordering =  ['site', '-date', 'post']
         
     def __str__(self):
         return self.title

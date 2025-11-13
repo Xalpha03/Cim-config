@@ -172,7 +172,8 @@ class homeView(ListView):
             
             # le rendement journalier
             total_rend += rend
-            moyenne_rend = Decimal(total_rend/nbr_objet).quantize(Decimal('0.1'), rounding=ROUND_HALF_UP)
+            moyenne_rend = (Decimal(total_liv)/Decimal(total_temp_march)).quantize(Decimal('0.1'), rounding=ROUND_HALF_UP)
+            # moyenne_rend = Decimal(total_rend/nbr_objet).quantize(Decimal('0.1'), rounding=ROUND_HALF_UP)
             
 
         return {
@@ -285,7 +286,8 @@ class homeView(ListView):
             total_compt += dif_compt.quantize(Decimal('0.1'), rounding=ROUND_HALF_UP) 
             total_prod += prod.quantize(Decimal('1'), rounding=ROUND_HALF_UP)
             total_temp_march += temp_march.quantize(Decimal('0.01'), rounding=ROUND_HALF_UP)
-            total_rend += (rend/Decimal(nbr_objet)).quantize(Decimal('0.01'), rounding=ROUND_HALF_UP)
+            # total_rend += (rend/Decimal(nbr_objet)).quantize(Decimal('0.01'), rounding=ROUND_HALF_UP)
+            total_rend = (Decimal(total_prod)/Decimal(total_temp_march)).quantize(Decimal('0.01'), rounding=ROUND_HALF_UP)
             total_conso += (conso/Decimal(nbr_objet)).quantize(Decimal('0.01'), rounding=ROUND_HALF_UP)
             
         return {
