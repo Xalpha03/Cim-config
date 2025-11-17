@@ -1,10 +1,8 @@
 from django.db import models
-# from my_Packing_Apk.models import Post, Packing
 from django.contrib.auth.models import User
-from datetime import date, datetime, timedelta
+from datetime import datetime
 from django.utils.text import slugify
 from django.utils import timezone
-# from packing.models import Post
 from accounts.models import Site
 
 # Create your models here
@@ -28,7 +26,10 @@ class Totaliseur(models.Model):
         return {
             '06H-14H': 'A',
             '14H-22H': 'B',
-            '22H-06H': 'C'
+            '22H-06H': 'C',
+            
+            '06H-18H': 'A',
+            '18H-06H': 'B',
         }.get(self.post.post, '?')
         
     def generate_title(self):
@@ -78,7 +79,7 @@ class Broyage(models.Model):
 
     def generate_title(self):
         date_str = self.totaliseur.date.strftime("%Y-%m-%d")
-        shift = {'06H-14H': 'A', '14H-22H': 'B'}.get(self.post.post, 'C')
+        shift = {'06H-14H': 'A', '14H-22H': 'B', '06H-18H': 'A', '18H-06H': 'B'}.get(self.post.post, 'C')
         return f"Broy_{date_str}_{shift}_{self.site}"
 
     def generate_slug(self):

@@ -45,52 +45,37 @@ class broyageHomeList(ListView):
         object_pann = Pannes.objects.filter(filters_pann)
         object_tota = Totaliseur.objects.filter(filters_tota)
         
-        temp_march_converter = Decimal()
         total_temp_arret = timedelta() 
         total_temp_arret_formate = str()    
         
         for obj in object_broy:
-            start = datetime.combine(search_date, obj.post.start_post)
-            end = datetime.combine(search_date, obj.post.end_post)
-
-            if end < start:
-                end += timedelta(days=1)
-            duree = end - start
+            
             temp_arret = object_pann.filter(broyage=obj).aggregate(total=Sum('duree'))['total'] or timedelta()
             
-            temp_march = Decimal((duree - temp_arret).total_seconds())/Decimal(3600)
-            temp_march= temp_march.quantize(Decimal('0.0001'), rounding=ROUND_HALF_UP)
-            
-            obj.temp_march = temp_march.quantize(Decimal('0.01'), rounding=ROUND_HALF_UP)
-            heure = int(temp_march*3600)//3600
-            minute = int(temp_march*3600)%3600//60
-
-            temp_march_formate = f'{heure:02d}:{minute:02d}'
-            obj.temp_march_formate = temp_march_formate
-            
-            # Calcul de la production  
+            # Calcul de production par post
             prod = obj.dif_clinker + obj.dif_gypse + obj.dif_dolomite
-            obj.prod = prod.quantize(Decimal('1'), rounding=ROUND_HALF_UP) 
+            obj.prod = prod.quantize(Decimal('0'), rounding=ROUND_HALF_UP)
             
-            # Calcul du rendement
-            rend = Decimal(prod)/temp_march if prod else Decimal(0.0)
+            # Calcul du temps de marche par post
+            temp_march = obj.post.duree_post-temp_arret
+            obj.temp_march = Decimal(temp_march.total_seconds()/3600).quantize(Decimal('0.1'), rounding=ROUND_HALF_UP)
+            
+            # Calcul du rendement par post
+            rend = Decimal(prod)/Decimal(temp_march.total_seconds()/3600) if prod and temp_march else Decimal(0)
             obj.rend = rend.quantize(Decimal('0.01'), rounding=ROUND_HALF_UP)
             
-            # Calcul de la cosommation
-            cons = Decimal(obj.dif_compt)/Decimal(prod) if obj.dif_compt and prod > 0 else Decimal(0.0)
-            obj.cons = cons.quantize(Decimal('0.1'), rounding=ROUND_HALF_UP)
-                        
-            # Calcul de temps total d'arret
-            total_temp_arret += temp_arret
-            heure = int(total_temp_arret.total_seconds()//3600)
-            minute = int(total_temp_arret.total_seconds()%3600//60)
-            total_temp_arret_formate = f'{heure:02d}:{minute:02d}'
+            # Calcul de la consommation spécifique
+            cons = Decimal(obj.dif_compt)/Decimal(prod) if prod and obj.dif_compt else Decimal(0)
+            obj.cons = cons.quantize(Decimal('0.01'), rounding=ROUND_HALF_UP)
+            
+            print(temp_march)
 
 
         context.update({
             'broyage': 'broyage',
             'broyage_panne': 'broyage_panne',
             'search_date': search_date,
+            
             'object_broy': object_broy,
             'object_pann': object_pann,
             'object_tota': object_tota,
@@ -101,9 +86,15 @@ class broyageHomeList(ListView):
             'object_post_14h': object_broy.filter(post__post='14H-22H'),
             'object_post_22h': object_broy.filter(post__post='22H-06H'),
             
+            'object_post_06_18h': object_broy.filter(post__post='06H-18H'),
+            'object_post_18_06h': object_broy.filter(post__post='18H-06H'),
+            
             'totalis_post_06h': object_tota.filter(post__post='06H-14H'),
             'totalis_post_14h': object_tota.filter(post__post='14H-22H'),
             'totalis_post_22h': object_tota.filter(post__post='22H-06H'),
+            
+            'totalis_post_06_18h': object_tota.filter(post__post='06H-18H'),
+            'totalis_post_18_06h': object_tota.filter(post__post='18H-06H'),
         }) 
         return context
 
@@ -283,76 +274,73 @@ class broyageUserView(ListView):
         
         search_date = ""
         total_prod = int()
-        total_rend = Decimal()
-        total_conso = Decimal()
+        moyenne_rend = Decimal()
+        moyenne_conso = Decimal()
         
         total_temp_arret = timedelta()
         total_temp_march = timedelta()
-        total_temp_march_converter = Decimal()
+        total_compt = Decimal()
         total_temp_arret_formate = str()
         
         for obj in object_broy:
-            start = datetime.combine(date.today(), obj.post.start_post)
-            end = datetime.combine(date.today(), obj.post.end_post)
-            
-            if end < start:
-                end += timedelta(days=1)
-            
-            duree_post = end - start
-            # Temps d'arrêt par post
             temp_arret = object_pann.filter(broyage=obj).aggregate(total=Sum('duree'))['total'] or timedelta()
-            heure = int(temp_arret.total_seconds()//3600)
-            minute = int(temp_arret.total_seconds()%3600//60)
-            obj.temp_arret_formate = f'{heure:02d}:{minute:02d}'
-            
-            # Temps de marche par post
-            temp_march = duree_post - temp_arret
-            heure = int(temp_march.total_seconds()//3600)
-            minute = int(temp_march.total_seconds()%3600//60)
-            obj.temp_march_formate = f'{heure:02d}:{minute:02d}'
+            heure = int(temp_arret.total_seconds())//3600
+            minute = int(temp_arret.total_seconds())%3600 // 60
+            temp_arret_formate = f'{heure:02d}:{minute:02d}'
+            obj.temp_arret_formate = temp_arret_formate
             
             # Calcul de production
             prod = obj.dif_clinker + obj.dif_gypse + obj.dif_dolomite
-            obj.prod = prod.quantize(Decimal('1'), rounding=ROUND_HALF_UP)
+            obj.prod = prod.quantize(Decimal('0'), rounding=ROUND_HALF_UP)
             
-            # Calcul de rendement
-            rend = Decimal(prod)/Decimal(temp_march.total_seconds()/3600) if prod > 0 else 0.0
-            obj.rend = rend.quantize(Decimal('0.1'), rounding=ROUND_HALF_UP)
+            # Calcul de temps de marche
+            temp_march = obj.post.duree_post - temp_arret
+            heure = int(temp_march.total_seconds())//3600
+            minute = int(temp_march.total_seconds())%3600 // 60
+            temp_march_formate = f'{heure:02d}:{minute:02d}'
+            obj.temp_march_formate = temp_march_formate
             
-            # Calcul de consomation spécifique
-            conso = Decimal(obj.dif_compt)/Decimal(prod) if obj.dif_compt and prod else 0.0
+            # Calcul du rendement
+            rend = Decimal(prod)/Decimal(temp_march.total_seconds()/3600) if prod and temp_march else Decimal(0)
+            obj.rend = rend.quantize(Decimal('0.01'), rounding=ROUND_HALF_UP)
+            
+            # Calcul de la consommtion spécifique
+            conso = Decimal(obj.dif_compt)/Decimal(prod) if obj.dif_compt and prod else Decimal(0)
             obj.conso = conso.quantize(Decimal('0.01'), rounding=ROUND_HALF_UP)
             
-            # Calcul de production total
-            total_prod += prod.quantize(Decimal('1'), rounding=ROUND_HALF_UP)
             
-            # Calcul de temps de marche total
-            total_temp_arret += temp_arret
-            heure = int(total_temp_arret.total_seconds()//3600)
-            minute = int(total_temp_arret.total_seconds()%3600//60)
-            total_temp_arret_formate = f'{heure:02d}:{minute:02d}'
+            # Calcul de la production mensuelle
+            total_prod += prod
             
-            # Calcul de temps de marche total
+            # Calcul du temps de marche total
             total_temp_march += temp_march
             
-            # temps de marche converter
-            total_temp_march_converter += Decimal(temp_march.total_seconds()/3600)
+            # Calcul de la moyenne du rendement
+            moyenne_rend = Decimal(total_prod)/Decimal(total_temp_march.total_seconds()/3600) if total_prod and total_temp_march else Decimal(0)
+            moyenne_rend = moyenne_rend.quantize(Decimal('0.01'), rounding=ROUND_HALF_UP) 
             
-            # Calcul de rendement total
-            total_rend += Decimal(rend)/Decimal(nbr_obj)
-            total_rend = total_rend.quantize(Decimal('0.1'), rounding=ROUND_HALF_UP)
-
-            # Calcul de la moyenne  
-            total_conso += Decimal(obj.conso)/Decimal(nbr_obj)
-            total_conso = total_conso.quantize(Decimal('0.01'), rounding=ROUND_HALF_UP)
-        
+            # Calcul de la consomation spécifique moyenne
+            total_compt += obj.dif_compt
+            moyenne_conso = Decimal(total_compt)/Decimal(total_prod) if total_compt and total_prod else Decimal(0)
+            moyenne_conso = moyenne_conso.quantize(Decimal('0.01'), rounding=ROUND_HALF_UP) 
+            
+            # Calcul de temps d'arrêt total
+            total_temp_arret += temp_arret
+            heure = int(total_temp_arret.total_seconds())//3600
+            minute = int(total_temp_arret.total_seconds())%3600 // 60
+            total_temp_arret_formate = f'{heure:02d}:{minute:02d}'
+            total_temp_arret_formate = total_temp_arret_formate
+            
+            print(total_compt)
+            
+            
         context.update({
             'search_date': search_date,
             'object_broy': object_broy,
             
             'total_prod': total_prod,
-            'total_rend': total_rend, 
-            'total_conso': total_conso,
+            'total_rend': moyenne_rend, 
+            'total_conso': moyenne_conso,
             
             'total_temp_arret': total_temp_arret_formate,
             'total_temp_march': total_temp_march,
@@ -479,74 +467,63 @@ class adminBroyage(ListView):
         object_pann = Pannes.objects.filter(filter_pann)
         nbr_obj = object_broy.count()
         
-        total_prod = Decimal()
-        
-        total_temp_march_converter = Decimal()
-        total_rend = Decimal()
-        total_dif_compt = Decimal()
-        total_conso = Decimal()
+        total_prod = int()
+        moyenne_rend = Decimal()
+        moyenne_conso = Decimal()
         
         total_temp_arret = timedelta()
         total_temp_march = timedelta()
+        total_compt = Decimal()
         total_temp_arret_formate = str()
                 
         for obj in object_broy:
-            start = datetime.combine(date.today(), obj.post.start_post)
-            end = datetime.combine(date.today(), obj.post.end_post)
-            
-            if end < start:
-                end += timedelta(days=1)
-            
-            duree_post = end - start
-            # Temps d'arrêt par post
             temp_arret = object_pann.filter(broyage=obj).aggregate(total=Sum('duree'))['total'] or timedelta()
-            heure = int(temp_arret.total_seconds()//3600)
-            minute = int(temp_arret.total_seconds()%3600//60)
-            obj.temp_arret_formate = f'{heure:02d}:{minute:02d}'
-            
-            # Temps de marche par post
-            temp_march = duree_post - temp_arret
-            heure = int(temp_march.total_seconds()//3600)
-            minute = int(temp_march.total_seconds()%3600//60)
-            obj.temp_march_formate = f'{heure:02d}:{minute:02d}'
+            heure = int(temp_arret.total_seconds())//3600
+            minute = int(temp_arret.total_seconds())%3600 // 60
+            temp_arret_formate = f'{heure:02d}:{minute:02d}'
+            obj.temp_arret_formate = temp_arret_formate
             
             # Calcul de production
             prod = obj.dif_clinker + obj.dif_gypse + obj.dif_dolomite
-            obj.prod = prod.quantize(Decimal('1'), rounding=ROUND_HALF_UP)
+            obj.prod = prod.quantize(Decimal('0'), rounding=ROUND_HALF_UP)
             
-            # Calcul de rendement
-            rend = Decimal(prod)/Decimal(temp_march.total_seconds()/3600) if prod > 0 else 0.0
-            obj.rend = rend.quantize(Decimal('0.1'), rounding=ROUND_HALF_UP)
+            # Calcul de temps de marche
+            temp_march = obj.post.duree_post - temp_arret
+            heure = int(temp_march.total_seconds())//3600
+            minute = int(temp_march.total_seconds())%3600 // 60
+            temp_march_formate = f'{heure:02d}:{minute:02d}'
+            obj.temp_march_formate = temp_march_formate
             
-            # Calcul de consomation spécifique
-            conso = Decimal(obj.dif_compt)/Decimal(prod) if obj.dif_compt and prod else 0.0
+            # Calcul du rendement
+            rend = Decimal(prod)/Decimal(temp_march.total_seconds()/3600) if prod and temp_march else Decimal(0)
+            obj.rend = rend.quantize(Decimal('0.01'), rounding=ROUND_HALF_UP)
+            
+            # Calcul de la consommtion spécifique
+            conso = Decimal(obj.dif_compt)/Decimal(prod) if obj.dif_compt and prod else Decimal(0)
             obj.conso = conso.quantize(Decimal('0.01'), rounding=ROUND_HALF_UP)
             
-            # Calcul de production total
-            total_prod += prod.quantize(Decimal('1'), rounding=ROUND_HALF_UP)
             
-            # Calcul de temps de marche total
-            total_temp_arret += temp_arret
-            heure = int(total_temp_arret.total_seconds()//3600)
-            minute = int(total_temp_arret.total_seconds()%3600//60)
-            total_temp_arret_formate = f'{heure:02d}:{minute:02d}'
+            # Calcul de la production mensuelle
+            total_prod += prod.quantize(Decimal('0'), rounding=ROUND_HALF_UP)
             
-            # Calcul de temps de marche total
+            # Calcul du temps de marche total
             total_temp_march += temp_march
-            # heure = int(total_temp_march.total_seconds()//3600)
-            # minute = int(total_temp_march.total_seconds()%3600//60)
-            # total_temp_march_formate = f'{heure:02d}:{minute:02d}'
             
-            # temps de marche converter
-            total_temp_march_converter += Decimal(temp_march.total_seconds()/3600)
+            # Calcul de la moyenne du rendement
+            moyenne_rend = Decimal(total_prod)/Decimal(total_temp_march.total_seconds()/3600) if total_prod and total_temp_march else Decimal(0)
+            moyenne_rend = moyenne_rend.quantize(Decimal('0.01'), rounding=ROUND_HALF_UP) 
             
-            # Calcul de rendement total
-            total_rend += Decimal(rend)/Decimal(nbr_obj)
-            total_rend = total_rend.quantize(Decimal('0.1'), rounding=ROUND_HALF_UP)
-
-            # Calcul de la moyenne  
-            total_conso += Decimal(obj.conso)/Decimal(nbr_obj)
-            total_conso = total_conso.quantize(Decimal('0.01'), rounding=ROUND_HALF_UP)
+            # Calcul de la consomation spécifique moyenne
+            total_compt += obj.dif_compt
+            moyenne_conso = Decimal(total_compt)/Decimal(total_prod) if total_compt and total_prod else Decimal(0)
+            moyenne_conso = moyenne_conso.quantize(Decimal('0.01'), rounding=ROUND_HALF_UP) 
+            
+            # Calcul de temps d'arrêt total
+            total_temp_arret += temp_arret
+            heure = int(total_temp_arret.total_seconds())//3600
+            minute = int(total_temp_arret.total_seconds())%3600 // 60
+            total_temp_arret_formate = f'{heure:02d}:{minute:02d}'
+            total_temp_arret_formate = total_temp_arret_formate
         
         
         
@@ -556,8 +533,8 @@ class adminBroyage(ListView):
             'object_broy': object_broy,
             
             'total_prod': total_prod,
-            'total_rend': total_rend, 
-            'total_conso': total_conso,
+            'total_rend': moyenne_rend, 
+            'total_conso': moyenne_conso,
             
             'total_temp_arret': total_temp_arret_formate,
             'total_temp_march': total_temp_march,

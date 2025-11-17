@@ -1,15 +1,26 @@
 from django import forms
 from .models import *
+from datetime import timedelta
+from django.apps import apps
+
+Post = apps.get_model('packing', 'Post')
 
 
 class totaliForm(forms.ModelForm):
-        
+    long_shift = forms.BooleanField(
+        required=False,
+        label="Cocher uniquement si c'est post de 12h"
+    )    
     class Meta:
         model = Totaliseur
-        fields = ['post', 'compt_debut', 'clinker_debut', 'gypse_debut', 'dolomite_debut', 'date']
+        fields = ['post', 'compt_debut', 'clinker_debut', 'gypse_debut', 'dolomite_debut', 'date', 'long_shift']
         widgets = {
-            'post': forms.Select(attrs={
-                'class': 'form-select'
+            'long_shift': forms.CheckboxInput(attrs={
+                'class': 'form-check-input'
+            }),
+            
+            'post':forms.Select(attrs={
+                'class': 'form-select',
             }),
             'site': forms.Select(attrs={
                 'class': 'form-select'
@@ -39,6 +50,20 @@ class totaliForm(forms.ModelForm):
             ),
         }
         
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        # Vérifie si la case est cochée dans les données POST
+        long_shift_checked = False
+        if self.data:
+            long_shift_checked = str(self.data.get("long_shift")).lower() in ("on", "true", "1")
+
+        # Filtrer le queryset du champ "post"
+        if long_shift_checked:
+            self.fields["post"].queryset = Post.objects.filter(duree_post=timedelta(hours=12))
+        else:
+            self.fields["post"].queryset = Post.objects.filter(duree_post=timedelta(hours=8))
+        
         
 class broyageForm(forms.ModelForm):
 
@@ -60,3 +85,8 @@ class broyageForm(forms.ModelForm):
                 'class': 'form-control'
             }),
         }
+        
+        
+        
+        
+        

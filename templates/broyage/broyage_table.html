@@ -31,7 +31,13 @@
       <tbody>
         {% if object_broy %}
           {% for iteam in object_broy %}
-            <tr class="align-middle {% if iteam.prod|default:0 > 206 %}table-success{% elif iteam.prod|default:0 > 200 %}table-warning{% else %}table-danger{% endif %}">
+            <tr class="align-middle {% if iteam.prod|default:0 > 206 %}
+                table-success
+              {% elif iteam.prod|default:0 > 200 %}
+                table-warning
+              {% else %}
+                table-danger
+              {% endif %}">
               <td class="fw-bold">{{ forloop.counter }}</td>
               {% if admin %}
                 <td class="fw-bold text-primary">{{ iteam.user.last_name }}</td>
@@ -53,7 +59,12 @@
 
       <tfoot class="text-white fw-bold" style="background: linear-gradient(90deg, #198754, #20c997); letter-spacing: 0.5px;">
         <tr>
-          <td colspan="3" class="text-end pe-3 border-0 fs-6">🔢 Total :</td>
+          {% if admin %}
+            <td colspan="3" class="text-end pe-3 border-0 fs-6">🔢 Total :</td>
+          {% else %}
+            <td colspan="2" class="text-end pe-3 border-0 fs-6">🔢 Total :</td>
+          {% endif %}
+
           <td class="text-center pe-3 border-0 fs-6">{{ total_prod|default:'—' }}</td>
           <td class="text-center pe-3 border-0 fs-6">{{ total_rend|default:'—' }}</td>
           <td class="text-center pe-3 border-0 fs-6">{{ total_conso|default:'—' }}</td>

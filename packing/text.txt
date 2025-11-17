@@ -1,32 +1,49 @@
-def get(self, request, *args, **kwargs):
-        if request.GET.get('pdf') == 'true':
-            return self.get_pdf(request)
-        return super().get(request, *args, **kwargs)
-    
-    def render_to_pdf(self):
+            # Calucl de temps d'arret par post
+            temp_arret = object_pann.filter(packing=obj).aggregate(total=Sum('duree'))['total'] or timedelta()
+            heure = int(temp_arret.total_seconds())//3600
+            minute = int(temp_arret.total_seconds())%3600 // 60
+            temp_arret_formate = f'{heure:02d}:{minute:02d}'
+            obj.temp_arret_formate = temp_arret_formate
+            
+            # Calcul de temps de marche par post
+            # temp_march = 
+            temp_march = duree_post - temp_arret
+            heure = int(temp_march.total_seconds())//3600
+            minute = int(temp_march.total_seconds())%3600//60
+            temp_march_formate = f'{heure:02d}:{minute:02d}'
+            obj.temp_march_formate = temp_march_formate
+         
+            # Calcul de taux de casse
+            tx_cas = Decimal(obj.casse*100)/((obj.livraison*20)-obj.casse) if obj.livraison and obj.casse else 0.0
+            tx_cas = tx_cas.quantize(Decimal('0.01'), rounding=ROUND_HALF_UP)
+            obj.tx_cas = tx_cas
+            
+            # Calcul du rendement
+            rend = Decimal(obj.livraison)/(Decimal(temp_march.total_seconds()/3600)) if obj.livraison else 0.0
+            obj.rend = rend.quantize(Decimal('0.1'), rounding=ROUND_HALF_UP)
+            
+            
+            total_liv = object_pack.aggregate(total=Sum('livraison'))['total'] or 0
+            total_cas = object_pack.aggregate(total=Sum('casse'))['total'] or 0
+            total_vrack = round((object_pack.aggregate(total=Sum('vrack'))['total'] or 0.0), 2)
+            
+            # Calcul de la moyenne de taux de casse
+            total_tx_cas += tx_cas
+            moyenne_tx_cas = Decimal(total_tx_cas/nbr_objet).quantize(Decimal('0.01'), rounding=ROUND_HALF_UP) 
+           
+            # Calcul de temps d'arrêt total
+            total_temp_arret += temp_arret
+            heure = int(total_temp_arret.total_seconds())//3600
+            minute = int(total_temp_arret.total_seconds()%3600)//60
+            total_temp_arret_formate = f'{heure:02d}:{minute:02d}'
+            
+            # Calcul de temps de marche total
+            total_temp_march += temp_march
+            heure = int(total_temp_march.total_seconds())//3600
+            minute = int(total_temp_march.total_seconds()%3600)//60
+            total_temp_march_formate = f'{heure:02d}:{minute:02d}'
 
-        """Génère le PDF à partir du template et du contexte avec WeasyPrint"""
-        template = get_template(self.template_name)
-        html_string = template.render(self.get_context_data())
-        
-
-        # Générer directement le PDF et récupérer les bytes
-        pdf_bytes = HTML(string=html_string, base_url=self.request.build_absolute_uri('/')).write_pdf()
-
-        return pdf_bytes
-
-
-    def get_pdf(self, request):
-        """Génère un PDF avec WeasyPrint"""
-        from django.template.loader import render_to_string
-
-        context = self.get_context_data()
-        html_string = render_to_string('packing/packing-panne-user-pdf.html', context)
-        html = HTML(string=html_string)
-        pdf_file = html.write_pdf()  # respectera le @page CSS
-        response = HttpResponse(content_type='application/pdf')
-        response['Content-Disposition'] = f'inline; filename="packingr_{self.request.user}.pdf"'
-        HTML(string=html_string, base_url=request.build_absolute_uri()).write_pdf(response)
-        response= HttpResponse(pdf_file, content_type='application/pdf')
-        context['pdf'] = True  # <-- indique au template que c'est pour le PDF
-        return response
+            
+            # Calucl de la moyenne du rendement
+            total_rend += rend
+            moyenne_rend = Decimal(total_rend/nbr_objet).quantize(Decimal('0.1'), rounding=ROUND_HALF_UP)

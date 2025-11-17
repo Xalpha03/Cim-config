@@ -1,7 +1,13 @@
 <!-- 🧭 Titre principal -->
 {% comment %} <div class="text-center bg-primary text-white py-3 rounded shadow-sm mb-4 fs-4 fw-bold">🛠️ Broyage du {{ search_date }}</div> {% endcomment %}
 
-<div class="col-md-4">
+<div class="
+{% if poste == '06H-18H' or poste == '18H-06H' %}
+  col-md-6
+{% elif poste == '06H-14H' or poste == '14H-22H' or poste == '22H-06H' %} 
+  col-md-4
+{% endif %}
+  ">
   <div class="card border-0 shadow-lg rounded-4 overflow-hidden h-100 hover-shadow">
     <div class="card-header bg-{{ couleur }} text-white text-center fs-5">🕒 Poste {{ poste }}</div>
     <div class="card-body table-responsive p-0">

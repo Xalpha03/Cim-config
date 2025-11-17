@@ -23,36 +23,35 @@
           <th colspan="2" class="fs-6 align-middle">⏱️ Durée</th>
         </tr>
         <tr class="table-light">
-          <th class="fs-6">🚚 Livraison</th>
-          <th class="fs-6">💥 Casse</th>
-          <th class="fs-6">📉 Tx Casse</th>
-          <th class="fs-6">🪣 Vrack</th>
-          <th class="fs-6">📈 Rendement</th>
-          <th class="fs-6">⛔ Arrêt</th>
-          <th class="fs-6">✅ Marche</th>
+          <th class="fs-6" title="Livraison">🚚 Livraison</th>
+          <th class="fs-6" title="Casse">💥 Casse</th>
+          <th class="fs-6" title="Tx Casse">📉 Tx Casse</th>
+          <th class="fs-6" title="Vrack">🪣 Vrack</th>
+          <th class="fs-6" title="Rendement">📈 Rendement</th>
+          <th class="fs-6" title="Arrêt">⛔ Arrêt</th>
+          <th class="fs-6" title="Marche">✅ Marche</th>
         </tr>
       </thead>
 
       <!-- Corps du tableau -->
       <tbody>
         {% if object_pack %}
-          {% for iteam in object_pack %}
-            <tr class="align-middle {% if iteam.livraison|default:0 > 206 %}table-success{% elif iteam.livraison|default:0 > 200 %}table-warning{% else %}table-danger{% endif %}">
+          {% for item in object_pack %}
+            <tr class="align-middle {% if item.livraison|default:0 > 206 %}table-success{% elif item.livraison|default:0 > 200 %}table-warning{% else %}table-danger{% endif %}">
               <td class="fw-bold">{{ forloop.counter }}</td>
 
               {% if admin %}
-                <td class="fw-bold text-primary">{{ iteam.user.last_name }}</td>
-                {% comment %} <td class="fw-bold text-primary">{{ iteam.user.last_name }}</td> {% endcomment %}
+                <td class="fw-bold text-primary">{{ item.user.last_name }}</td>
               {% endif %}
 
-              <td class="fw-bold text-primary">{{ iteam.title }}</td>
-              <td>{{ iteam.livraison }}</td>
-              <td>{{ iteam.casse }}</td>
-              <td>{{ iteam.tx_cas|floatformat:2 }} %</td>
-              <td>{{ iteam.vrack }}</td>
-              <td>{{ iteam.rend }}</td>
-              <td>{{ iteam.temp_arret_formate }}</td>
-              <td>{{ iteam.temp_march_formate }}</td>
+              <td class="fw-bold text-primary">{{ item.title }}</td>
+              <td>{{ item.livraison }}</td>
+              <td>{{ item.casse }}</td>
+              <td>{{ item.tx_cas }} %</td>
+              <td>{{ item.vrack }}</td>
+              <td>{{ item.rend }}</td>
+              <td>{{ item.temp_arret_formate }}</td>
+              <td>{{ item.temp_march_formate }}</td>
             </tr>
           {% endfor %}
         {% else %}

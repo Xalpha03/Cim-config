@@ -16,11 +16,15 @@ class Post(models.Model):
         ('06H-14H', '06H-14H'),
         ('14H-22H', '14H-22H'),
         ('22H-06H', '22H-06H'),
+        
+        ('06H-18H', '06H-18H'),
+        ('18H-06H', '18H-06H'),
     ]
     
     post = models.CharField(max_length=10, choices=CHOICES_POST, default='06H-14H')
     start_post = models.TimeField()
     end_post = models.TimeField()
+    duree_post = models.DurationField(default=timedelta())
     
     class Meta:
         verbose_name = 'Post'
@@ -30,6 +34,16 @@ class Post(models.Model):
     
     def __str__(self):
         return "Post_{}".format(self.post)
+    
+    def save(self, *args, **kwargs):
+        self.start_post = datetime.combine(date.today(), self.start_post)
+        self.end_post = datetime.combine(date.today(), self.end_post)
+        if self.end_post < self.start_post:
+            self.end_post += timedelta(days=1)
+        
+        self.duree_post = self.end_post - self.start_post
+        
+        return super().save(*args, **kwargs)
     
 class Packing(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
@@ -52,7 +66,10 @@ class Packing(models.Model):
         return {
             '06H-14H': 'A',
             '14H-22H': 'B',
-            '22H-06H': 'C'
+            '22H-06H': 'C',
+            
+            '06H-18H': 'A',
+            '18H-06H': 'B',
         }.get(self.post.post, '?')
 
     def generate_title(self):
@@ -75,6 +92,8 @@ class Packing(models.Model):
         self.title = self.generate_title()
         if not self.slug:
             self.slug = self.generate_slug()
+            
+        
         super().save(*args, **kwargs)
 
     
@@ -119,7 +138,7 @@ class Pannes(models.Model):
 
     def get_shift_letter(self):
         post = self.get_source().post.post if self.get_source() else None
-        return {'06H-14H': 'A', '14H-22H': 'B', '22H-06H': 'C'}.get(post, '?')
+        return {'06H-14H': 'A', '14H-22H': 'B', '22H-06H': 'C', '06H-18H': 'A', '18H-06H': 'B'}.get(post, '?')
 
     def generate_slug(self):
         return f"Arret_{slugify(self.date)}_{self.get_shift_letter()}_{self.site}-{int(datetime.now().timestamp())}"

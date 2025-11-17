@@ -25,10 +25,15 @@
     {% endif %}
 
     <!-- Les 3 postes -->
-    <div class="row g-4">
-      {% include 'broyage/poste_card.html' with poste='06H-14H' couleur='primary' horaire='Poste 06H-14H' object_post=object_post_06h object_tot=totalis_post_06h %}
-      {% include 'broyage/poste_card.html' with poste='14H-22H' couleur='success' horaire='Poste 14H-22H' object_post=object_post_14h object_tot=totalis_post_14h %}
-      {% include 'broyage/poste_card.html' with poste='22H-06H' couleur='warning' horaire='Poste 22H-06H' object_post=object_post_22h object_tot=totalis_post_22h %}
+    <div class="row g-5">
+      {% if totalis_post_06_18h or totalis_post_18_06h or object_post_06_18h or object_post_18_06h %}
+        {% include 'broyage/poste_card.html' with poste='06H-18H' couleur='primary' horaire='Poste 06H-18H' object_post=object_post_06_18h object_tot=totalis_post_06_18h %}
+        {% include 'broyage/poste_card.html' with poste='18H-06H' couleur='warning' horaire='Poste 18H-06H' object_post=object_post_18_06h object_tot=totalis_post_18_06h %}
+      {% else %}
+        {% include 'broyage/poste_card.html' with poste='06H-14H' couleur='primary' horaire='Poste 06H-14H' object_post=object_post_06h object_tot=totalis_post_06h %}
+        {% include 'broyage/poste_card.html' with poste='14H-22H' couleur='success' horaire='Poste 14H-22H' object_post=object_post_14h object_tot=totalis_post_14h %}
+        {% include 'broyage/poste_card.html' with poste='22H-06H' couleur='warning' horaire='Poste 22H-06H' object_post=object_post_22h object_tot=totalis_post_22h %}
+      {% endif %}
     </div>
 
     <!-- Tableau des pannes -->

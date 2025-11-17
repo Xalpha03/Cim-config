@@ -9,10 +9,6 @@ from .forms import PackingForm, PanneForm
 from django.contrib import messages
 from broyage.models import Broyage
 from django.http import HttpResponse
-from django.template.loader import render_to_string
-from xhtml2pdf import pisa
-import os
-from io import BytesIO
 from django.views.generic import TemplateView
 from django.template.loader import get_template
 from django.http import HttpResponse
@@ -42,6 +38,7 @@ class homeView(ListView):
     model = Packing
     template_name = 'home-page.html'
     
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         
@@ -61,6 +58,7 @@ class homeView(ListView):
         
         broyage_existe = Broyage.objects.filter(date=date.today(), site=site)
         packing_existe = Packing.objects.filter(date=date.today(), site=site)
+        
         print('broyage_existe : ', broyage_existe.exists())
         print('packing_existe : ', packing_existe.exists())
         
@@ -98,8 +96,6 @@ class homeView(ListView):
         total_ens = int()
         moyenne_rend = int()
         moyenne_tx_cas = int()
-        total_tx_cas = Decimal()
-        total_rend = Decimal()
         total_temp_march = Decimal()
         total_liv = int()
         total_cas = int()
@@ -114,76 +110,61 @@ class homeView(ListView):
 
 
         for obj in object_pack:
-            start = datetime.combine(date.today(), obj.post.start_post)
-            end = datetime.combine(date.today(), obj.post.end_post)
-            
-            if end < start:
-                end += timedelta(days=1)
-            duree_post = end - start
-            
             temp_arret = object_pann.filter(packing=obj).aggregate(total=Sum('duree'))['total'] or timedelta()
             
-            temp_march = Decimal((duree_post - temp_arret).total_seconds())/Decimal(3600)
-            temp_march= temp_march.quantize(Decimal('0.0001'), rounding=ROUND_HALF_UP)
-            
-            obj.temp_march = temp_march.quantize(Decimal('0.1'), rounding=ROUND_HALF_UP)
-            
-            # somme livraison + vrack par post
+            # Calcul de somme de la livraison et vrack
             som_liv_vrack = obj.livraison + obj.vrack
             obj.som_liv_vrack = som_liv_vrack
             
-            # nombre de sacs livré par post
-            ens = Decimal(obj.livraison*20)
+            
+            ens = obj.livraison*20
             obj.ens = ens
             
-            # taux de casse par post
-            tx_cas = Decimal(obj.casse*100)/Decimal(obj.ens - obj.casse)
+            # Calcul de tau de casse
+            tx_cas = Decimal(obj.casse*100)/Decimal(obj.ens-obj.casse) if obj.casse else Decimal(0)
             obj.tx_cas = tx_cas.quantize(Decimal('0.01'), rounding=ROUND_HALF_UP)
             
-            # rendement par post
-            rend = Decimal(obj.livraison)/temp_march
-            print('rend : ', rend)
-            print('temp_march : ', )
-            obj.rend = rend.quantize(Decimal('0.1'), rounding=ROUND_HALF_UP)
+            # Calcul de temp_marche 
+            temp_march = obj.post.duree_post - temp_arret
+            obj.temp_march = Decimal(temp_march.total_seconds()/3600).quantize(Decimal('0.1'), rounding=ROUND_HALF_UP)
             
-            # -------------------------------------- Partie journalière-------------------------------------------#
-            # livraison journalière
-            total_liv += obj.livraison 
+            # Calcul de rendement
+            rend = Decimal(obj.livraison/(temp_march.total_seconds()/3600)) if obj.livraison and temp_march else Decimal(0)
+            obj.rend = rend.quantize(Decimal('0.01'), rounding=ROUND_HALF_UP)
             
-            # livraison par vrack journalière
-            total_vrack += obj.vrack 
             
-            # somme livraison vrack journalière
-            toat_som_liv_vrack += som_liv_vrack
+            # Calcul de la livraison total
+            total_liv = object_pack.aggregate(total=Sum('livraison'))['total'] or int(0)
+            total_cas = object_pack.aggregate(total=Sum('casse'))['total'] or int(0)
+            total_vrack = object_pack.aggregate(total=Sum('vrack'))['total'] or Decimal(0)
+            total_vrack = total_vrack.quantize(Decimal('0.01'), rounding=ROUND_HALF_UP)
+            toat_som_liv_vrack = total_liv + total_vrack
             
-            # nombre de sac livrais journalier
-            total_ens += ens
             
-            # nombre de casse journalier
-            total_cas += obj.casse
+            # Calcul de la moyenne de taux de casse
+            moyenne_tx_cas = Decimal(total_cas*100)/Decimal((total_liv*20)-total_cas) if total_cas else Decimal(0)
+            moyenne_tx_cas = moyenne_tx_cas.quantize(Decimal('0.01'), rounding=ROUND_HALF_UP)
             
-            # taux de casse journalier
-            total_tx_cas += tx_cas
-            moyenne_tx_cas = Decimal(total_tx_cas/nbr_objet).quantize(Decimal('0.01'), rounding=ROUND_HALF_UP)
+            # Calcul de temps marche total
+            total_temp_march += Decimal(temp_march.total_seconds()/3600)
             
-            # temps de marche jounalier
-            total_temp_march += temp_march
-            total_temp_march = total_temp_march.quantize(Decimal('0.01'), rounding=ROUND_HALF_UP)
+            # Calcul de la mpyenne du rendement
+            moyenne_rend = Decimal(total_liv)/total_temp_march if total_liv and total_temp_march else Decimal(0)
+            moyenne_rend = moyenne_rend.quantize(Decimal('0.01'), rounding=ROUND_HALF_UP)
             
-            # le rendement journalier
-            total_rend += rend
-            moyenne_rend = (Decimal(total_liv)/Decimal(total_temp_march)).quantize(Decimal('0.1'), rounding=ROUND_HALF_UP)
-            # moyenne_rend = Decimal(total_rend/nbr_objet).quantize(Decimal('0.1'), rounding=ROUND_HALF_UP)
-            
+            total_temp_march = total_temp_march.quantize(Decimal('0.1'), rounding=ROUND_HALF_UP)
 
         return {
             'search_date': search_date,
             'object_pack': object_pack,
-            'object_pann': object_pann,
+            'object_pann': object_pann.order_by('packing__post'),
             
             'object_post_06h': object_pack.filter(post__post='06H-14H'),
             'object_post_14h': object_pack.filter(post__post='14H-22H'),
             'object_post_22h': object_pack.filter(post__post='22H-06H'),
+            
+            'object_post_06_18h': object_pack.filter(post__post='06H-18H'),
+            'object_post_18_06h': object_pack.filter(post__post='18H-06H'),
             
             'total_liv': total_liv,
             'total_ens': total_ens,
@@ -244,9 +225,11 @@ class homeView(ListView):
         
         total_compt = Decimal()
         total_prod = Decimal()
-        total_rend = Decimal()
+        moyenne_rend = Decimal()
         total_temp_march = Decimal()
-        total_conso = Decimal()
+        moyenne_conso = Decimal()
+        _total_temp_march = Decimal()
+        _total_compt = Decimal()
         
         temp_arret = Decimal()
         for obj in object_panne:
@@ -254,59 +237,70 @@ class homeView(ListView):
             obj.temp_arret = (Decimal(temp_arret.total_seconds())/Decimal(3600)).quantize(Decimal('0.01'), rounding=ROUND_HALF_UP)
             
         for obj in object_broy:
-            start = datetime.combine(date.today(), obj.post.start_post)
-            end = datetime.combine(date.today(), obj.post.end_post)
-                
-            if end < start:
-                end += timedelta(days=1)
-            duree_post = end - start
+            
             temp_arret = object_panne.filter(broyage=obj).aggregate(total=Sum('duree'))['total'] or timedelta()
-            temp_march = Decimal((duree_post - temp_arret).total_seconds())/Decimal(3600)
-            temp_march = temp_march.quantize(Decimal('0.0001'), rounding=ROUND_HALF_UP)
-            obj.temp_march = temp_march.quantize(Decimal('0.01'), rounding=ROUND_HALF_UP)
             
-            # production par post
+            # Calcul de production par post
             prod = obj.dif_clinker + obj.dif_gypse + obj.dif_dolomite
-            obj.prod = prod.quantize(Decimal('1'), rounding=ROUND_HALF_UP)
+            obj.prod = prod.quantize(Decimal('0'), rounding=ROUND_HALF_UP)
             
-            # le rendement post
-            rend = Decimal(prod)/temp_march
+            # Calcul de temps de marche par post
+            temp_march = obj.post.duree_post-temp_arret
+            obj.temp_march = Decimal(temp_march.total_seconds()/3600).quantize(Decimal('0.1'), rounding=ROUND_HALF_UP)
+            
+            # Calcul du rendement par post
+            rend = Decimal(prod)/Decimal(temp_march.total_seconds()/3600) if prod and temp_march else Decimal(0)
             obj.rend = rend.quantize(Decimal('0.01'), rounding=ROUND_HALF_UP)
             
-            # consommation par post
-            conso = Decimal(obj.dif_compt)/Decimal(prod)
+            # Calcul de consomation spécifique par post
+            conso = Decimal(obj.dif_compt)/Decimal(prod) if obj.dif_compt and prod else Decimal(0)
+            obj.conso = conso.quantize(Decimal('0.01'), rounding=ROUND_HALF_UP)
             
-            obj.conso = conso.quantize(Decimal('0.1'), rounding=ROUND_HALF_UP)
+                        
+            # Calcul de la production total journalière
+            total_prod += obj.prod
             
+            # Calcul du temps de marche total journalier
+            _total_temp_march += Decimal(temp_march.total_seconds()/3600)
+            total_temp_march = _total_temp_march.quantize(Decimal('0.1'), rounding=ROUND_HALF_UP)
+            
+            # Calcul de la moyenne du rendememnt journalier
+            moyenne_rend = Decimal(total_prod)/Decimal(_total_temp_march) if total_prod and _total_temp_march else Decimal(0)
+            moyenne_rend = moyenne_rend.quantize(Decimal('0.01'), rounding=ROUND_HALF_UP)
+            
+            # Calcul de la moyenne de la consommation spécifique
+            _total_compt += obj.dif_compt
+            moyenne_conso = Decimal(_total_compt)/Decimal(total_prod) if _total_compt and total_prod else Decimal(0)
+            moyenne_conso = moyenne_conso.quantize(Decimal('0.01'), rounding=ROUND_HALF_UP)
+            
+            # Conversion du compteur broyeur
             dif_compt = Decimal(obj.dif_compt/1000)
             obj.dif_compt = dif_compt.quantize(Decimal('0.1'), rounding=ROUND_HALF_UP)
             
+            # Conversion du compteur broyeur global
+            total_compt = Decimal(_total_compt/1000).quantize(Decimal('0.1'), rounding=ROUND_HALF_UP)
             
-            
-            total_compt += dif_compt.quantize(Decimal('0.1'), rounding=ROUND_HALF_UP) 
-            total_prod += prod.quantize(Decimal('1'), rounding=ROUND_HALF_UP)
-            total_temp_march += temp_march.quantize(Decimal('0.01'), rounding=ROUND_HALF_UP)
-            # total_rend += (rend/Decimal(nbr_objet)).quantize(Decimal('0.01'), rounding=ROUND_HALF_UP)
-            total_rend = (Decimal(total_prod)/Decimal(total_temp_march)).quantize(Decimal('0.01'), rounding=ROUND_HALF_UP)
-            total_conso += (conso/Decimal(nbr_objet)).quantize(Decimal('0.01'), rounding=ROUND_HALF_UP)
+            print(total_compt)
             
         return {
             
             'object_broy': object_broy,
-            'object_panne': object_panne,
+            'object_panne': object_panne.order_by('broyage__post'),
             
             'object_broy_post_06h': object_broy.filter(post__post='06H-14H'),
             'object_broy_post_14h': object_broy.filter(post__post='14H-22H'),
             'object_broy_post_22h': object_broy.filter(post__post='22H-06H'),
             
+            'object_broy_post_06_18h': object_broy.filter(post__post='06H-18H'),
+            'object_broy_post_18_06h': object_broy.filter(post__post='18H-06H'),
+            
             'total_compt': total_compt,
             'total_prod': total_prod,
             'total_temp_march_b': total_temp_march,
-            'total_rend_b': total_rend,
-            'total_conso': total_conso
+            'moyenne_rend_b': moyenne_rend,
+            'moyenne_conso': moyenne_conso
         }
 
-      
 class packingHomeList(ListView):
     model = Packing
     template_name = 'packing/packing-home.html'
@@ -330,46 +324,47 @@ class packingHomeList(ListView):
             filters_pack &= Q(date=search_date)
             filters_pann &= Q(date=search_date)
         
-        query_pack = Packing.objects.filter(filters_pack)
-        query_pan = Pannes.objects.filter(filters_pann)
+        object_pack = Packing.objects.filter(filters_pack)
+        object_pann = Pannes.objects.filter(filters_pann)
         
-        for obj in query_pack:
+        for obj in object_pack:
             
-            start = datetime.combine(date.today(), obj.post.start_post)
-            end = datetime.combine(date.today(), obj.post.end_post)
+            temp_arret = object_pann.filter(packing=obj).aggregate(total=Sum('duree'))['total'] or timedelta()
             
-            if end < start:
-                end += timedelta(days=1)
-            duree_post = end - start
+            # Calcul de nombre de sacs livré par post
+            ens = obj.livraison*20
+            obj.ens = ens
             
-            obj.temp_arret = query_pan.filter(packing=obj).aggregate(total=Sum('duree'))['total'] or timedelta()
-            
-
-            temp_march = Decimal((duree_post - obj.temp_arret).total_seconds())/Decimal(3600)
-            heure = int(temp_march*3600) // 3600
-            munite = int(temp_march*3600) % 3600 // 60
-            obj.temp_march_formate = f'{heure:02d}:{munite:02d}'
-            
-            obj.ens = obj.livraison * 20 if obj.livraison else 0.0
-            
-            tx_cas = Decimal(obj.casse*100)/Decimal(obj.ens - obj.casse) if obj.casse > 0 else Decimal(0.0)
+            # Calcul de tau de casse par post
+            tx_cas = Decimal(obj.casse*100)/Decimal(ens-obj.casse) if obj.livraison and obj.casse else Decimal(0)
             obj.tx_cas = tx_cas.quantize(Decimal('0.01'), rounding=ROUND_HALF_UP)
             
-            rend = Decimal(obj.livraison)/Decimal(temp_march) if obj.livraison else 0.0
-            obj.rend = rend.quantize(Decimal('0.1'), rounding=ROUND_HALF_UP)
+            # Calcul de temps de marche par post
+            temp_march = obj.post.duree_post - temp_arret
+            heure = int(temp_march.total_seconds())//3600
+            minute = int(temp_march.total_seconds())%3600 // 60
+            obj.temp_march_formate = f'{heure:02d}:{minute:02d}'
+                    
+            # Calcul de rendement par post
+            rend = Decimal(obj.livraison)/Decimal(temp_march.total_seconds()/3600) if obj.livraison and temp_march else Decimal(0)
+            obj.rend = rend.quantize(Decimal('0.01'), rounding=ROUND_HALF_EVEN)
 
         context.update({
             
             'packing': 'packing',
             'packing_panne': 'packing_panne',
             'search_date': search_date,
-            'object_post_06h': query_pack.filter(post__post='06H-14H'),
-            'object_post_14h': query_pack.filter(post__post='14H-22H'),
-            'object_post_22h': query_pack.filter(post__post='22H-06H'),
             
-            'object_list': query_pack,
-            'object_pann': query_pan,
-            'total_temp_arret': query_pan.aggregate(total=Sum('duree'))['total'] or timedelta()
+            'object_post_06h': object_pack.filter(post__post='06H-14H'),
+            'object_post_14h': object_pack.filter(post__post='14H-22H'),
+            'object_post_22h': object_pack.filter(post__post='22H-06H'),
+            
+            'object_post_06_18h': object_pack.filter(post__post='06H-18H'),
+            'object_post_18_06h': object_pack.filter(post__post='18H-06H'),
+            
+            'object_list': object_pack,
+            'object_pann': object_pann.order_by('packing__post'),
+
         })
         return context
 
@@ -378,6 +373,13 @@ class ajoutPacking(CreateView):
     form_class = PackingForm
     template_name = 'packing/formulaire.html'
     success_url = reverse_lazy('packing:packing-home')
+    
+    
+    # def get_form_kwargs(self):
+    #     kwargs = super().get_form_kwargs()
+    #     # On vérifie si ?long=1 est dans l’URL
+    #     kwargs['long_shift'] = self.request.GET.get('long') == '1'
+    #     return kwargs
     
     
     def form_valid(self, form):
@@ -492,9 +494,7 @@ class userPackingDetail(ListView):
         nbr_objet = object_pack.count()
         
         moyenne_tx_cas = Decimal()
-        total_tx_cas = int()
         moyenne_rend = Decimal()
-        total_rend = int()
         total_temp_march = timedelta()
         total_liv = int()
         total_cas = int()
@@ -504,62 +504,54 @@ class userPackingDetail(ListView):
         
         
         for obj in object_pack:
-            start_post = datetime.combine(date.today(), obj.post.start_post)
-            end_post = datetime.combine(date.today(), obj.post.end_post)
             
-            if end_post < start_post:
-                end_post += timedelta(days=1)
-            duree_post = end_post - start_post
-            
-            # Calucl de temps d'arret par post
+            # Temps d'arrêt par post
             temp_arret = object_pann.filter(packing=obj).aggregate(total=Sum('duree'))['total'] or timedelta()
             heure = int(temp_arret.total_seconds())//3600
             minute = int(temp_arret.total_seconds())%3600 // 60
             temp_arret_formate = f'{heure:02d}:{minute:02d}'
             obj.temp_arret_formate = temp_arret_formate
             
-            # Calcul de temps de marche par post
-            # temp_march = 
-            temp_march = duree_post - temp_arret
+            # Calcul du temps de marche par post
+            temp_march = obj.post.duree_post - temp_arret
             heure = int(temp_march.total_seconds())//3600
-            minute = int(temp_march.total_seconds())%3600//60
+            minute = int(temp_march.total_seconds())%3600 // 60
             temp_march_formate = f'{heure:02d}:{minute:02d}'
             obj.temp_march_formate = temp_march_formate
-         
-            # Calcul de taux de casse
-            tx_cas = Decimal(obj.casse*100)/((obj.livraison*20)-obj.casse) if obj.livraison and obj.casse else 0.0
-            tx_cas = tx_cas.quantize(Decimal('0.01'), rounding=ROUND_HALF_UP)
-            obj.tx_cas = tx_cas
             
-            # Calcul du rendement
-            rend = Decimal(obj.livraison)/(Decimal(temp_march.total_seconds()/3600)) if obj.livraison else 0.0
-            obj.rend = rend.quantize(Decimal('0.1'), rounding=ROUND_HALF_UP)
+            # Calcul du tau de casse par post
+            tx_cas = Decimal(obj.casse*100)/Decimal((obj.livraison*20)-obj.casse) if obj.livraison and obj.casse else Decimal(0)
+            obj.tx_cas = tx_cas.quantize(Decimal('0.01'), rounding=ROUND_HALF_UP)
             
+            # Calcul du rendement par post
+            rend = Decimal(obj.livraison)/(Decimal(temp_march.total_seconds()/3600)) if obj.livraison and temp_march else Decimal(0)
+            obj.rend = rend.quantize(Decimal('0.01'), rounding=ROUND_HALF_UP)
             
-            total_liv = object_pack.aggregate(total=Sum('livraison'))['total'] or 0
-            total_cas = object_pack.aggregate(total=Sum('casse'))['total'] or 0
-            total_vrack = round((object_pack.aggregate(total=Sum('vrack'))['total'] or 0.0), 2)
+            # Calcul de la livraison total
+            total_liv = object_pack.aggregate(total=Sum('livraison'))['total'] or int()
+
+            # Calcul de casse total
+            total_cas = object_pack.aggregate(total=Sum('casse'))['total'] or int()
+            
+            # Calcul de la livraison vrack total
+            total_vrack = object_pack.aggregate(total=Sum('vrack'))['total'] or Decimal()
+            total_vrack = total_vrack.quantize(Decimal('0.01'), rounding=ROUND_HALF_UP)
             
             # Calcul de la moyenne de taux de casse
-            total_tx_cas += tx_cas
-            moyenne_tx_cas = Decimal(total_tx_cas/nbr_objet).quantize(Decimal('0.01'), rounding=ROUND_HALF_UP) 
-           
-            # Calcul de temps d'arrêt total
+            moyenne_tx_cas = Decimal(total_cas*100)/Decimal((total_liv*20)-total_cas) if total_liv and total_cas else Decimal(0)
+            moyenne_tx_cas = moyenne_tx_cas.quantize(Decimal('0.01'), rounding=ROUND_HALF_UP)
+            
+            # Calcul de la moyenne de rendement
+            total_temp_march += temp_march
+            moyenne_rend = Decimal(total_liv)/Decimal(total_temp_march.total_seconds()/3600) if total_liv and total_temp_march else Decimal(0)
+            moyenne_rend = moyenne_rend.quantize(Decimal('0.01'), rounding=ROUND_HALF_UP)
+            
+            # Calcul du temps d'arrêt total
             total_temp_arret += temp_arret
             heure = int(total_temp_arret.total_seconds())//3600
-            minute = int(total_temp_arret.total_seconds()%3600)//60
+            minute = int(total_temp_arret.total_seconds())%3600 // 60
             total_temp_arret_formate = f'{heure:02d}:{minute:02d}'
             
-            # Calcul de temps de marche total
-            total_temp_march += temp_march
-            heure = int(total_temp_march.total_seconds())//3600
-            minute = int(total_temp_march.total_seconds()%3600)//60
-            total_temp_march_formate = f'{heure:02d}:{minute:02d}'
-
-            
-            # Calucl de la moyenne du rendement
-            total_rend += rend
-            moyenne_rend = Decimal(total_rend/nbr_objet).quantize(Decimal('0.1'), rounding=ROUND_HALF_UP)
 
         context.update({
             'object_pack': object_pack,
@@ -616,6 +608,7 @@ class userPackingPanneDetail(ListView):
                 filters_pann &= Q(date__month=get_operational_month(), date__year=date.today().year)
 
         object_pann = Pannes.objects.filter(filters_pann).order_by('-date', 'packing__post__post')
+        
         total_temp_arret = object_pann.aggregate(total=Sum('duree'))['total'] or timedelta()
         heure = int(total_temp_arret.total_seconds() // 3600)
         minute = int(total_temp_arret.total_seconds() % 3600 // 60)
@@ -629,8 +622,7 @@ class userPackingPanneDetail(ListView):
             'user_detail': user,
         })
         return context
-
-    
+  
 class updatePacking(UpdateView):
     model = Packing
     form_class = PackingForm
@@ -757,62 +749,53 @@ class adminPackingView(ListView):
         total_temp_arret_formate = str()
         
         for obj in object_pack:
-            start_post = datetime.combine(date.today(), obj.post.start_post)
-            end_post = datetime.combine(date.today(), obj.post.end_post)
             
-            if end_post < start_post:
-                end_post += timedelta(days=1)
-            duree_post = end_post - start_post
-            
-            # Calucl de temps d'arret par post
+            # Temps d'arrêt par post
             temp_arret = object_pann.filter(packing=obj).aggregate(total=Sum('duree'))['total'] or timedelta()
             heure = int(temp_arret.total_seconds())//3600
             minute = int(temp_arret.total_seconds())%3600 // 60
             temp_arret_formate = f'{heure:02d}:{minute:02d}'
             obj.temp_arret_formate = temp_arret_formate
             
-            # Calcul de temps de marche par post
-            # temp_march = 
-            temp_march = duree_post - temp_arret
+            # Calcul du temps de marche par post
+            temp_march = obj.post.duree_post - temp_arret
             heure = int(temp_march.total_seconds())//3600
-            minute = int(temp_march.total_seconds())%3600//60
+            minute = int(temp_march.total_seconds())%3600 // 60
             temp_march_formate = f'{heure:02d}:{minute:02d}'
             obj.temp_march_formate = temp_march_formate
-         
-            # Calcul de taux de casse
-            tx_cas = Decimal(obj.casse*100)/((obj.livraison*20)-obj.casse) if obj.livraison and obj.casse else 0.0
-            tx_cas = tx_cas.quantize(Decimal('0.01'), rounding=ROUND_HALF_UP)
-            obj.tx_cas = tx_cas
             
-            # Calcul du rendement
-            rend = Decimal(obj.livraison)/(Decimal(temp_march.total_seconds()/3600)) if obj.livraison else 0.0
-            obj.rend = rend.quantize(Decimal('0.1'), rounding=ROUND_HALF_UP)
+            # Calcul du tau de casse par post
+            tx_cas = Decimal(obj.casse*100)/Decimal((obj.livraison*20)-obj.casse) if obj.livraison and obj.casse else Decimal(0)
+            obj.tx_cas = tx_cas.quantize(Decimal('0.01'), rounding=ROUND_HALF_UP)
             
+            # Calcul du rendement par post
+            rend = Decimal(obj.livraison)/(Decimal(temp_march.total_seconds()/3600)) if obj.livraison and temp_march else Decimal(0)
+            obj.rend = rend.quantize(Decimal('0.01'), rounding=ROUND_HALF_UP)
             
-            total_liv = object_pack.aggregate(total=Sum('livraison'))['total'] or 0
-            total_cas = object_pack.aggregate(total=Sum('casse'))['total'] or 0
-            total_vrack = round((object_pack.aggregate(total=Sum('vrack'))['total'] or 0.0), 2)
+            # Calcul de la livraison total
+            total_liv = object_pack.aggregate(total=Sum('livraison'))['total'] or int()
+
+            # Calcul de casse total
+            total_cas = object_pack.aggregate(total=Sum('casse'))['total'] or int()
+            
+            # Calcul de la livraison vrack total
+            total_vrack = object_pack.aggregate(total=Sum('vrack'))['total'] or Decimal()
+            total_vrack = total_vrack.quantize(Decimal('0.01'), rounding=ROUND_HALF_UP)
             
             # Calcul de la moyenne de taux de casse
-            total_tx_cas += tx_cas
-            moyenne_tx_cas = Decimal(total_tx_cas/nbr_objet).quantize(Decimal('0.01'), rounding=ROUND_HALF_UP) 
-           
-            # Calcul de temps d'arrêt total
+            moyenne_tx_cas = Decimal(total_cas*100)/Decimal((total_liv*20)-total_cas) if total_liv and total_cas else Decimal(0)
+            moyenne_tx_cas = moyenne_tx_cas.quantize(Decimal('0.01'), rounding=ROUND_HALF_UP)
+            
+            # Calcul de la moyenne de rendement
+            total_temp_march += temp_march
+            moyenne_rend = Decimal(total_liv)/Decimal(total_temp_march.total_seconds()/3600) if total_liv and total_temp_march else Decimal(0)
+            moyenne_rend = moyenne_rend.quantize(Decimal('0.01'), rounding=ROUND_HALF_UP)
+            
+            # Calcul du temps d'arrêt total
             total_temp_arret += temp_arret
             heure = int(total_temp_arret.total_seconds())//3600
-            minute = int(total_temp_arret.total_seconds()%3600)//60
+            minute = int(total_temp_arret.total_seconds())%3600 // 60
             total_temp_arret_formate = f'{heure:02d}:{minute:02d}'
-            
-            # Calcul de temps de marche total
-            total_temp_march += temp_march
-            heure = int(total_temp_march.total_seconds())//3600
-            minute = int(total_temp_march.total_seconds()%3600)//60
-            total_temp_march_formate = f'{heure:02d}:{minute:02d}'
-
-            
-            # Calucl de la moyenne du rendement
-            total_rend += rend
-            moyenne_rend = Decimal(total_rend/nbr_objet).quantize(Decimal('0.1'), rounding=ROUND_HALF_UP)
 
         context.update({
             'admin': 'admin',

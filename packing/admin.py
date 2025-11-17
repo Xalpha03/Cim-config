@@ -6,8 +6,8 @@ from .models import *
 
 class PostAdmin(admin.ModelAdmin):
     model = Post
-    list_display = ['post', 'start_post', 'end_post']
-    fields = ('post', 'start_post', 'end_post')
+    list_display = ['post', 'start_post', 'end_post', 'duree_post']
+    fields = ('post', 'start_post', 'end_post', )
     
 class PackingAdmin(admin.ModelAdmin):
     model = Packing
@@ -17,7 +17,7 @@ class PackingAdmin(admin.ModelAdmin):
     
 class PanneAdmin(admin.ModelAdmin):
     model = Pannes
-    list_display = ['departement', 'site', 'packing', 'broyage', 'section', 'start_panne', 'end_panne', 'duree', 'description', 'date']
+    list_display = ['departement', 'site', 'packing', 'broyage', 'section', 'start_panne', 'end_panne', 'duree', 'description', 'date', 'slug']
     fields = ('departement', 'site', 'packing', 'broyage', 'section', 'start_panne', 'end_panne', 'description', 'solution')
     
     
