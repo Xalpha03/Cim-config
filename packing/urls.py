@@ -17,5 +17,5 @@ urlpatterns = [
     path('admin-packing-panne/', adminPackingPanneViews.as_view(), name='admin-packing-panne'),
     path('packing/<str:username>/pdf/', userPackingPanneDetailPdf.as_view(), name='user_packing_panne_pdf'),
     
-    path('dashboard/', dashboard.as_view(), name='dashboard'),
+    path('dashboard-packing/', dashboard.as_view(), name='dashboard_packing'),
 ]

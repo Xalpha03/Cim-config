@@ -100,3 +100,8 @@ class Broyage(models.Model):
             self.dif_gypse = self.gypse_fin - query.gypse_debut
         else:
             self.dif_compt = self.dif_clinker = self.dif_dolomite = self.dif_gypse = 0
+            
+            
+
+       
+            

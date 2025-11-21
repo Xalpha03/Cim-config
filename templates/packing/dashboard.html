@@ -49,7 +49,7 @@ const livraison = {{ livraison|safe }};
 const casse = {{ casse|safe }};
 const txCasse = {{ tx_casse|safe }};
 const rendement = {{ rendement|safe }};
-const tempMarche = {{ temp_march|safe }};
+const tempArret = {{ temp_arret|safe }};
 
 var ctx = document.getElementById('packingChart').getContext('2d');
 var chart = new Chart(ctx, {
@@ -61,7 +61,7 @@ var chart = new Chart(ctx, {
             { label: 'Casse (T)', data: casse, borderColor: 'red', fill: false },
             { label: 'Taux de casse (%)', data: txCasse, borderColor: 'green', fill: false, yAxisID: 'y2' },
             { label: 'Rendement (T/H)', data: rendement, borderColor: 'purple', fill: false },
-            { label: 'Temps de marche (H)', data: tempMarche, borderColor: 'orange', fill: false },
+            { label: 'Temps de arrêt (H)', data: tempArret, borderColor: 'orange', fill: false },
         ]
     },
     options: {

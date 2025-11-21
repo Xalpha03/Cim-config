@@ -16,4 +16,6 @@ urlpatterns = [
     
     path('admin-broyage-view/', adminBroyage.as_view(), name='admin-broyage'),
     path('admin-broyage_panne-view/', adminBroyagePanne.as_view(), name='admin-broyage-panne'),
+    
+    path('dashboard-broyage/', dashboard.as_view(), name='dashboard_broyage'),
 ]

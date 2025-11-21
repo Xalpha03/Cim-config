@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block content %}
+
+
+<h1 class="text-center fst-italic text-info">Page encoure de conception merci de patienter!</h1>
+{% comment %} <table class="table">
+    <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Date</th>
+            <th scope="col">Operator</th>
+            <th scope="col">Quantity Processed</th>
+            <th scope="col">Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for record in broyage_records %}
+        <tr>
+            <th scope="row">{{ record.id }}</th>
+            <td>{{ record.date }}</td>
+            <td>{{ record.operator }}</td>
+            <td>{{ record.quantity_processed }}</td>
+            <td>{{ record.status }}</td>
+        </tr>
+        {% endfor %}
+    </tbody> {% endcomment %}
+{% endblock content %}

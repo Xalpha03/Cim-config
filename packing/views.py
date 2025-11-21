@@ -1059,7 +1059,7 @@ class userPackingPanneDetailPdf(TemplateView):
 
 class dashboard(ListView):
     model = Packing
-    template_name = 'dashboard.html'
+    template_name = 'packing/dashboard.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -1121,13 +1121,13 @@ class dashboard(ListView):
         pannes = Pannes.objects.filter(filter_panne)
         packings = Packing.objects.filter(filter_packing)
 
-        labels, livraison, casse, tx_casse, rendement, temp_march = [], [], [], [], [], []
+        labels, livraison, casse, tx_casse, rendement, temp_arret = [], [], [], [], [], []
         total_temp_march = timedelta()
         for obj in packings:
 
-            temp_arret = pannes.filter(packing=obj).aggregate(
+            temp_arret_val = pannes.filter(packing=obj).aggregate(
                 total=Sum('duree'))['total'] or timedelta()
-            temp_march_val = obj.post.duree_post - temp_arret
+            temp_march_val = obj.post.duree_post - temp_arret_val
 
             tx_cas = Decimal((obj.casse * 100) / ((obj.livraison * 20) -
                              obj.casse)) if obj.livraison and obj.casse else Decimal(0)
@@ -1139,7 +1139,7 @@ class dashboard(ListView):
             obj.rendement = rendement_val.quantize(
                 Decimal('.01'), rounding=ROUND_HALF_UP)
 
-            obj.temp_march = Decimal(temp_march_val.total_seconds(
+            obj.temp_arret = Decimal(temp_arret_val.total_seconds(
             ) / 3600).quantize(Decimal('.01'), rounding=ROUND_HALF_UP)
 
             # Remplir les listes
@@ -1148,14 +1148,14 @@ class dashboard(ListView):
             casse.append(float(obj.casse))
             tx_casse.append(float(obj.tx_casse))
             rendement.append(float(obj.rendement))
-            temp_march.append(float(obj.temp_march))
+            temp_arret.append(float(obj.temp_arret))
 
             total_livraison = sum(p.livraison for p in packings)
             total_casse = sum(p.casse for p in packings)
             moyenne_tx_casse = (Decimal(total_casse * 100) / Decimal(
                 (total_livraison * 20) - total_casse)) if total_casse else Decimal(0)
 
-            total_temp_march += (obj.post.duree_post-temp_arret)
+            total_temp_march += (obj.post.duree_post-temp_arret_val)
             moyenne_rendement = Decimal(
                 total_livraison) / Decimal(total_temp_march.total_seconds()/3600) if total_livraison else Decimal(0)
 
@@ -1166,7 +1166,7 @@ class dashboard(ListView):
             "casse": json.dumps(casse),
             "tx_casse": json.dumps(tx_casse),
             "rendement": json.dumps(rendement),
-            "temp_march": json.dumps(temp_march),
+            "temp_arret": json.dumps(temp_arret),
 
             "total_livraison": total_livraison,
             "total_casse": total_casse,

@@ -596,7 +596,18 @@ class adminBroyagePanne(ListView):
         return context
     
 
-
+class dashboard(ListView):
+    model = Broyage
+    template_name = 'broyage/dashboard-broyage.html'
+    
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        site = self.request.user.profil.site
+        context.update({
+            'dashboard_broyage': 'dashboard_broyage',
+        })
+        return context
 
 
     
