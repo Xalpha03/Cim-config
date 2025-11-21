@@ -37,6 +37,7 @@
                   <li>
                     <a class="dropdown-item" href="{% url 'packing:user-packing-panne-detail' user.username %}">list panne</a>
                   </li>
+                  
                 </ul>
               </li>
             {% elif user.profil.poste == 'broyage' %}
@@ -69,6 +70,9 @@
                 <li>
                   <a class="dropdown-item" href="{% url 'broyage:admin-broyage-panne' %}">broyage panne list</a>
                 </li>
+                {% comment %} <li>
+                  <a class="dropdown-item" href="{% url 'packing:dashboard' %}">dashboard</a>
+                </li> {% endcomment %}
               </ul>
             </li>
           {% elif user.profil.role == 'opérateur' %}
@@ -100,6 +104,7 @@
               </li>
             {% endif %}
           {% endif %}
+          <a class="navbar-brand mt-2 mt-lg-0" href="{% url 'packing:dashboard' %}"><img src="" />dashboard</a>
         {% endif %}
       </ul>
       <!-- Left links -->

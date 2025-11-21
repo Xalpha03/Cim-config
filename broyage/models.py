@@ -65,7 +65,7 @@ class Broyage(models.Model):
     dif_compt = models.DecimalField(max_digits=25, decimal_places=2, blank=True, null=True)
     dif_clinker = models.DecimalField(max_digits=25, decimal_places=2, blank=True, null=True)
     dif_dolomite = models.DecimalField(max_digits=25, decimal_places=2, blank=True, null=True)
-    dif_gypse = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
+    dif_gypse = models.DecimalField(max_digits=20, decimal_places=2, blank=True, null=True)
     date = models.DateField(default=timezone.now)
     slug = models.SlugField()
     
