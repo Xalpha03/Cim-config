@@ -601,11 +601,11 @@ class userPackingDetail(ListView):
 
         context.update({
             'object_pack': object_pack,
-            'total_liv': total_liv,
-            'total_cas': total_cas,
+            'total_livraison': total_liv,
+            'total_casse': total_cas,
             'total_vrack': total_vrack,
-            'moyenne_tx_cas': moyenne_tx_cas,
-            'moyenne_rend': moyenne_rend,
+            'moyenne_tx_casse': moyenne_tx_cas,
+            'moyenne_rendement': moyenne_rend,
             'total_temp_arret': total_temp_arret_formate,
             'total_temp_march': total_temp_march,
         })
