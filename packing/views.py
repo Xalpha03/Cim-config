@@ -1109,9 +1109,9 @@ class dashboard(ListView):
 
         else:
             if packing_existe.exists():
-                search_date = date.today().month
-                filter_packing &= Q(date__month=search_date)
-                filter_panne &= Q(date__month=search_date)
+                search_date = date.today().year
+                filter_packing &= Q(date__year=search_date)
+                filter_panne &= Q(date__year=search_date)
 
             else:
                 search_date = get_operational_month()
@@ -1123,6 +1123,10 @@ class dashboard(ListView):
 
         labels, livraison, casse, tx_casse, rendement, temp_arret = [], [], [], [], [], []
         total_temp_march = timedelta()
+        total_livraison = int()
+        total_casse = int()
+        moyenne_tx_casse = Decimal()
+        moyenne_rendement = Decimal()
         for obj in packings:
 
             temp_arret_val = pannes.filter(packing=obj).aggregate(

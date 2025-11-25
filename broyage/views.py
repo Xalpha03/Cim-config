@@ -224,7 +224,6 @@ class broyageUserView(ListView):
         user = self.kwargs.get('username')
         user = get_object_or_404(User, username=user)
         search = self.request.GET.get('search')
-        true = self.request.GET.get('true')
         
         filter_broy = Q(user=user)
         filter_pann = Q(broyage__user=user)
@@ -292,7 +291,7 @@ class broyageUserView(ListView):
             # Calcul de production
             prod = obj.dif_clinker + obj.dif_gypse + obj.dif_dolomite
             obj.prod = prod.quantize(Decimal('0'), rounding=ROUND_HALF_UP)
-
+            
             # Calcul de temps de marche
             temp_march = obj.post.duree_post - temp_arret
             heure = int(temp_march.total_seconds())//3600
@@ -310,7 +309,7 @@ class broyageUserView(ListView):
             
             
             # Calcul de la production mensuelle
-            total_prod += prod
+            total_prod += prod.quantize(Decimal('0'), rounding=ROUND_HALF_UP)
             
             # Calcul du temps de marche total
             total_temp_march += temp_march
@@ -330,8 +329,6 @@ class broyageUserView(ListView):
             minute = int(total_temp_arret.total_seconds())%3600 // 60
             total_temp_arret_formate = f'{heure:02d}:{minute:02d}'
             total_temp_arret_formate = total_temp_arret_formate
-            
-            print(total_compt)
             
             
         context.update({
