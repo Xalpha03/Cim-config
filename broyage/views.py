@@ -292,7 +292,7 @@ class broyageUserView(ListView):
             # Calcul de production
             prod = obj.dif_clinker + obj.dif_gypse + obj.dif_dolomite
             obj.prod = prod.quantize(Decimal('0'), rounding=ROUND_HALF_UP)
-            
+
             # Calcul de temps de marche
             temp_march = obj.post.duree_post - temp_arret
             heure = int(temp_march.total_seconds())//3600
