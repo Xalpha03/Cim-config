@@ -1135,7 +1135,7 @@ class dashboard(ListView):
                 Decimal('.01'), rounding=ROUND_HALF_UP)
 
             rendement_val = Decimal(obj.livraison) / \
-                Decimal(temp_march_val.total_seconds() / 3600)
+                Decimal(temp_march_val.total_seconds() / 3600) if obj.livraison and temp_march_val else Decimal(0)
             obj.rendement = rendement_val.quantize(
                 Decimal('.01'), rounding=ROUND_HALF_UP)
 
