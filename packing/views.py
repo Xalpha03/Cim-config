@@ -39,10 +39,17 @@ def get_operational_month():
 class homeView(ListView):
     model = Packing
     template_name = 'home-page.html'
+    
+    def dispatch(self, request, *args, **kwargs):
+        if not self.request.user.is_authenticated:
+            return redirect('account:login')
+        return super().dispatch(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
+        
+    
         context.update(self.context_packing())
         context.update(self.context_broyage())
         return context
@@ -200,6 +207,7 @@ class homeView(ListView):
 
         broyage_existe = Broyage.objects.filter(date=date.today(), site=site)
         packing_existe = Packing.objects.filter(date=date.today(), site=site)
+        
         print('broyage_existe : ', broyage_existe.exists())
         print('packing_existe : ', packing_existe.exists())
 

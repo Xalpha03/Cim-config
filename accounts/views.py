@@ -27,7 +27,16 @@ class UserLoginView(LoginView):
         user=self.request.user
         section = user.profil.poste
         print(section)
+        
+        if not user.is_authenticated:
+            return reverse_lazy('account:login')
+        
+        if not hasattr(user, 'profil'):
+            messages.warning(self.request, "Votre compte n'a pas encore de profil associé.")
+            return reverse_lazy('home-view')
+        
         messages.success(self.request, "Vous avez été connecté.")
+        
         if section == 'broyage':
             return reverse_lazy('broyage:broyage-home')  # ou dashboard selon le rôle
         elif section == 'packing':
